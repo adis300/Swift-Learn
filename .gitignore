@@ -16,26 +16,19 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata/
+.DS_Store
 
 ## Other
 *.moved-aside
 *.xcuserstate
+*.xcscmblueprint
+*.xcworkspacedata
 
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
 *.dSYM.zip
 *.dSYM
-
-## Playgrounds
-timeline.xctimeline
-playground.xcworkspace
-
-# Swift Package Manager
-#
-# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
-# Packages/
-.build/
 
 # CocoaPods
 #
@@ -52,14 +45,8 @@ playground.xcworkspace
 
 Carthage/Build
 
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
-
 fastlane/report.xml
-fastlane/Preview.html
 fastlane/screenshots
-fastlane/test_output
+
+#Code Injection
+iOSInjectionProject/
