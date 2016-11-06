@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		E0E1BC711DCE61F4009D9D5F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC701DCE61F4009D9D5F /* main.swift */; };
-		E0E1BC7F1DCE6C1A009D9D5F /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC7D1DCE6C1A009D9D5F /* Matrix.swift */; };
-		E0E1BC801DCE6C1A009D9D5F /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC7E1DCE6C1A009D9D5F /* Vector.swift */; };
-		E0E1BC821DCE6FD7009D9D5F /* SLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC811DCE6FD7009D9D5F /* SLError.swift */; };
+		E0E1BC8C1DCEC752009D9D5F /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC891DCEC67D009D9D5F /* Matrix.swift */; };
+		E0E1BC8D1DCEC754009D9D5F /* SLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC8A1DCEC67D009D9D5F /* SLError.swift */; };
+		E0E1BC8E1DCEC756009D9D5F /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC8B1DCEC67D009D9D5F /* Vector.swift */; };
+		E0E1BC901DCED387009D9D5F /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC8F1DCED387009D9D5F /* Initializer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,9 +29,10 @@
 /* Begin PBXFileReference section */
 		E0E1BC6D1DCE61F4009D9D5F /* Swift-Learn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Swift-Learn"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E1BC701DCE61F4009D9D5F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		E0E1BC7D1DCE6C1A009D9D5F /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
-		E0E1BC7E1DCE6C1A009D9D5F /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
-		E0E1BC811DCE6FD7009D9D5F /* SLError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLError.swift; sourceTree = "<group>"; };
+		E0E1BC891DCEC67D009D9D5F /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		E0E1BC8A1DCEC67D009D9D5F /* SLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLError.swift; sourceTree = "<group>"; };
+		E0E1BC8B1DCEC67D009D9D5F /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		E0E1BC8F1DCED387009D9D5F /* Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,20 +65,21 @@
 		E0E1BC6F1DCE61F4009D9D5F /* Swift-Learn */ = {
 			isa = PBXGroup;
 			children = (
-				E0E1BC7C1DCE6C08009D9D5F /* Algebra */,
+				E0E1BC881DCEC67D009D9D5F /* Source */,
 				E0E1BC701DCE61F4009D9D5F /* main.swift */,
 			);
 			path = "Swift-Learn";
 			sourceTree = "<group>";
 		};
-		E0E1BC7C1DCE6C08009D9D5F /* Algebra */ = {
+		E0E1BC881DCEC67D009D9D5F /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E0E1BC7D1DCE6C1A009D9D5F /* Matrix.swift */,
-				E0E1BC7E1DCE6C1A009D9D5F /* Vector.swift */,
-				E0E1BC811DCE6FD7009D9D5F /* SLError.swift */,
+				E0E1BC891DCEC67D009D9D5F /* Matrix.swift */,
+				E0E1BC8A1DCEC67D009D9D5F /* SLError.swift */,
+				E0E1BC8B1DCEC67D009D9D5F /* Vector.swift */,
+				E0E1BC8F1DCED387009D9D5F /* Initializer.swift */,
 			);
-			path = Algebra;
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,10 +141,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0E1BC821DCE6FD7009D9D5F /* SLError.swift in Sources */,
-				E0E1BC7F1DCE6C1A009D9D5F /* Matrix.swift in Sources */,
+				E0E1BC8E1DCEC756009D9D5F /* Vector.swift in Sources */,
 				E0E1BC711DCE61F4009D9D5F /* main.swift in Sources */,
-				E0E1BC801DCE6C1A009D9D5F /* Vector.swift in Sources */,
+				E0E1BC8C1DCEC752009D9D5F /* Matrix.swift in Sources */,
+				E0E1BC8D1DCEC754009D9D5F /* SLError.swift in Sources */,
+				E0E1BC901DCED387009D9D5F /* Initializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

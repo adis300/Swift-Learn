@@ -6,6 +6,7 @@
 //  Copyright © 2016 Votebin. All rights reserved.
 //
 
+import Foundation
 import Accelerate
 
 struct Vector { // <T>
@@ -51,12 +52,41 @@ struct Vector { // <T>
         vector = values
     }
     
-    // Returns the count of the vector
+    // MARK: Array property impl
     func length() -> Int{
         return vector.count
     }
     
-    // Implements the array operator
+    func copy() -> Vector {
+        let copied = Vector(length: vector.count)
+        cblas_dcopy(CInt(vector.count), UnsafeMutablePointer<Double>(mutating: vector), CInt(1), UnsafeMutablePointer<Double>(mutating: copied.vector), CInt(1))
+        return copied
+    }
+    // 
+    
+    func sum() -> Double{
+        var result: Double = 0.0
+        vDSP_sveD(vector, 1, &result, vDSP_Length(vector.count))
+        return result
+    }
+    
+    func mean() -> Double{
+        var result: Double = 0.0
+        vDSP_meanvD(vector, 1, &result, vDSP_Length(vector.count))
+        // return sum() / Double(vector.count)
+        return result
+    }
+    
+    // MARK: Vector Interop implementation
+    func dot(vecB: Vector) -> Double{
+        precondition(vector.count == vecB.length(), "Vectors must have equal size")
+        
+        var result: Double = 0.0
+        vDSP_dotprD(vector, 1, vecB.vector, 1, &result, vDSP_Length(vector.count))
+        return result
+    }
+    
+    // MARK: Indexed getter setter implementation
     subscript(index:Int) -> Double{
         get {
             // assert(vector[index] is T.Type, "Vector element has to be as defined!")
@@ -68,17 +98,6 @@ struct Vector { // <T>
         }
     }
     
-    func dot(vecB: Vector) -> Double{
-        assert(vector.count == vecB.length(), "Vector must have identical size")
-        return vector[0]
-    }
-    
-    func copy() -> Vector {
-        let copied = Vector(length: vector.count)
-        cblas_dcopy(CInt(vector.count), UnsafeMutablePointer<Double>(mutating: vector), CInt(1), UnsafeMutablePointer<Double>(mutating: copied.vector), CInt(1))
-        return copied
-    }
-    // Indexed getter setter implementation
     subscript(indices: CountableRange<Int>) -> [Double] {
         get { return Array(vector[indices]) }
         set{
@@ -106,36 +125,5 @@ struct Vector { // <T>
     
 }
 
-/*
-struct StaticArray<
-    T : StaticArrayProtocol
-> : StaticArrayProtocol, RandomAccessCollection, MutableCollection {
-    typealias Indices = CountableRange<Int>
-    
-    init(_ defaultValue : T.ElemTy) { values = T(defaultValue) }
-    var values : T
-    func get(_ idx: Int) -> T.ElemTy { return values.get(idx) }
-    mutating func set(_ idx: Int,_ val : T.ElemTy) { return values.set(idx, val) }
-    func count() -> Int { return values.count() }
-    
-    typealias Index = Int
-    typealias IndexDistance = Int
-    let startIndex: Int = 0
-    var endIndex: Int { return count()}
-    
-    subscript(idx: Int) -> T.ElemTy {
-        get {
-            return get(idx)
-        }
-        set(val) {
-            set(idx, val)
-        }
-    }
-    
-    typealias Iterator = IndexingIterator<StaticArray>
-    
-    subscript(bounds: Range<Index>) -> StaticArray<T> {
-        get { fatalError() }
-        set { fatalError() }
-    }
-}*/
+// Future implementation
+// extension Array where Element == Double { }

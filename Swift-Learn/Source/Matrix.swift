@@ -10,7 +10,7 @@ import Accelerate
 
 struct Matrix {
     
-    
-    
+    init(row: Int, col: Int) {
+    }
 }
 
