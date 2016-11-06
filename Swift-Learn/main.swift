@@ -10,12 +10,15 @@ import Foundation
 
 print("Test framework here!")
 
-var vec = Vector(length: 20)
+var vec = zeros(length: 6)
 
-vec[5...9] = [6.0,7.0,6,8,3]
+vec[2...5] = [-6.0,7.0,6,8]
 
-print("Sum")
-print(vec.sum())
+print("Original: vector")
+print(vec)
+
+print("Square sum:")
+print(vec.sumSq())
 
 print("Mean:")
 print(vec.mean())

@@ -62,7 +62,19 @@ struct Vector { // <T>
         cblas_dcopy(CInt(vector.count), UnsafeMutablePointer<Double>(mutating: vector), CInt(1), UnsafeMutablePointer<Double>(mutating: copied.vector), CInt(1))
         return copied
     }
-    // 
+    
+    // MARK: Arithmic operations
+    func min() -> Double {
+        var result: Double = 0.0
+        vDSP_minvD(vector, 1, &result, vDSP_Length(vector.count))
+        return result
+    }
+    
+    func max() -> Double {
+        var result: Double = 0.0
+        vDSP_maxvD(vector, 1, &result, vDSP_Length(vector.count))
+        return result
+    }
     
     func sum() -> Double{
         var result: Double = 0.0
@@ -70,10 +82,33 @@ struct Vector { // <T>
         return result
     }
     
+    // Sume of absolute values
+    func asum() -> Double {
+        return cblas_dasum(CInt(vector.count), vector, 1)
+    }
+    
+    func sumSq() -> Double {
+        var result: Double = 0
+        vDSP_svesqD(vector, 1, &result, vDSP_Length(vector.count))
+        return result
+    }
+    
     func mean() -> Double{
         var result: Double = 0.0
         vDSP_meanvD(vector, 1, &result, vDSP_Length(vector.count))
         // return sum() / Double(vector.count)
+        return result
+    }
+    
+    func meanMag() -> Double {
+        var result: Double = 0.0
+        vDSP_meamgvD(vector, 1, &result, vDSP_Length(vector.count))
+        return result
+    }
+    
+    public func meanSquare() -> Double {
+        var result: Double = 0.0
+        vDSP_measqvD(vector, 1, &result, vDSP_Length(vector.count))
         return result
     }
     
@@ -125,5 +160,6 @@ struct Vector { // <T>
     
 }
 
-// Future implementation
+// MARK: Future implementation
+// TODO: Implement simple vector extension with Swift 3.1 +
 // extension Array where Element == Double { }
