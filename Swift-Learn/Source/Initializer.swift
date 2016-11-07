@@ -13,6 +13,6 @@ func zeros(length:Int) -> Vector<Double>{
     return Vector<Double>(length)
 }
 
-func zeros(row:Int, col:Int) -> Matrix{
-    return Matrix(row: row, col: col)
+func zeros(row:Int, col:Int) -> Matrix<Double>{
+    return Matrix<Double>(rows: row, cols: col)
 }
