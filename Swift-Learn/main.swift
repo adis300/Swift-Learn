@@ -8,15 +8,19 @@
 
 import Foundation
 
-print("Test framework here!")
+print("Starting framework test!")
 
-var vec = zeros(length: 6)
+// MARK: Vector test
+// var vec = zeros(length: 6)
+// vec[2...5] = [-6.0,7.0,6,8]
 
-vec[2...5] = [-6.0,7.0,6,8]
+var vec = Vector([-6.0,7.0,6,8])
 
 print("Original: vector")
 print(vec)
 
 print("Square sum:")
 print(dot(vec,vec))
+
+// MARK: NeuralNetwork test
 

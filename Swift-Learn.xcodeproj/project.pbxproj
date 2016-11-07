@@ -39,6 +39,7 @@
 		E0E1BC921DD10551009D9D5F /* Arithmetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arithmetic.swift; sourceTree = "<group>"; };
 		E0E1BC941DD1058B009D9D5F /* Auxiliary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auxiliary.swift; sourceTree = "<group>"; };
 		E0E1BC961DD105B1009D9D5F /* Power.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Power.swift; sourceTree = "<group>"; };
+		E0E1BC9D1DD11585009D9D5F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +81,7 @@
 		E0E1BC881DCEC67D009D9D5F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				E0E1BC9C1DD11585009D9D5F /* NeuralNetwork */,
 				E0E1BC891DCEC67D009D9D5F /* Matrix.swift */,
 				E0E1BC8A1DCEC67D009D9D5F /* Err.swift */,
 				E0E1BC8B1DCEC67D009D9D5F /* Vector.swift */,
@@ -89,6 +91,14 @@
 				E0E1BC961DD105B1009D9D5F /* Power.swift */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		E0E1BC9C1DD11585009D9D5F /* NeuralNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				E0E1BC9D1DD11585009D9D5F /* Network.swift */,
+			);
+			path = NeuralNetwork;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
