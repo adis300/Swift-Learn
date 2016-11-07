@@ -18,7 +18,5 @@ print("Original: vector")
 print(vec)
 
 print("Square sum:")
-print(vec.sumSq())
+print(dot(vec,vec))
 
-print("Mean:")
-print(vec.mean())

@@ -8,8 +8,9 @@
 
 import Foundation
 
-func zeros(length:Int) -> Vector{
-    return Vector(length: length)
+// Initializers by default returns double vectors
+func zeros(length:Int) -> Vector<Double>{
+    return Vector<Double>(length)
 }
 
 func zeros(row:Int, col:Int) -> Matrix{

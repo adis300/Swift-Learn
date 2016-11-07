@@ -174,7 +174,7 @@ public func ==<T> (leftHandSide: Vector<T>, rightHandSide: Vector<T>) -> Bool {
 // MARK: -
 // TODO: Confirm in-place addtion works
 
-public func add(_ x: Vector<Float>, y: Vector<Float>) -> Vector<Float> {
+public func add(_ x: Vector<Float>, _ y: Vector<Float>) -> Vector<Float> {
     precondition(x.length() == y.length(), "Vector dimensions not compatible with addition")
     
     var results = Vector(y.vector)
@@ -182,7 +182,7 @@ public func add(_ x: Vector<Float>, y: Vector<Float>) -> Vector<Float> {
     return results
 }
 
-public func add(_ x: Vector<Double>, y: Vector<Double>) -> Vector<Double> {
+public func add(_ x: Vector<Double>, _ y: Vector<Double>) -> Vector<Double> {
     precondition(x.length() == y.length(), "Vector dimensions not compatible with addition")
     
     var results = Vector(y.vector)
@@ -190,19 +190,19 @@ public func add(_ x: Vector<Double>, y: Vector<Double>) -> Vector<Double> {
     return results
 }
 
-public func mul(_ alpha: Float, x: Vector<Float>) -> Vector<Float> {
+public func mul(_ alpha: Float, _ x: Vector<Float>) -> Vector<Float> {
     var results = Vector(x.vector)
     cblas_sscal(CInt(x.vector.count), alpha, &(results.vector), 1)
     return results
 }
 
-public func mul(_ alpha: Double, x: Vector<Double>) -> Vector<Double> {
+public func mul(_ alpha: Double, _ x: Vector<Double>) -> Vector<Double> {
     var results = Vector(x.vector)
     cblas_dscal(CInt(x.vector.count), alpha, &(results.vector), 1)
     return results
 }
 
-public func dot(_ x: Vector<Float>, y: Vector<Float>) -> Float {
+public func dot(_ x: Vector<Float>, _ y: Vector<Float>) -> Float {
     precondition(x.length() == y.length(), "Vectors must have equal length to perform dot product")
     
     var result: Float = 0.0
@@ -211,7 +211,7 @@ public func dot(_ x: Vector<Float>, y: Vector<Float>) -> Float {
     return result
 }
 
-public func dot(_ x: Vector<Double>, y: Vector<Double>) -> Double {
+public func dot(_ x: Vector<Double>, _ y: Vector<Double>) -> Double {
     precondition(x.length() == y.length(), "Vectors must have equal length to perform dot product")
     
     var result: Double = 0.0
@@ -221,7 +221,7 @@ public func dot(_ x: Vector<Double>, y: Vector<Double>) -> Double {
 }
 
 // Element-vise multiplication (hadamard product)
-public func elmul(x: Vector<Float>, y: Vector<Float>) -> Vector<Float>{
+public func elmul(x: Vector<Float>, _ y: Vector<Float>) -> Vector<Float>{
     precondition(x.length() == y.length(), "Vector dimensions not compatible for hadamard product")
     
     var results = Vector<Float>(x.length()) //[Float](repeating: 0.0, count: x.count)
@@ -229,7 +229,7 @@ public func elmul(x: Vector<Float>, y: Vector<Float>) -> Vector<Float>{
     return results
 }
 
-public func elmul(x: Vector<Double>, y: Vector<Double>) -> Vector<Double>{
+public func elmul(x: Vector<Double>, _ y: Vector<Double>) -> Vector<Double>{
     precondition(x.length() == y.length(), "Vector dimensions not compatible for hadamard product")
     
     var results = Vector<Double>(x.length()) //[Float](repeating: 0.0, count: x.count)
