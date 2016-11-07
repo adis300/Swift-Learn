@@ -9,6 +9,6 @@
 import Foundation
 
 
-enum SLError: Error {
+enum Err: Error {
     case vectorElementHasToBeDouble
 }
