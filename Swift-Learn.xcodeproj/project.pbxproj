@@ -15,6 +15,9 @@
 		E0E1BC931DD10551009D9D5F /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC921DD10551009D9D5F /* Arithmetic.swift */; };
 		E0E1BC951DD1058B009D9D5F /* Auxiliary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC941DD1058B009D9D5F /* Auxiliary.swift */; };
 		E0E1BC971DD105B1009D9D5F /* Power.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC961DD105B1009D9D5F /* Power.swift */; };
+		E0E1BCA01DD81E6F009D9D5F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC9D1DD11585009D9D5F /* Network.swift */; };
+		E0E1BCA21DD823ED009D9D5F /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BCA11DD823ED009D9D5F /* Random.swift */; };
+		E0E1BCA41DD824DB009D9D5F /* Activation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BCA31DD824DB009D9D5F /* Activation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +43,8 @@
 		E0E1BC941DD1058B009D9D5F /* Auxiliary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auxiliary.swift; sourceTree = "<group>"; };
 		E0E1BC961DD105B1009D9D5F /* Power.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Power.swift; sourceTree = "<group>"; };
 		E0E1BC9D1DD11585009D9D5F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		E0E1BCA11DD823ED009D9D5F /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		E0E1BCA31DD824DB009D9D5F /* Activation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +94,8 @@
 				E0E1BC921DD10551009D9D5F /* Arithmetic.swift */,
 				E0E1BC941DD1058B009D9D5F /* Auxiliary.swift */,
 				E0E1BC961DD105B1009D9D5F /* Power.swift */,
+				E0E1BCA11DD823ED009D9D5F /* Random.swift */,
+				E0E1BCA31DD824DB009D9D5F /* Activation.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -160,13 +167,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0E1BCA01DD81E6F009D9D5F /* Network.swift in Sources */,
 				E0E1BC8E1DCEC756009D9D5F /* Vector.swift in Sources */,
+				E0E1BCA21DD823ED009D9D5F /* Random.swift in Sources */,
 				E0E1BC951DD1058B009D9D5F /* Auxiliary.swift in Sources */,
 				E0E1BC711DCE61F4009D9D5F /* main.swift in Sources */,
 				E0E1BC971DD105B1009D9D5F /* Power.swift in Sources */,
 				E0E1BC8C1DCEC752009D9D5F /* Matrix.swift in Sources */,
 				E0E1BC931DD10551009D9D5F /* Arithmetic.swift in Sources */,
 				E0E1BC8D1DCEC754009D9D5F /* Err.swift in Sources */,
+				E0E1BCA41DD824DB009D9D5F /* Activation.swift in Sources */,
 				E0E1BC901DCED387009D9D5F /* Initializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -22,5 +22,15 @@ print(vec)
 print("Square sum:")
 print(dot(vec,vec))
 
-// MARK: NeuralNetwork test
 
+
+
+
+// MARK: NeuralNetwork test
+var network = Network([3,3,2])
+print(network.biases)
+print("Weights: ")
+print(network.weights)
+
+print("Activation test: ")
+print((0...100).map{ return Activation.sigmoid(Double($0))})
