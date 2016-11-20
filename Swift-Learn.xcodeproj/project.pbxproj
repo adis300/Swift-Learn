@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E09E7A941DE14591003F7DA2 /* DateSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E7A931DE14591003F7DA2 /* DateSet.swift */; };
+		E09E7A941DE14591003F7DA2 /* LabeledData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E7A931DE14591003F7DA2 /* LabeledData.swift */; };
 		E0E1BC711DCE61F4009D9D5F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC701DCE61F4009D9D5F /* main.swift */; };
 		E0E1BC8C1DCEC752009D9D5F /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC891DCEC67D009D9D5F /* Matrix.swift */; };
 		E0E1BC8D1DCEC754009D9D5F /* Err.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC8A1DCEC67D009D9D5F /* Err.swift */; };
@@ -34,7 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E09E7A931DE14591003F7DA2 /* DateSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSet.swift; sourceTree = "<group>"; };
+		E09E7A931DE14591003F7DA2 /* LabeledData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledData.swift; sourceTree = "<group>"; };
 		E0E1BC6D1DCE61F4009D9D5F /* Swift-Learn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Swift-Learn"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E1BC701DCE61F4009D9D5F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E0E1BC891DCEC67D009D9D5F /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				E0E1BC9D1DD11585009D9D5F /* Network.swift */,
-				E09E7A931DE14591003F7DA2 /* DateSet.swift */,
+				E09E7A931DE14591003F7DA2 /* LabeledData.swift */,
 			);
 			path = NeuralNetwork;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 			files = (
 				E0E1BCA01DD81E6F009D9D5F /* Network.swift in Sources */,
 				E0E1BC8E1DCEC756009D9D5F /* Vector.swift in Sources */,
-				E09E7A941DE14591003F7DA2 /* DateSet.swift in Sources */,
+				E09E7A941DE14591003F7DA2 /* LabeledData.swift in Sources */,
 				E0E1BCA21DD823ED009D9D5F /* Random.swift in Sources */,
 				E0E1BC951DD1058B009D9D5F /* Auxiliary.swift in Sources */,
 				E0E1BC711DCE61F4009D9D5F /* main.swift in Sources */,

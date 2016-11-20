@@ -1,37 +1,4 @@
-//
-//  Mat.swift
-//  Swift-Learn
-//
-//  Created by Disi A on 11/5/16.
-//  Copyright © 2016 Votebin. All rights reserved.
-//
-
-import Accelerate
-/*
-struct Matrix {
-    
-    // Flat matrix implementation
-    var matrix: [Double]
-    let size: (Int, Int)
-    
-    init(row: Int, col: Int) {
-        size = (row,col)
-        matrix = [Double](repeating:0, count: row*col)
-    }
-    
-    // MARK: Indexed getter setter implementation
-    subscript(row: Int, column: Int) -> Double {
-        get {
-            return matrix[row * size.1 + column]
-        }
-        set(newValue) {
-            return matrix[row * size.1 + column] = newValue
-        }
-    }
-    
-}*/
-
-// Hyperbolic.swift
+// Matrix.swift
 //
 // Copyright (c) 2014–2015 Mattt Thompson (http://mattt.me)
 //
@@ -61,47 +28,47 @@ public enum Axis {
 }
 
 public struct Matrix<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
-    public typealias Element = T
+    // public typealias Element = T
     
     let rows: Int
     let cols: Int
-    var grid: [Element]
+    var grid: [T]
     
     
     public init(size: (Int, Int)) {
         self.rows = size.0
         self.cols = size.1
         
-        self.grid = [Element](repeating: 0, count: rows * cols)
+        self.grid = [T](repeating: 0, count: rows * cols)
     }
     
     public init(rows: Int, cols: Int) {
         self.rows = rows
         self.cols = cols
         
-        self.grid = [Element](repeating: 0, count: rows * cols)
+        self.grid = [T](repeating: 0, count: rows * cols)
     }
     
-    public init(rows: Int, cols: Int, repeatedValue: Element) {
+    public init(rows: Int, cols: Int, repeatedValue: T) {
         self.rows = rows
         self.cols = cols
         
-        self.grid = [Element](repeating: repeatedValue, count: rows * cols)
+        self.grid = [T](repeating: repeatedValue, count: rows * cols)
     }
     
-    public init(_ contents: [[Element]]) {
-        let m: Int = contents.count
-        let n: Int = contents[0].count
-        let repeatedValue: Element = 0.0
+    public init(_ values: [[T]]) {
+        let m: Int = values.count
+        let n: Int = values[0].count
+        let repeatedValue: T = 0.0
         
         self.init(rows: m, cols: n, repeatedValue: repeatedValue)
         
-        for (i, row) in contents.enumerated() {
+        for (i, row) in values.enumerated() {
             grid.replaceSubrange(i*n..<i*n+Swift.min(m, row.count), with: row)
         }
     }
     
-    public subscript(row: Int, column: Int) -> Element {
+    public subscript(row: Int, column: Int) -> T {
         get {
             assert(indexIsValidForRow(row, column: column))
             return grid[(row * cols) + column]
@@ -113,7 +80,7 @@ public struct Matrix<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
         }
     }
     
-    public subscript(row row: Int) -> [Element] {
+    public subscript(row row: Int) -> [T] {
         get {
             assert(row < rows)
             let startIndex = row * cols
@@ -130,9 +97,9 @@ public struct Matrix<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
         }
     }
     
-    public subscript(column column: Int) -> [Element] {
+    public subscript(column column: Int) -> [T] {
         get {
-            var result = [Element](repeating: 0.0, count: rows)
+            var result = [T](repeating: 0.0, count: rows)
             for i in 0..<rows {
                 let index = i * cols + column
                 result[i] = self.grid[index]
@@ -185,7 +152,7 @@ extension Matrix: CustomStringConvertible {
 // MARK: - SequenceType
 
 extension Matrix: Sequence {
-    public func makeIterator() -> AnyIterator<ArraySlice<Element>> {
+    public func makeIterator() -> AnyIterator<ArraySlice<T>> {
         let endIndex = rows * cols
         var nextRowStartIndex = 0
         
@@ -405,6 +372,50 @@ public func * (lhs: Matrix<Float>, rhs: Matrix<Float>) -> Matrix<Float> {
 
 public func * (lhs: Matrix<Double>, rhs: Matrix<Double>) -> Matrix<Double> {
     return mul(lhs, y: rhs)
+}
+
+// Disi's matrix * vector convenient implementation
+
+public func * (lhs: Matrix<Float>, rhs: Vector<Float>) -> Vector<Float> {
+    precondition(lhs.rows == rhs.length(), "Matrix dimensions not compatible with multiplication")
+    
+    // Because vector is horizontal, we need to change code to B * A' = C
+    var results = Vector<Float>(rhs.length())
+    
+    cblas_sgemm(CblasColMajor, CblasTrans, CblasNoTrans,
+                Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
+        1, // Number of columns in matrices B and C.
+        Int32(lhs.cols), // Number of columns in matrix A; number of rows in matrix B.
+        1.0, // Scaling factor for the product
+        lhs.grid, // Matrix A
+        Int32(lhs.rows), // The size of the first dimention of matrix A
+        rhs.vector, // Matrix B
+        Int32(rhs.length()), // First dimension of matrix B
+        1.0,
+        &results.vector,
+        Int32(rhs.length())) // The size of the first dimention of matrix C; if you are passing a matrix C[m][n], the value should be m.
+    return results
+}
+
+public func * (lhs: Matrix<Double>, rhs: Vector<Double>) -> Vector<Double> {
+    precondition(lhs.rows == rhs.length(), "Matrix dimensions not compatible with multiplication")
+    
+    // Because vector is horizontal, we need to change code to B * A' = C
+    var results = Vector<Double>(rhs.length())
+
+    cblas_dgemm(CblasColMajor, CblasTrans, CblasNoTrans,
+                Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
+        1, // Number of columns in matrices B and C.
+        Int32(lhs.cols), // Number of columns in matrix A; number of rows in matrix B.
+        1.0, // Scaling factor for the product
+        lhs.grid, // Matrix A
+        Int32(lhs.rows), // The size of the first dimention of matrix A
+        rhs.vector, // Matrix B
+        Int32(rhs.length()), // First dimension of matrix B
+        1.0,
+        &results.vector,
+        Int32(rhs.length())) // The size of the first dimention of matrix C; if you are passing a matrix C[m][n], the value should be m.
+    return results
 }
 
 public func / (lhs: Matrix<Double>, rhs: Matrix<Double>) -> Matrix<Double> {

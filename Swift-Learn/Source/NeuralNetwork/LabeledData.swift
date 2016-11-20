@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DataSet{
+class LabeledData{
     
     let input: Vector<Double>
     let label: Vector<Double>
