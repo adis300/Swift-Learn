@@ -25,14 +25,15 @@ class Network {
         biases = []
         weights = []
         
-        for layerNumber in 1..<layerSizes.count {
-            
-            biases.append(Random.randN1To1(length: layerSizes[layerNumber]))
+        for nodeCount in 1..<layerSizes.count {
+            biases.append([Double](repeating: 0, count: layerSizes[nodeCount]))
+            // biases.append(Random.randMinus1To1(length: layerSizes[nodeCount]))
             
             weights.append([])
             
-            for _ in 0..<layerSizes[layerNumber] {
-                weights[layerNumber - 1].append(Vector(Random.randN1To1(length: layerSizes[layerNumber - 1])))
+            for _ in 0..<layerSizes[nodeCount] {
+                weights[nodeCount - 1].append(Vector(layerSizes[nodeCount - 1]))
+                // weights[layerNumber - 1].append(Vector(Random.randMinus1To1(length: layerSizes[layerNumber - 1])))
             }
             
         }
@@ -43,30 +44,41 @@ class Network {
     The ``mini_batch`` is a list of tuples ``(x, y)``, and ``eta``
     is the learning rate. 
      */
-    func updateMiniBatch(miniBatch: [Vector<Double>], eta: Double){
+    func updateMiniBatch(miniBatch: [DataSet], eta: Double){
         
-        let nablaB = biases.map{$0.map{_ in return 0.0}} // Gradient of biases
-        let nablaW = weights.map{$0.map{Vector($0.length())}} // Gradient of weights
+        var nablaB = biases.map{$0.map{_ in return 0.0}} // Gradient of biases
+        var nablaW = weights.map{$0.map{Vector($0.length())}} // Gradient of weights
         
         print(nablaB)
         print(nablaW)
-
         
-        /*
-         for x, y in mini_batch:
-         delta_nabla_b, delta_nabla_w = self.backprop(x, y)
-         nabla_b = [nb+dnb for nb, dnb in zip(nabla_b, delta_nabla_b)]
-         nabla_w = [nw+dnw for nw, dnw in zip(nabla_w, delta_nabla_w)]
-         self.weights = [w-(eta/len(mini_batch))*nw
-         for w, nw in zip(self.weights, nabla_w)]
-         self.biases = [b-(eta/len(mini_batch))*nb
-         for b, nb in zip(self.biases, nabla_b)]
-         */
+        for trainingData in miniBatch {
+            let (deltaNablaW, deltaNablaB) = backProp(trainingData)
+            
+            for layerNumber in 1..<layerSizes.count {
+                
+                addTo(&nablaB[layerNumber - 1], values: deltaNablaB[layerNumber - 1])
+                
+                for nodeNumber in 0..<layerSizes[layerNumber] {
+                    addTo(&nablaW[layerNumber - 1][nodeNumber], values: deltaNablaW[layerNumber - 1][nodeNumber])
+                }
+                
+            }
+        }
+        
+        // Finally update the network weights and biases by scaling the gradient with learning rate and batch size.
+        for layerNumber in 1..<layerSizes.count {
+            addTo(&biases[layerNumber - 1], values: nablaB[layerNumber - 1], scale: eta/miniBatch.count)
+            for nodeNumber in 0..<layerSizes[layerNumber] {
+                addTo(&weights[layerNumber - 1][nodeNumber], values: nablaW[layerNumber - 1][nodeNumber] , scale: eta/miniBatch.count)
+            }
+        }
     }
     
-    func backProp(data:[Vector<Double>], label:[Double]) -> [Vector<Double>]{
-        
-        return []
+    func backProp(_ dataSet:DataSet) -> ([[Vector<Double>]], [[Double]]){
+        let nW = weights.map{$0.map{Vector($0.length(),repeatedValue: 0.01)}} // Gradient of weights
+        let nB = biases.map{$0.map{_ in return 0.01}} // Gradient of biases
+        return (nW, nB)
     }
     
     /*

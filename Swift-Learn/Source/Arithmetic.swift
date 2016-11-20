@@ -157,6 +157,22 @@ public func add(_ x: [Double], y: [Double]) -> [Double] {
     return results
 }
 
+public func addTo(_ target: inout [Float], values: [Float]){
+    cblas_saxpy(Int32(target.count), 1.0, values, 1, &target, 1)
+}
+
+public func addTo(_ target: inout [Double], values: [Double]){
+    cblas_daxpy(Int32(target.count), 1.0, values, 1, &target, 1)
+}
+
+public func addTo(_ target: inout [Float], values: [Float], scale: Float){
+    catlas_saxpby(Int32(target.count), scale, values, 1, 1.0, &target, 1)
+}
+
+public func addTo(_ target: inout [Double], values: [Double], scale: Double){
+    catlas_daxpby(Int32(target.count), scale, values, 1, 1.0, &target, 1)
+}
+
 // MARK: Subtraction
 
 public func sub(_ x: [Float], y: [Float]) -> [Float] {
@@ -342,6 +358,14 @@ public func / (lhs: [Float], rhs: Float) -> [Float] {
 
 public func / (lhs: [Double], rhs: Double) -> [Double] {
     return div(lhs, y: [Double](repeating: rhs, count: lhs.count))
+}
+
+public func / (lhs: Float, rhs: Int) -> Float {
+    return lhs/Float(rhs)
+}
+
+public func / (lhs: Double, rhs: Int) -> Double {
+    return lhs/Double(rhs)
 }
 
 public func * (lhs: [Float], rhs: [Float]) -> [Float] {

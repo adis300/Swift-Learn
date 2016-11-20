@@ -9,21 +9,21 @@
 import Accelerate
 
 public struct Vector<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
-    public typealias Element = T
+    // public typealias Element = T
     
-    var vector: [Element]
+    var vector: [T]
     
     public init(_ length: Int) {
-        vector = [Element](repeating: 0, count: length)
+        vector = [T](repeating: 0, count: length)
     }
     
-    public init(_ length: Int, repeatedValue: Element) {
-        vector = [Element](repeating: repeatedValue, count: length)
+    public init(_ length: Int, repeatedValue: T) {
+        vector = [T](repeating: repeatedValue, count: length)
     }
     
-    public init(_ values: [Element]) {
+    public init(_ values: [T]) {
         // let repeatedValue: Element = 0.0
-        vector = [Element](values)
+        vector = [T](values)
         // self.init(length: values.count, repeatedValue: repeatedValue)
         // vector.replaceSubrange(0..<values.count, with: values)
     }
@@ -32,7 +32,7 @@ public struct Vector<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
         return vector.count
     }
     
-    public subscript(index: Int) -> Element {
+    public subscript(index: Int) -> T {
         get {
             // Assert Check index in range?
             return vector[index]
@@ -43,7 +43,7 @@ public struct Vector<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
         }
     }
     
-    public subscript(indices: CountableRange<Int>) -> [Element] {
+    public subscript(indices: CountableRange<Int>) -> [T] {
         get { return Array(vector[indices]) }
         set{
             precondition(indices.count == newValue.count, "Size of indices must match size of newValue")
@@ -52,7 +52,7 @@ public struct Vector<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
         }
     }
     
-    public subscript(indices: CountableClosedRange<Int>) -> [Element] {
+    public subscript(indices: CountableClosedRange<Int>) -> [T] {
         get { return Array(vector[indices]) }
         set{
             precondition(indices.count == newValue.count, "Size of indices must match size of newValue")
@@ -149,7 +149,7 @@ extension Vector: CustomStringConvertible {
 // MARK: - SequenceType
 
 extension Vector: Sequence {
-    public func makeIterator() -> AnyIterator<Element> {
+    public func makeIterator() -> AnyIterator<T> {
         let endIndex = vector.count
         var nextIndex = 0
         
@@ -188,6 +188,22 @@ public func add(_ x: Vector<Double>, _ y: Vector<Double>) -> Vector<Double> {
     var results = Vector(y.vector)
     cblas_daxpy(CInt(x.vector.count), 1.0, x.vector, 1, &(results.vector), 1)
     return results
+}
+
+public func addTo(_ target: inout Vector<Float>, values: Vector<Float>){
+    cblas_saxpy(Int32(target.length()), 1.0, values.vector, 1, &target.vector, 1)
+}
+
+public func addTo(_ target: inout Vector<Double>, values: Vector<Double>){
+    cblas_daxpy(Int32(target.length()), 1.0, values.vector, 1, &target.vector, 1)
+}
+
+public func addTo(_ target: inout Vector<Float>, values: Vector<Float>, scale: Float){
+    catlas_saxpby(Int32(target.length()), scale, values.vector, 1, 1.0, &target.vector, 1)
+}
+
+public func addTo(_ target: inout Vector<Double>, values: Vector<Double>, scale: Double){
+    catlas_daxpby(Int32(target.length()), scale, values.vector, 1, 1.0, &target.vector, 1)
 }
 
 public func mul(_ alpha: Float, _ x: Vector<Float>) -> Vector<Float> {

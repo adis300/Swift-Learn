@@ -35,4 +35,4 @@ print(network.weights)
 print("Activation test: ")
 print((0...100).map{ return Activation.sigmoid(Double($0))})
 
-network.updateMiniBatch(miniBatch: [], eta: 0)
+network.updateMiniBatch(miniBatch: [DataSet(input: [],label: [0,0,1,0])], eta: 3)
