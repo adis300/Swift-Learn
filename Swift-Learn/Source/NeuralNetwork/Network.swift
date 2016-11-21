@@ -73,12 +73,13 @@ class Network {
         var nablaW = weights.map{Matrix(rows: $0.rows, cols: $0.cols)} // Gradient of weights
         
         var activations:[Vector<Double>] = [dataSet.input]
+        var zs: [Vector<Double>] = []
         
         for layerNumber in 1..<layerSizes.count {
-            let weight = weights[layerNumber - 1]
-            let bias = biases[layerNumber - 1]
-            let activation = weight * (activations[layerNumber - 1]) + bias
-            activations.append(activation)
+            let z = weights[layerNumber - 1] * (activations[layerNumber - 1]) + biases[layerNumber - 1]
+            zs.append(z)
+            activations.append(sigmoid(z))
+            
         }
         return (nablaW, nablaB)
     }
