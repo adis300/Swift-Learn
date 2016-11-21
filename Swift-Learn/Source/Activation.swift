@@ -20,8 +20,8 @@ public func sigmoid(_ x: Vector<Double>)-> Vector<Double>{
     
     vvexp(&results.vector, results.vector, [Int32(x.length())])
     results += 1
-    return results // 1/results
-    
+    inv(&results) // 1/results
+    return results
 }
 
 /*

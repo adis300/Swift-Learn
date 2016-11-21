@@ -175,26 +175,6 @@ public func ==<T> (leftHandSide: Vector<T>, rightHandSide: Vector<T>) -> Bool {
     return leftHandSide.vector == rightHandSide.vector
 }
 
-
-// MARK: -
-// TODO: Confirm in-place addtion works
-
-public func addTo(_ target: inout Vector<Float>, values: Vector<Float>){
-    cblas_saxpy(Int32(target.length()), 1.0, values.vector, 1, &target.vector, 1)
-}
-
-public func addTo(_ target: inout Vector<Double>, values: Vector<Double>){
-    cblas_daxpy(Int32(target.length()), 1.0, values.vector, 1, &target.vector, 1)
-}
-
-public func addTo(_ target: inout Vector<Float>, values: Vector<Float>, scale: Float){
-    catlas_saxpby(Int32(target.length()), scale, values.vector, 1, 1.0, &target.vector, 1)
-}
-
-public func addTo(_ target: inout Vector<Double>, values: Vector<Double>, scale: Double){
-    catlas_daxpby(Int32(target.length()), scale, values.vector, 1, 1.0, &target.vector, 1)
-}
-
 public func mul(_ alpha: Float, _ x: Vector<Float>) -> Vector<Float> {
     var results = Vector(x.vector)
     cblas_sscal(CInt(x.vector.count), alpha, &(results.vector), 1)
@@ -266,40 +246,4 @@ public func exp(_ x: Vector<Float>) -> Vector<Float> {
     return result
 }
 
-public func + (lhs: Vector<Float>, rhs: Vector<Float>) -> Vector<Float> {
-    precondition(lhs.length() == rhs.length(), "Vector dimensions not compatible with addition")
-    
-    var results = Vector<Float>(rhs.vector)
-    cblas_saxpy(CInt(lhs.vector.count), 1.0, lhs.vector, 1, &(results.vector), 1)
-    return results
-}
 
-public func + (lhs: Vector<Double>, rhs: Vector<Double>) -> Vector<Double> {
-    precondition(lhs.length() == rhs.length(), "Vector dimensions not compatible with addition")
-    
-    var results = Vector<Double>(rhs.vector)
-    cblas_daxpy(CInt(lhs.vector.count), 1.0, lhs.vector, 1, &(results.vector), 1)
-    return results
-}
-
-public func + (lhs: Vector<Float>, rhs: inout Float) -> Vector<Float> {
-    var results = Vector<Float>(lhs.length())
-    vDSP_vsadd(lhs.vector, 1, &rhs, &results.vector, 1, vDSP_Length(lhs.length()))
-    return results
-}
-
-public func + (lhs: Vector<Double>, rhs: inout Double) -> Vector<Double> {
-    var results = Vector<Double>(lhs.length())
-    vDSP_vsaddD(lhs.vector, 1, &rhs, &results.vector, 1, vDSP_Length(lhs.length()))
-    return results
-}
-
-public func += (lhs: inout Vector<Float>, rhs: Float){
-    var rhs = rhs
-    vDSP_vsadd(lhs.vector, 1, &rhs, &lhs.vector, 1, vDSP_Length(lhs.length()))
-}
-
-public func += (lhs: inout Vector<Double>, rhs: Double){
-    var rhs = rhs
-    vDSP_vsaddD(lhs.vector, 1, &rhs, &lhs.vector, 1, vDSP_Length(lhs.length()))
-}

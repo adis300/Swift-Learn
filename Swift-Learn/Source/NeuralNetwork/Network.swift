@@ -12,8 +12,8 @@ class Network {
     
     var numLayers : Int
     var layerSizes: [Int]
-    var weights : [Matrix<Double>]
-    var biases: [Vector<Double>]
+    var weights : [Matrix<Double>] = []
+    var biases: [Vector<Double>] = []
     
     init(_ layerSizes: [Int]) {
         
@@ -22,16 +22,12 @@ class Network {
         numLayers = layerSizes.count
         self.layerSizes = layerSizes
         
-        biases = []
-        weights = []
-        
         for nodeCount in 1..<layerSizes.count {
             // biases.append(Vector<Double>(layerSizes[nodeCount])) // Zero biases for test
             biases.append(Vector<Double>(randomLength: layerSizes[nodeCount]))
             
             // weights.append(Matrix(rows: layerSizes[nodeCount],  cols:layerSizes[nodeCount - 1]))
             weights.append(Matrix(randomSize:(layerSizes[nodeCount], layerSizes[nodeCount - 1])))
-
         }
     }
     /* 
@@ -49,8 +45,8 @@ class Network {
         for trainingData in miniBatch {
             let (deltaNablaW, deltaNablaB) = backProp(trainingData)
             for layerNumber in 1..<layerSizes.count {
-                addTo(&nablaB[layerNumber - 1], values: deltaNablaB[layerNumber - 1])
-                addTo(&nablaW[layerNumber - 1], values: deltaNablaW[layerNumber - 1])
+                nablaB[layerNumber - 1] += deltaNablaB[layerNumber - 1]
+                nablaW[layerNumber - 1] += deltaNablaW[layerNumber - 1]
             }
         }
         

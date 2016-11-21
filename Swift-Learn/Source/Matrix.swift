@@ -188,40 +188,6 @@ public func ==<T> (lhs: Matrix<T>, rhs: Matrix<T>) -> Bool {
 
 // MARK: -
 
-public func add(_ x: Matrix<Float>, y: Matrix<Float>) -> Matrix<Float> {
-    precondition(x.rows == y.rows && x.cols == y.cols, "Matrix dimensions not compatible with addition")
-    
-    var results = y
-    cblas_saxpy(Int32(x.grid.count), 1.0, x.grid, 1, &(results.grid), 1)
-    
-    return results
-}
-
-public func add(_ x: Matrix<Double>, y: Matrix<Double>) -> Matrix<Double> {
-    precondition(x.rows == y.rows && x.cols == y.cols, "Matrix dimensions not compatible with addition")
-    
-    var results = y
-    cblas_daxpy(Int32(x.grid.count), 1.0, x.grid, 1, &(results.grid), 1)
-    
-    return results
-}
-
-public func addTo(_ target: inout Matrix<Float>, values: Matrix<Float>){
-    cblas_saxpy(Int32(target.length()), 1.0, values.grid, 1, &target.grid, 1)
-}
-
-public func addTo(_ target: inout Matrix<Double>, values: Matrix<Double>){
-    cblas_daxpy(Int32(target.length()), 1.0, values.grid, 1, &target.grid, 1)
-}
-
-public func addTo(_ target: inout Matrix<Float>, values: Matrix<Float>, scale: Float){
-    catlas_saxpby(Int32(target.length()), scale, values.grid, 1, 1.0, &target.grid, 1)
-}
-
-public func addTo(_ target: inout Matrix<Double>, values: Matrix<Double>, scale: Double){
-    catlas_daxpby(Int32(target.length()), scale, values.grid, 1, 1.0, &target.grid, 1)
-}
-
 public func mul(_ alpha: Float, x: Matrix<Float>) -> Matrix<Float> {
     var results = x
     cblas_sscal(Int32(x.grid.count), alpha, &(results.grid), 1)
@@ -268,18 +234,6 @@ public func elmul(_ x: Matrix<Float>, y: Matrix<Float>) -> Matrix<Float> {
     return result
 }
 
-public func div(_ x: Matrix<Double>, y: Matrix<Double>) -> Matrix<Double> {
-    let yInv = inv(y)
-    precondition(x.cols == yInv.rows, "Matrix dimensions not compatible")
-    return mul(x, y: yInv)
-}
-
-public func div(_ x: Matrix<Float>, y: Matrix<Float>) -> Matrix<Float> {
-    let yInv = inv(y)
-    precondition(x.cols == yInv.rows, "Matrix dimensions not compatible")
-    return mul(x, y: yInv)
-}
-
 public func pow(_ x: Matrix<Double>, _ y: Double) -> Matrix<Double> {
     var result = Matrix<Double>(rows: x.rows, cols: x.cols, repeatedValue: 0.0)
     result.grid = pow(x.grid, y)
@@ -323,43 +277,7 @@ public func sum(_ x: Matrix<Double>, axis: Axis = .column) -> Matrix<Double> {
     }
 }
 
-public func inv(_ x : Matrix<Float>) -> Matrix<Float> {
-    precondition(x.rows == x.cols, "Matrix must be square")
-    
-    var results = x
-    
-    var ipiv = [__CLPK_integer](repeating: 0, count: x.rows * x.rows)
-    var lwork = __CLPK_integer(x.cols * x.cols)
-    var work = [CFloat](repeating: 0.0, count: Int(lwork))
-    var error: __CLPK_integer = 0
-    var nc = __CLPK_integer(x.cols)
-    
-    sgetrf_(&nc, &nc, &(results.grid), &nc, &ipiv, &error)
-    sgetri_(&nc, &(results.grid), &nc, &ipiv, &work, &lwork, &error)
-    
-    assert(error == 0, "Matrix not invertible")
-    
-    return results
-}
 
-public func inv(_ x : Matrix<Double>) -> Matrix<Double> {
-    precondition(x.rows == x.cols, "Matrix must be square")
-    
-    var results = x
-    
-    var ipiv = [__CLPK_integer](repeating: 0, count: x.rows * x.rows)
-    var lwork = __CLPK_integer(x.cols * x.cols)
-    var work = [CDouble](repeating: 0.0, count: Int(lwork))
-    var error: __CLPK_integer = 0
-    var nc = __CLPK_integer(x.cols)
-    
-    dgetrf_(&nc, &nc, &(results.grid), &nc, &ipiv, &error)
-    dgetri_(&nc, &(results.grid), &nc, &ipiv, &work, &lwork, &error)
-    
-    assert(error == 0, "Matrix not invertible")
-    
-    return results
-}
 
 public func transpose(_ x: Matrix<Float>) -> Matrix<Float> {
     var results = Matrix<Float>(rows: x.cols, cols: x.rows, repeatedValue: 0.0)
@@ -376,14 +294,6 @@ public func transpose(_ x: Matrix<Double>) -> Matrix<Double> {
 }
 
 // MARK: - Operators
-
-public func + (lhs: Matrix<Float>, rhs: Matrix<Float>) -> Matrix<Float> {
-    return add(lhs, y: rhs)
-}
-
-public func + (lhs: Matrix<Double>, rhs: Matrix<Double>) -> Matrix<Double> {
-    return add(lhs, y: rhs)
-}
 
 public func * (lhs: Float, rhs: Matrix<Float>) -> Matrix<Float> {
     return mul(lhs, x: rhs)
@@ -443,26 +353,6 @@ public func * (lhs: Matrix<Double>, rhs: Vector<Double>) -> Vector<Double> {
         &results.vector,
         Int32(lhs.rows)) // The size of the first dimention of matrix C; if you are passing a matrix C[m][n], the value should be m.
     return results
-}
-
-public func / (lhs: Matrix<Double>, rhs: Matrix<Double>) -> Matrix<Double> {
-    return div(lhs, y: rhs)
-}
-
-public func / (lhs: Matrix<Float>, rhs: Matrix<Float>) -> Matrix<Float> {
-    return div(lhs, y: rhs)
-}
-
-public func / (lhs: Matrix<Double>, rhs: Double) -> Matrix<Double> {
-    var result = Matrix<Double>(rows: lhs.rows, cols: lhs.cols, repeatedValue: 0.0)
-    result.grid = lhs.grid / rhs;
-    return result;
-}
-
-public func / (lhs: Matrix<Float>, rhs: Float) -> Matrix<Float> {
-    var result = Matrix<Float>(rows: lhs.rows, cols: lhs.cols, repeatedValue: 0.0)
-    result.grid = lhs.grid / rhs;
-    return result;
 }
 
 postfix operator ′

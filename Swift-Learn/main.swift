@@ -31,6 +31,10 @@ var mat2 = Matrix([[1,2,3]])
 print(mat*mat2)
 var vec = Vector([1,4,8])
 print(mat * vec)
+
+var vec:Vector<Double> = Vector([1,2,3])
+vec /= 2 
+print(vec)
 */
 
 // MARK: Arithmic operation tests

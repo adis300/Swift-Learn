@@ -173,22 +173,6 @@ public func mul(_ x: [Double], y: [Double]) -> [Double] {
     return results
 }
 
-// MARK: Divide
-
-public func div(_ x: [Float], y: [Float]) -> [Float] {
-    var results = [Float](repeating: 0.0, count: x.count)
-    vvdivf(&results, x, y, [Int32(x.count)])
-    
-    return results
-}
-
-public func div(_ x: [Double], y: [Double]) -> [Double] {
-    var results = [Double](repeating: 0.0, count: x.count)
-    vvdiv(&results, x, y, [Int32(x.count)])
-    
-    return results
-}
-
 // MARK: Modulo
 
 public func mod(_ x: [Float], y: [Float]) -> [Float] {
@@ -294,50 +278,6 @@ public func - (lhs: [Float], rhs: Float) -> [Float] {
 
 public func - (lhs: [Double], rhs: Double) -> [Double] {
     return sub(lhs, y: [Double](repeating: rhs, count: lhs.count))
-}
-
-public func / (lhs: [Float], rhs: [Float]) -> [Float] {
-    return div(lhs, y: rhs)
-}
-
-public func / (lhs: [Double], rhs: [Double]) -> [Double] {
-    return div(lhs, y: rhs)
-}
-
-public func / (lhs: [Float], rhs: Float) -> [Float] {
-    var rhs = rhs
-    var results = [Float](repeating: 0, count: lhs.count)
-    vDSP_vsdiv(lhs,1, &rhs, &results, 1, vDSP_Length(lhs.count))
-    return results
-}
-
-public func / (lhs: [Double], rhs: Double) -> [Double] {
-    var rhs = rhs
-    var results = [Double](repeating: 0, count: lhs.count)
-    vDSP_vsdivD(lhs,1, &rhs, &results, 1, vDSP_Length(lhs.count))
-    return results
-}
-
-public func / (lhs: Float, rhs: [Float]) -> [Float] {
-    var lhs = lhs
-    var results = [Float](repeating: 0, count: rhs.count)
-    vDSP_svdiv(&lhs, rhs, 1, &results, 1, vDSP_Length(rhs.count))
-    return results
-}
-
-public func / (lhs: Double, rhs: [Double]) -> [Double] {
-    var lhs = lhs
-    var results = [Double](repeating: 0, count: rhs.count)
-    vDSP_svdivD(&lhs, rhs, 1, &results, 1, vDSP_Length(rhs.count))
-    return results
-}
-
-public func / (lhs: Float, rhs: Int) -> Float {
-    return lhs/Float(rhs)
-}
-
-public func / (lhs: Double, rhs: Int) -> Double {
-    return lhs/Double(rhs)
 }
 
 public func * (lhs: [Float], rhs: [Float]) -> [Float] {
