@@ -26,10 +26,22 @@ print(dot(vec,vec))
 // MARK: Matrix test
 /*
 var mat = Matrix([[1,2,3],[4,5,6],[7,8,9]])
-print(mat)
+var mat2 = Matrix([[1,2,3]])
+
+print(mat*mat2)
 var vec = Vector([1,4,8])
 print(mat * vec)
 */
+
+// MARK: Arithmic operation tests
+// print(1.0/[Double](repeating: 2.0, count : 3))
+print([1.0,2.0,3.0] + 3)
+print(1.0/[1,2,3])
+print([1.0,2.0,3.0]/3)
+var mat = Matrix([[1,2,3],[4,5,6],[7,8,9]])
+var vec = Vector([1,2,3])
+
+print(mat*vec)
 
 // MARK: NeuralNetwork test
 var network = Network([3,3,2])

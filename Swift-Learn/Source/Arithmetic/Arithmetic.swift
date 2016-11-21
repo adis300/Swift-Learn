@@ -141,38 +141,6 @@ public func measq(_ x: [Double]) -> Double {
     return result
 }
 
-// MARK: Add
-
-public func add(_ x: [Float], y: [Float]) -> [Float] {
-    var results = [Float](y)
-    cblas_saxpy(Int32(x.count), 1.0, x, 1, &results, 1)
-    
-    return results
-}
-
-public func add(_ x: [Double], y: [Double]) -> [Double] {
-    var results = [Double](y)
-    cblas_daxpy(Int32(x.count), 1.0, x, 1, &results, 1)
-    
-    return results
-}
-
-public func addTo(_ target: inout [Float], values: [Float]){
-    cblas_saxpy(Int32(target.count), 1.0, values, 1, &target, 1)
-}
-
-public func addTo(_ target: inout [Double], values: [Double]){
-    cblas_daxpy(Int32(target.count), 1.0, values, 1, &target, 1)
-}
-
-public func addTo(_ target: inout [Float], values: [Float], scale: Float){
-    catlas_saxpby(Int32(target.count), scale, values, 1, 1.0, &target, 1)
-}
-
-public func addTo(_ target: inout [Double], values: [Double], scale: Double){
-    catlas_daxpby(Int32(target.count), scale, values, 1, 1.0, &target, 1)
-}
-
 // MARK: Subtraction
 
 public func sub(_ x: [Float], y: [Float]) -> [Float] {
@@ -312,22 +280,6 @@ public func dist(_ x: [Double], y: [Double]) -> Double {
 
 // MARK: - Operators
 
-public func + (lhs: [Float], rhs: [Float]) -> [Float] {
-    return add(lhs, y: rhs)
-}
-
-public func + (lhs: [Double], rhs: [Double]) -> [Double] {
-    return add(lhs, y: rhs)
-}
-
-public func + (lhs: [Float], rhs: Float) -> [Float] {
-    return add(lhs, y: [Float](repeating: rhs, count: lhs.count))
-}
-
-public func + (lhs: [Double], rhs: Double) -> [Double] {
-    return add(lhs, y: [Double](repeating: rhs, count: lhs.count))
-}
-
 public func - (lhs: [Float], rhs: [Float]) -> [Float] {
     return sub(lhs, y: rhs)
 }
@@ -353,11 +305,31 @@ public func / (lhs: [Double], rhs: [Double]) -> [Double] {
 }
 
 public func / (lhs: [Float], rhs: Float) -> [Float] {
-    return div(lhs, y: [Float](repeating: rhs, count: lhs.count))
+    var rhs = rhs
+    var results = [Float](repeating: 0, count: lhs.count)
+    vDSP_vsdiv(lhs,1, &rhs, &results, 1, vDSP_Length(lhs.count))
+    return results
 }
 
 public func / (lhs: [Double], rhs: Double) -> [Double] {
-    return div(lhs, y: [Double](repeating: rhs, count: lhs.count))
+    var rhs = rhs
+    var results = [Double](repeating: 0, count: lhs.count)
+    vDSP_vsdivD(lhs,1, &rhs, &results, 1, vDSP_Length(lhs.count))
+    return results
+}
+
+public func / (lhs: Float, rhs: [Float]) -> [Float] {
+    var lhs = lhs
+    var results = [Float](repeating: 0, count: rhs.count)
+    vDSP_svdiv(&lhs, rhs, 1, &results, 1, vDSP_Length(rhs.count))
+    return results
+}
+
+public func / (lhs: Double, rhs: [Double]) -> [Double] {
+    var lhs = lhs
+    var results = [Double](repeating: 0, count: rhs.count)
+    vDSP_svdivD(&lhs, rhs, 1, &results, 1, vDSP_Length(rhs.count))
+    return results
 }
 
 public func / (lhs: Float, rhs: Int) -> Float {

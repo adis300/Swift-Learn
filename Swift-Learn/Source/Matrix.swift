@@ -240,8 +240,8 @@ public func mul(_ x: Matrix<Float>, y: Matrix<Float>) -> Matrix<Float> {
     precondition(x.cols == y.rows, "Matrix dimensions not compatible with multiplication")
     
     var results = Matrix<Float>(rows: x.rows, cols: y.cols, repeatedValue: 0.0)
-    cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, Int32(x.rows), Int32(y.cols), Int32(x.cols), 1.0, x.grid, Int32(x.cols), y.grid, Int32(y.cols), 0.0, &(results.grid), Int32(results.cols))
-    
+    // cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, Int32(x.rows), Int32(y.cols), Int32(x.cols), 1.0, x.grid, Int32(x.cols), y.grid, Int32(y.cols), 0.0, &(results.grid), Int32(results.cols))
+    vDSP_mmul(x.grid, 1, y.grid, 1, &results.grid, 1, vDSP_Length(x.rows), vDSP_Length(y.cols), vDSP_Length(x.cols))
     return results
 }
 
@@ -249,8 +249,8 @@ public func mul(_ x: Matrix<Double>, y: Matrix<Double>) -> Matrix<Double> {
     precondition(x.cols == y.rows, "Matrix dimensions not compatible with multiplication")
     
     var results = Matrix<Double>(rows: x.rows, cols: y.cols, repeatedValue: 0.0)
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, Int32(x.rows), Int32(y.cols), Int32(x.cols), 1.0, x.grid, Int32(x.cols), y.grid, Int32(y.cols), 0.0, &(results.grid), Int32(results.cols))
-    
+    // cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, Int32(x.rows), Int32(y.cols), Int32(x.cols), 1.0, x.grid, Int32(x.cols), y.grid, Int32(y.cols), 0.0, &(results.grid), Int32(results.cols))
+    vDSP_mmulD(x.grid, 1, y.grid, 1, &results.grid, 1, vDSP_Length(x.rows), vDSP_Length(y.cols), vDSP_Length(x.cols))
     return results
 }
 
