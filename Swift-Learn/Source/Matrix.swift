@@ -383,7 +383,7 @@ public func * (lhs: Matrix<Float>, rhs: Vector<Float>) -> Vector<Float> {
     var results = Vector<Float>(rhs.length())
     
     cblas_sgemm(CblasColMajor, CblasTrans, CblasNoTrans,
-                Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
+        Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
         1, // Number of columns in matrices B and C.
         Int32(lhs.cols), // Number of columns in matrix A; number of rows in matrix B.
         1.0, // Scaling factor for the product
@@ -404,7 +404,7 @@ public func * (lhs: Matrix<Double>, rhs: Vector<Double>) -> Vector<Double> {
     var results = Vector<Double>(rhs.length())
 
     cblas_dgemm(CblasColMajor, CblasTrans, CblasNoTrans,
-                Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
+        Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
         1, // Number of columns in matrices B and C.
         Int32(lhs.cols), // Number of columns in matrix A; number of rows in matrix B.
         1.0, // Scaling factor for the product

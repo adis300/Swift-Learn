@@ -13,7 +13,7 @@ class Network {
     var numLayers : Int
     var layerSizes: [Int]
     var weights : [[Vector<Double>]]
-    var biases: [[Double]]
+    var biases: [Vector<Double>]
     
     init(_ layerSizes: [Int]) {
         
@@ -26,7 +26,7 @@ class Network {
         weights = []
         
         for nodeCount in 1..<layerSizes.count {
-            biases.append([Double](repeating: 0, count: layerSizes[nodeCount])) // Zero biases for test
+            biases.append(Vector<Double>(layerSizes[nodeCount])) // Zero biases for test
             // biases.append(Random.randMinus1To1(length: layerSizes[nodeCount]))
             
             weights.append([])
@@ -46,7 +46,7 @@ class Network {
      */
     func updateMiniBatch(miniBatch: [LabeledData], eta: Double){
         
-        var nablaB = biases.map{$0.map{_ in return 0.0}} // Gradient of biases
+        var nablaB = biases.map{Vector($0.length())} // Gradient of biases
         var nablaW = weights.map{$0.map{Vector($0.length())}} // Gradient of weights
         
         print(nablaB)
@@ -55,7 +55,7 @@ class Network {
         for trainingData in miniBatch {
             let (deltaNablaW, deltaNablaB) = backProp(trainingData)
             for layerNumber in 1..<layerSizes.count {
-                addTo(&nablaB[layerNumber - 1], values: deltaNablaB[layerNumber - 1])
+                addTo(&(nablaB[layerNumber - 1]), values: deltaNablaB[layerNumber - 1])
                 
                 for nodeNumber in 0..<layerSizes[layerNumber] {
                     addTo(&nablaW[layerNumber - 1][nodeNumber], values: deltaNablaW[layerNumber - 1][nodeNumber])
@@ -73,9 +73,10 @@ class Network {
         }
     }
     
-    func backProp(_ dataSet:LabeledData) -> ([[Vector<Double>]], [[Double]]){
+    func backProp(_ dataSet:LabeledData) -> ([[Vector<Double>]], [Vector<Double>]){
         
-        var nablaB = biases.map{$0.map{_ in return 0.0}} // Gradient of biases
+        // var nablaB = biases.map{Vector($0.length(), repeatedValue: 0.1)} // Gradient of biases
+        var nablaB = biases.map{Vector($0.length())}
         var nablaW = weights.map{$0.map{Vector($0.length())}} // Gradient of weights
         
         
