@@ -9,23 +9,6 @@
 import Foundation
 import Accelerate
 
-public func addTo(_ target: inout [Float], values: [Float]){
-    cblas_saxpy(Int32(target.count), 1.0, values, 1, &target, 1)
-}
-
-public func addTo(_ target: inout [Double], values: [Double]){
-    cblas_daxpy(Int32(target.count), 1.0, values, 1, &target, 1)
-}
-
-public func addTo(_ target: inout [Float], values: [Float], scale: Float){
-    catlas_saxpby(Int32(target.count), scale, values, 1, 1.0, &target, 1)
-}
-
-public func addTo(_ target: inout [Double], values: [Double], scale: Double){
-    catlas_daxpby(Int32(target.count), scale, values, 1, 1.0, &target, 1)
-}
-
-
 public func + (lhs: [Float], rhs: [Float]) -> [Float] {
     var results = [Float](rhs)
     cblas_saxpy(Int32(lhs.count), 1.0, lhs, 1, &results, 1)
@@ -50,4 +33,20 @@ public func + (lhs: [Double], rhs: Double) -> [Double] {
     var results = [Double](repeating: 0, count: lhs.count)
     vDSP_vsaddD(lhs, 1, &rhs, &results, 1, vDSP_Length(lhs.count))
     return results
+}
+
+public func += (lhs: inout [Float], rhs: [Float]){
+    cblas_saxpy(Int32(lhs.count), 1.0, rhs, 1, &lhs, 1)
+}
+
+public func += (lhs: inout [Double], rhs: [Double]){
+    cblas_daxpy(Int32(lhs.count), 1.0, rhs, 1, &lhs, 1)
+}
+
+public func addTo(_ target: inout [Float], values: [Float], scale: Float){
+    catlas_saxpby(Int32(target.count), scale, values, 1, 1.0, &target, 1)
+}
+
+public func addTo(_ target: inout [Double], values: [Double], scale: Double){
+    catlas_daxpby(Int32(target.count), scale, values, 1, 1.0, &target, 1)
 }
