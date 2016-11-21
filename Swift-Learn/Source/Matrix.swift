@@ -404,23 +404,23 @@ public func * (lhs: Matrix<Double>, rhs: Matrix<Double>) -> Matrix<Double> {
 // Disi's matrix * vector convenient implementation
 
 public func * (lhs: Matrix<Float>, rhs: Vector<Float>) -> Vector<Float> {
-    precondition(lhs.rows == rhs.length(), "Matrix dimensions not compatible with multiplication")
+    precondition(lhs.cols == rhs.length(), "Matrix dimensions not compatible with multiplication")
     
     // Because vector is horizontal, we need to change code to B * A' = C
-    var results = Vector<Float>(rhs.length())
+    var results = Vector<Float>(lhs.rows)
     
     cblas_sgemm(CblasColMajor, CblasTrans, CblasNoTrans,
-        Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
+                Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
         1, // Number of columns in matrices B and C.
         Int32(lhs.cols), // Number of columns in matrix A; number of rows in matrix B.
         1.0, // Scaling factor for the product
         lhs.grid, // Matrix A
-        Int32(lhs.rows), // The size of the first dimention of matrix A
+        Int32(lhs.cols), // The size of the first dimention of matrix A
         rhs.vector, // Matrix B
         Int32(rhs.length()), // First dimension of matrix B
         1.0,
         &results.vector,
-        Int32(rhs.length())) // The size of the first dimention of matrix C; if you are passing a matrix C[m][n], the value should be m.
+        Int32(lhs.rows)) // The size of the first dimention of matrix C; if you are passing a matrix C[m][n], the value should be m.
     return results
 }
 
@@ -428,7 +428,7 @@ public func * (lhs: Matrix<Double>, rhs: Vector<Double>) -> Vector<Double> {
     precondition(lhs.cols == rhs.length(), "Matrix dimensions not compatible with multiplication")
     
     // Because vector is horizontal, we need to change code to B * A' = C
-    var results = Vector<Double>(rhs.length())
+    var results = Vector<Double>(lhs.rows)
 
     cblas_dgemm(CblasColMajor, CblasTrans, CblasNoTrans,
         Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
@@ -436,12 +436,12 @@ public func * (lhs: Matrix<Double>, rhs: Vector<Double>) -> Vector<Double> {
         Int32(lhs.cols), // Number of columns in matrix A; number of rows in matrix B.
         1.0, // Scaling factor for the product
         lhs.grid, // Matrix A
-        Int32(lhs.rows), // The size of the first dimention of matrix A
+        Int32(lhs.cols), // The size of the first dimention of matrix A
         rhs.vector, // Matrix B
         Int32(rhs.length()), // First dimension of matrix B
         1.0,
         &results.vector,
-        Int32(rhs.length())) // The size of the first dimention of matrix C; if you are passing a matrix C[m][n], the value should be m.
+        Int32(lhs.rows)) // The size of the first dimention of matrix C; if you are passing a matrix C[m][n], the value should be m.
     return results
 }
 

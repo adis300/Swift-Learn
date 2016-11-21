@@ -24,11 +24,10 @@ print(dot(vec,vec))
 */
 
 // MARK: Matrix test
-var mat = Matrix([[1,2,3],[4,5,6]])
+var mat = Matrix([[1,2,3],[4,5,6],[7,8,9]])
 print(mat)
 var vec = Vector([1,4,8])
-let newVec = mat * vec
-print(newVec)
+print(mat * vec)
 
 // MARK: NeuralNetwork test
 var network = Network([3,3,2])
