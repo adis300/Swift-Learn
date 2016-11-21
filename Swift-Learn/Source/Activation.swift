@@ -13,6 +13,16 @@ public func sigmoid(_ x: Double)-> Double{
     return tanh(x) / 2 + 0.5
 }
 
+public func sigmoid(_ x: [Double])-> [Double]{
+    
+    var results = [Double](x)
+    vDSP_vnegD(x, 1, &results, 1, vDSP_Length(Int32(x.count)))
+    
+    vvexp(&results, results, [Int32(x.count)])
+    results += 1
+    return 1/results
+}
+
 public func sigmoid(_ x: Vector<Double>)-> Vector<Double>{
     
     var results = Vector<Double>(x.length())

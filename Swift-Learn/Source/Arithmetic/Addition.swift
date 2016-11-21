@@ -44,6 +44,16 @@ public func += (lhs: inout [Double], rhs: [Double]){
     cblas_daxpy(Int32(lhs.count), 1.0, rhs, 1, &lhs, 1)
 }
 
+public func += (lhs: inout [Float], rhs: Float){
+    var rhs = rhs
+    vDSP_vsadd(lhs, 1, &rhs, &lhs, 1, vDSP_Length(lhs.count))
+}
+
+public func += (lhs: inout [Double], rhs: Double){
+    var rhs = rhs
+    vDSP_vsaddD(lhs, 1, &rhs, &lhs, 1, vDSP_Length(lhs.count))
+}
+
 // MARK: Vector addition implementation
 
 public func + (lhs: Vector<Float>, rhs: Vector<Float>) -> Vector<Float> {
@@ -62,13 +72,15 @@ public func + (lhs: Vector<Double>, rhs: Vector<Double>) -> Vector<Double> {
     return results
 }
 
-public func + (lhs: Vector<Float>, rhs: inout Float) -> Vector<Float> {
+public func + (lhs: Vector<Float>, rhs: Float) -> Vector<Float> {
+    var rhs = rhs
     var results = Vector<Float>(lhs.length())
     vDSP_vsadd(lhs.vector, 1, &rhs, &results.vector, 1, vDSP_Length(lhs.length()))
     return results
 }
 
-public func + (lhs: Vector<Double>, rhs: inout Double) -> Vector<Double> {
+public func + (lhs: Vector<Double>, rhs: Double) -> Vector<Double> {
+    var rhs = rhs
     var results = Vector<Double>(lhs.length())
     vDSP_vsaddD(lhs.vector, 1, &rhs, &results.vector, 1, vDSP_Length(lhs.length()))
     return results

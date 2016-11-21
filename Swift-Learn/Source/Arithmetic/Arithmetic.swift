@@ -141,22 +141,6 @@ public func measq(_ x: [Double]) -> Double {
     return result
 }
 
-// MARK: Subtraction
-
-public func sub(_ x: [Float], y: [Float]) -> [Float] {
-    var results = [Float](y)
-    catlas_saxpby(Int32(x.count), 1.0, x, 1, -1, &results, 1)
-    
-    return results
-}
-
-public func sub(_ x: [Double], y: [Double]) -> [Double] {
-    var results = [Double](y)
-    catlas_daxpby(Int32(x.count), 1.0, x, 1, -1, &results, 1)
-    
-    return results
-}
-
 // MARK: Multiply
 
 public func mul(_ x: [Float], y: [Float]) -> [Float] {
@@ -263,22 +247,6 @@ public func dist(_ x: [Double], y: [Double]) -> Double {
 }
 
 // MARK: - Operators
-
-public func - (lhs: [Float], rhs: [Float]) -> [Float] {
-    return sub(lhs, y: rhs)
-}
-
-public func - (lhs: [Double], rhs: [Double]) -> [Double] {
-    return sub(lhs, y: rhs)
-}
-
-public func - (lhs: [Float], rhs: Float) -> [Float] {
-    return sub(lhs, y: [Float](repeating: rhs, count: lhs.count))
-}
-
-public func - (lhs: [Double], rhs: Double) -> [Double] {
-    return sub(lhs, y: [Double](repeating: rhs, count: lhs.count))
-}
 
 public func * (lhs: [Float], rhs: [Float]) -> [Float] {
     return mul(lhs, y: rhs)
