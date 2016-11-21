@@ -35,7 +35,7 @@ public struct Matrix<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
     var grid: [T]
     
     
-    public init(size: (Int, Int)) {
+    public init(_ size: (Int, Int)) {
         self.rows = size.0
         self.cols = size.1
         
@@ -47,6 +47,13 @@ public struct Matrix<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
         self.cols = cols
         
         self.grid = [T](repeating: 0, count: rows * cols)
+    }
+    
+    public init(randomSize size: (Int, Int)) {
+        self.rows = size.0
+        self.cols = size.1
+        
+        self.grid = (0..<rows*cols).map{_ in T(arc4random())/T(INT32_MAX) - 1}
     }
     
     public init(rows: Int, cols: Int, repeatedValue: T) {
@@ -66,6 +73,10 @@ public struct Matrix<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
         for (i, row) in values.enumerated() {
             grid.replaceSubrange(i*n..<i*n+Swift.min(m, row.count), with: row)
         }
+    }
+    
+    public func length() -> Int{
+        return grid.count
     }
     
     public subscript(row: Int, column: Int) -> T {
@@ -193,6 +204,22 @@ public func add(_ x: Matrix<Double>, y: Matrix<Double>) -> Matrix<Double> {
     cblas_daxpy(Int32(x.grid.count), 1.0, x.grid, 1, &(results.grid), 1)
     
     return results
+}
+
+public func addTo(_ target: inout Matrix<Float>, values: Matrix<Float>){
+    cblas_saxpy(Int32(target.length()), 1.0, values.grid, 1, &target.grid, 1)
+}
+
+public func addTo(_ target: inout Matrix<Double>, values: Matrix<Double>){
+    cblas_daxpy(Int32(target.length()), 1.0, values.grid, 1, &target.grid, 1)
+}
+
+public func addTo(_ target: inout Matrix<Float>, values: Matrix<Float>, scale: Float){
+    catlas_saxpby(Int32(target.length()), scale, values.grid, 1, 1.0, &target.grid, 1)
+}
+
+public func addTo(_ target: inout Matrix<Double>, values: Matrix<Double>, scale: Double){
+    catlas_daxpby(Int32(target.length()), scale, values.grid, 1, 1.0, &target.grid, 1)
 }
 
 public func mul(_ alpha: Float, x: Matrix<Float>) -> Matrix<Float> {
@@ -398,7 +425,7 @@ public func * (lhs: Matrix<Float>, rhs: Vector<Float>) -> Vector<Float> {
 }
 
 public func * (lhs: Matrix<Double>, rhs: Vector<Double>) -> Vector<Double> {
-    precondition(lhs.rows == rhs.length(), "Matrix dimensions not compatible with multiplication")
+    precondition(lhs.cols == rhs.length(), "Matrix dimensions not compatible with multiplication")
     
     // Because vector is horizontal, we need to change code to B * A' = C
     var results = Vector<Double>(rhs.length())

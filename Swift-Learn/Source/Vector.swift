@@ -21,6 +21,11 @@ public struct Vector<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
         vector = [T](repeating: repeatedValue, count: length)
     }
     
+    public init(randomLength length: Int){
+        
+        self.vector = (0..<length).map{_ in T(arc4random())/T(INT32_MAX) - 1}
+    }
+    
     public init(_ values: [T]) {
         // let repeatedValue: Element = 0.0
         vector = [T](values)
@@ -275,4 +280,12 @@ public func exp(_ x: Vector<Float>) -> Vector<Float> {
     var result = Vector<Float>(x.length())
     vvexpf(&result.vector, x.vector, [Int32(x.length())])
     return result
+}
+
+public func + (lhs: Vector<Float>, rhs: Vector<Float>) -> Vector<Float> {
+    return add(lhs, rhs)
+}
+
+public func + (lhs: Vector<Double>, rhs: Vector<Double>) -> Vector<Double> {
+    return add(lhs, rhs)
 }

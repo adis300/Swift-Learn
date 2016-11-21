@@ -24,10 +24,11 @@ print(dot(vec,vec))
 */
 
 // MARK: Matrix test
-var mat = Matrix([[1,2,3],[4,5,6],[7,8,9]])
+var mat = Matrix([[1,2,3],[4,5,6]])
 print(mat)
 var vec = Vector([1,4,8])
-print(mat * vec)
+let newVec = mat * vec
+print(newVec)
 
 // MARK: NeuralNetwork test
 var network = Network([3,3,2])
@@ -39,7 +40,7 @@ print("Activation test: ")
 print((0...100).map{ return Activation.sigmoid(Double($0))})
 
 // Test updateMiniBatch
-network.updateMiniBatch(miniBatch: [LabeledData(input: [],label: [0,0,1,0])], eta: 3)
+network.updateMiniBatch(miniBatch: [LabeledData(input: [1,2,3],label: [1,0])], eta: 3)
 
 // Test backprop
 let (deltaW, deltaB) = network.backProp(LabeledData(input: [1,2,3],label: [0,1]))
