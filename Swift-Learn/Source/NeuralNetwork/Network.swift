@@ -65,8 +65,8 @@ class Network {
     func backProp(_ dataSet:LabeledData) -> ([Matrix<Double>], [Vector<Double>]){
         
         // var nablaB = biases.map{Vector($0.length, repeatedValue: 0.1)} // Gradient of biases
-        var nablaB = biases.map{Vector($0.length)}
-        var nablaW = weights.map{Matrix(rows: $0.rows, cols: $0.cols)} // Gradient of weights
+        // var nablaB = biases.map{Vector($0.length)}
+        // var nablaW = weights.map{Matrix(rows: $0.rows, cols: $0.cols)} // Gradient of weights
         
         // Feedforward
         var activations:[Vector<Double>] = [dataSet.input]
@@ -79,9 +79,15 @@ class Network {
         }
         
         // Back propagation passes
-        var err = activations[activations.endIndex - 1] - dataSet.label
+        let costDerivative = activations[activations.endIndex - 1] - dataSet.label
+        let delta = costDerivative .* sigmoidPrime(zs[zs.endIndex - 1])
         
-        return (nablaW, nablaB)
+        var nablaBReversed = [delta]
+        var nablaWReversed = [delta *^ activations[activations.endIndex - 2]]
+
+        
+        return (nablaWReversed.reversed(), nablaBReversed.reversed())
     }
+    
 
 }

@@ -28,14 +28,13 @@ public func sigmoid(_ x: Vector<Double>)-> Vector<Double>{
 }
 
 // """Derivative of the sigmoid function."""
-public func sigmoidPrime(_ x: Vector<Double>) -> Vector<Double>{
-    let sigmoidX = sigmoid(x)
-    return sigmoidX .* (1-sigmoidX)
-}
-
 public func sigmoidPrime(_ x: [Double]) -> [Double]{
     let sigmoidX = sigmoid(x)
     return sigmoidX .* (1 - sigmoidX)
+}
+
+public func sigmoidPrime(_ x: Vector<Double>) -> Vector<Double>{
+    return Vector(sigmoidPrime(x.vector))
 }
 
 

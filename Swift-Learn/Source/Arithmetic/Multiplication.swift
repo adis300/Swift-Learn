@@ -14,7 +14,8 @@ import Accelerate
 infix operator .*
 // Dot product
 infix operator •
-
+// Vec A * Transpose B
+infix operator *^
 
 // MARK: Array of values implementation
 
@@ -84,6 +85,18 @@ public func • (lhs: [Float], rhs: [Float]) -> Float {
     return dot(lhs, y: rhs)
 }
 
+public func *^ (lhs: [Float], rhs: [Float]) -> [Float] {
+    var results = [Float](repeating: 0, count: lhs.count * rhs.count)
+    vDSP_mmul(lhs, 1, rhs, 1, &results, 1, vDSP_Length(lhs.count), vDSP_Length(rhs.count), vDSP_Length(1))
+    return results
+}
+
+public func *^ (lhs: [Double], rhs: [Double]) -> [Double] {
+    var results = [Double](repeating: 0, count: lhs.count * rhs.count)
+    vDSP_mmulD(lhs, 1, rhs, 1, &results, 1, vDSP_Length(lhs.count), vDSP_Length(rhs.count), vDSP_Length(1))
+    return results
+}
+
 // MARK: Vector implementation
 
 public func * (lhs: Vector<Float>, rhs: Float) -> Vector<Float> {
@@ -134,6 +147,15 @@ public func • (lhs: Vector<Float>, rhs: Vector<Float>) -> Float {
 
 public func • (lhs: Vector<Double>, rhs: Vector<Double>) -> Double {
     return dot(lhs, y: rhs)
+}
+
+
+public func *^ (lhs: Vector<Float>, rhs: Vector<Float>) -> Matrix<Float> {
+    return Matrix<Float>(rows: lhs.length, cols: rhs.length, values: (lhs.vector *^ rhs.vector))
+}
+
+public func *^ (lhs: Vector<Double>, rhs: Vector<Double>) -> Matrix<Double> {
+    return Matrix<Double>(rows: lhs.length, cols: rhs.length, values: (lhs.vector *^ rhs.vector))
 }
 
 

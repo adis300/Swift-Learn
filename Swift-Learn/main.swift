@@ -37,6 +37,9 @@ vec /= 2
 print(vec)
 vec -= 2
 print(vec)
+ 
+print(Vector([1.0,2,3]) *^ Vector([1,0,1]))
+
 print(sigmoid(Vector([1,2,3])))
 */
 
