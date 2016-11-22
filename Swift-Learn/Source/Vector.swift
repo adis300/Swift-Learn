@@ -234,4 +234,12 @@ public func exp(_ x: Vector<Float>) -> Vector<Float> {
     return result
 }
 
+public func reverse(_ x: inout Vector<Float>){
+    vDSP_vrvrs(&x.vector, 1, vDSP_Length(x.length))
+}
+
+public func reverse(_ x: inout Vector<Double>){
+    vDSP_vrvrsD(&x.vector, 1, vDSP_Length(x.length))
+}
+
 
