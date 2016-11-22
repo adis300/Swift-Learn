@@ -12,6 +12,7 @@
 		E09E7A9C1DE36C45003F7DA2 /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E7A9B1DE36C45003F7DA2 /* Addition.swift */; };
 		E09E7A9E1DE38474003F7DA2 /* Division.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E7A9D1DE38474003F7DA2 /* Division.swift */; };
 		E09E7AA01DE399D3003F7DA2 /* Subtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E7A9F1DE399D3003F7DA2 /* Subtraction.swift */; };
+		E09E7AA21DE4D099003F7DA2 /* Multiplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E7AA11DE4D099003F7DA2 /* Multiplication.swift */; };
 		E0E1BC711DCE61F4009D9D5F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC701DCE61F4009D9D5F /* main.swift */; };
 		E0E1BC8C1DCEC752009D9D5F /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC891DCEC67D009D9D5F /* Matrix.swift */; };
 		E0E1BC8D1DCEC754009D9D5F /* Err.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1BC8A1DCEC67D009D9D5F /* Err.swift */; };
@@ -42,6 +43,7 @@
 		E09E7A9B1DE36C45003F7DA2 /* Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Addition.swift; sourceTree = "<group>"; };
 		E09E7A9D1DE38474003F7DA2 /* Division.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Division.swift; sourceTree = "<group>"; };
 		E09E7A9F1DE399D3003F7DA2 /* Subtraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subtraction.swift; sourceTree = "<group>"; };
+		E09E7AA11DE4D099003F7DA2 /* Multiplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multiplication.swift; sourceTree = "<group>"; };
 		E0E1BC6D1DCE61F4009D9D5F /* Swift-Learn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Swift-Learn"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E1BC701DCE61F4009D9D5F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E0E1BC891DCEC67D009D9D5F /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				E09E7A9B1DE36C45003F7DA2 /* Addition.swift */,
 				E09E7A9D1DE38474003F7DA2 /* Division.swift */,
 				E09E7A9F1DE399D3003F7DA2 /* Subtraction.swift */,
+				E09E7AA11DE4D099003F7DA2 /* Multiplication.swift */,
 			);
 			path = Arithmetic;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				E0E1BC8D1DCEC754009D9D5F /* Err.swift in Sources */,
 				E09E7A9E1DE38474003F7DA2 /* Division.swift in Sources */,
 				E09E7A9A1DE36C19003F7DA2 /* Arithmetic.swift in Sources */,
+				E09E7AA21DE4D099003F7DA2 /* Multiplication.swift in Sources */,
 				E0E1BCA41DD824DB009D9D5F /* Activation.swift in Sources */,
 				E0E1BC901DCED387009D9D5F /* Initializer.swift in Sources */,
 			);

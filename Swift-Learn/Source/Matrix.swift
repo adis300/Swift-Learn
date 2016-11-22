@@ -32,51 +32,62 @@ public struct Matrix<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
     
     let rows: Int
     let cols: Int
+    let length: Int
     var grid: [T]
     
     
     public init(_ size: (Int, Int)) {
         self.rows = size.0
         self.cols = size.1
-        
-        self.grid = [T](repeating: 0, count: rows * cols)
+        self.length = size.0 * size.1
+        self.grid = [T](repeating: 0, count: length)
     }
     
     public init(rows: Int, cols: Int) {
         self.rows = rows
         self.cols = cols
-        
+        self.length = rows * cols
+
         self.grid = [T](repeating: 0, count: rows * cols)
     }
     
     public init(randomSize size: (Int, Int)) {
         self.rows = size.0
         self.cols = size.1
-        
-        self.grid = (0..<rows*cols).map{_ in T(arc4random())/T(INT32_MAX) - 1}
+        self.length = size.0 * size.1
+
+        self.grid = (0..<length).map{_ in T(arc4random())/T(INT32_MAX) - 1}
     }
     
     public init(rows: Int, cols: Int, repeatedValue: T) {
         self.rows = rows
         self.cols = cols
-        
-        self.grid = [T](repeating: repeatedValue, count: rows * cols)
+        self.length = rows * cols
+
+        self.grid = [T](repeating: repeatedValue, count: length)
+    }
+    
+    public init(rows: Int, cols: Int, values: [T]) {
+        self.rows = rows
+        self.cols = cols
+        self.length = rows * cols
+
+        self.grid = values
     }
     
     public init(_ values: [[T]]) {
         let m: Int = values.count
         let n: Int = values[0].count
-        let repeatedValue: T = 0.0
-        
-        self.init(rows: m, cols: n, repeatedValue: repeatedValue)
+
+        self.init(rows: m, cols: n, repeatedValue: 0.0)
         
         for (i, row) in values.enumerated() {
             grid.replaceSubrange(i*n..<i*n+Swift.min(m, row.count), with: row)
         }
     }
     
-    public func length() -> Int{
-        return grid.count
+    public func size() -> (Int, Int) {
+        return (rows,cols)
     }
     
     public subscript(row: Int, column: Int) -> T {
@@ -188,51 +199,6 @@ public func ==<T> (lhs: Matrix<T>, rhs: Matrix<T>) -> Bool {
 
 // MARK: -
 
-public func mul(_ alpha: Float, x: Matrix<Float>) -> Matrix<Float> {
-    var results = x
-    cblas_sscal(Int32(x.grid.count), alpha, &(results.grid), 1)
-    
-    return results
-}
-
-public func mul(_ alpha: Double, x: Matrix<Double>) -> Matrix<Double> {
-    var results = x
-    cblas_dscal(Int32(x.grid.count), alpha, &(results.grid), 1)
-    
-    return results
-}
-
-public func mul(_ x: Matrix<Float>, y: Matrix<Float>) -> Matrix<Float> {
-    precondition(x.cols == y.rows, "Matrix dimensions not compatible with multiplication")
-    
-    var results = Matrix<Float>(rows: x.rows, cols: y.cols, repeatedValue: 0.0)
-    // cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, Int32(x.rows), Int32(y.cols), Int32(x.cols), 1.0, x.grid, Int32(x.cols), y.grid, Int32(y.cols), 0.0, &(results.grid), Int32(results.cols))
-    vDSP_mmul(x.grid, 1, y.grid, 1, &results.grid, 1, vDSP_Length(x.rows), vDSP_Length(y.cols), vDSP_Length(x.cols))
-    return results
-}
-
-public func mul(_ x: Matrix<Double>, y: Matrix<Double>) -> Matrix<Double> {
-    precondition(x.cols == y.rows, "Matrix dimensions not compatible with multiplication")
-    
-    var results = Matrix<Double>(rows: x.rows, cols: y.cols, repeatedValue: 0.0)
-    // cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, Int32(x.rows), Int32(y.cols), Int32(x.cols), 1.0, x.grid, Int32(x.cols), y.grid, Int32(y.cols), 0.0, &(results.grid), Int32(results.cols))
-    vDSP_mmulD(x.grid, 1, y.grid, 1, &results.grid, 1, vDSP_Length(x.rows), vDSP_Length(y.cols), vDSP_Length(x.cols))
-    return results
-}
-
-public func elmul(_ x: Matrix<Double>, y: Matrix<Double>) -> Matrix<Double> {
-    precondition(x.rows == y.rows && x.cols == y.cols, "Matrix must have the same dimensions")
-    var result = Matrix<Double>(rows: x.rows, cols: x.cols, repeatedValue: 0.0)
-    result.grid = x.grid * y.grid
-    return result
-}
-
-public func elmul(_ x: Matrix<Float>, y: Matrix<Float>) -> Matrix<Float> {
-    precondition(x.rows == y.rows && x.cols == y.cols, "Matrix must have the same dimensions")
-    var result = Matrix<Float>(rows: x.rows, cols: x.cols, repeatedValue: 0.0)
-    result.grid = x.grid * y.grid
-    return result
-}
 
 public func pow(_ x: Matrix<Double>, _ y: Double) -> Matrix<Double> {
     var result = Matrix<Double>(rows: x.rows, cols: x.cols, repeatedValue: 0.0)
@@ -290,68 +256,6 @@ public func transpose(_ x: Matrix<Double>) -> Matrix<Double> {
     var results = Matrix<Double>(rows: x.cols, cols: x.rows, repeatedValue: 0.0)
     vDSP_mtransD(x.grid, 1, &(results.grid), 1, vDSP_Length(results.rows), vDSP_Length(results.cols))
     
-    return results
-}
-
-// MARK: - Operators
-
-public func * (lhs: Float, rhs: Matrix<Float>) -> Matrix<Float> {
-    return mul(lhs, x: rhs)
-}
-
-public func * (lhs: Double, rhs: Matrix<Double>) -> Matrix<Double> {
-    return mul(lhs, x: rhs)
-}
-
-public func * (lhs: Matrix<Float>, rhs: Matrix<Float>) -> Matrix<Float> {
-    return mul(lhs, y: rhs)
-}
-
-public func * (lhs: Matrix<Double>, rhs: Matrix<Double>) -> Matrix<Double> {
-    return mul(lhs, y: rhs)
-}
-
-// Disi's matrix * vector convenient implementation
-
-public func * (lhs: Matrix<Float>, rhs: Vector<Float>) -> Vector<Float> {
-    precondition(lhs.cols == rhs.length(), "Matrix dimensions not compatible with multiplication")
-    
-    // Because vector is horizontal, we need to change code to B * A' = C
-    var results = Vector<Float>(lhs.rows)
-    
-    cblas_sgemm(CblasColMajor, CblasTrans, CblasNoTrans,
-                Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
-        1, // Number of columns in matrices B and C.
-        Int32(lhs.cols), // Number of columns in matrix A; number of rows in matrix B.
-        1.0, // Scaling factor for the product
-        lhs.grid, // Matrix A
-        Int32(lhs.cols), // The size of the first dimention of matrix A
-        rhs.vector, // Matrix B
-        Int32(rhs.length()), // First dimension of matrix B
-        1.0,
-        &results.vector,
-        Int32(lhs.rows)) // The size of the first dimention of matrix C; if you are passing a matrix C[m][n], the value should be m.
-    return results
-}
-
-public func * (lhs: Matrix<Double>, rhs: Vector<Double>) -> Vector<Double> {
-    precondition(lhs.cols == rhs.length(), "Matrix dimensions not compatible with multiplication")
-    
-    // Because vector is horizontal, we need to change code to B * A' = C
-    var results = Vector<Double>(lhs.rows)
-
-    cblas_dgemm(CblasColMajor, CblasTrans, CblasNoTrans,
-        Int32(lhs.rows), // Number of rows in matrices A and C.  AB = C
-        1, // Number of columns in matrices B and C.
-        Int32(lhs.cols), // Number of columns in matrix A; number of rows in matrix B.
-        1.0, // Scaling factor for the product
-        lhs.grid, // Matrix A
-        Int32(lhs.cols), // The size of the first dimention of matrix A
-        rhs.vector, // Matrix B
-        Int32(rhs.length()), // First dimension of matrix B
-        1.0,
-        &results.vector,
-        Int32(lhs.rows)) // The size of the first dimention of matrix C; if you are passing a matrix C[m][n], the value should be m.
     return results
 }
 

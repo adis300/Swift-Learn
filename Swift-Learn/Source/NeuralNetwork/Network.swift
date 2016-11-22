@@ -38,7 +38,7 @@ class Network {
      */
     func updateMiniBatch(miniBatch: [LabeledData], eta: Double){
         
-        var nablaB = biases.map{Vector($0.length())} // Gradient of biases
+        var nablaB = biases.map{Vector($0.length)} // Gradient of biases
         // var nablaW = weights.map{Matrix(size: ($0.rows, $0.cols))}
         var nablaW = weights.map{Matrix(rows: $0.rows, cols:$0.cols)}
         
@@ -64,8 +64,8 @@ class Network {
      */
     func backProp(_ dataSet:LabeledData) -> ([Matrix<Double>], [Vector<Double>]){
         
-        // var nablaB = biases.map{Vector($0.length(), repeatedValue: 0.1)} // Gradient of biases
-        var nablaB = biases.map{Vector($0.length())}
+        // var nablaB = biases.map{Vector($0.length, repeatedValue: 0.1)} // Gradient of biases
+        var nablaB = biases.map{Vector($0.length)}
         var nablaW = weights.map{Matrix(rows: $0.rows, cols: $0.cols)} // Gradient of weights
         
         // Feedforward

@@ -141,22 +141,6 @@ public func measq(_ x: [Double]) -> Double {
     return result
 }
 
-// MARK: Multiply
-
-public func mul(_ x: [Float], y: [Float]) -> [Float] {
-    var results = [Float](repeating: 0.0, count: x.count)
-    vDSP_vmul(x, 1, y, 1, &results, 1, vDSP_Length(x.count))
-    
-    return results
-}
-
-public func mul(_ x: [Double], y: [Double]) -> [Double] {
-    var results = [Double](repeating: 0.0, count: x.count)
-    vDSP_vmulD(x, 1, y, 1, &results, 1, vDSP_Length(x.count))
-    
-    return results
-}
-
 // MARK: Modulo
 
 public func mod(_ x: [Float], y: [Float]) -> [Float] {
@@ -205,27 +189,6 @@ public func sqrt(_ x: [Double]) -> [Double] {
     return results
 }
 
-// MARK: Dot Product
-
-public func dot(_ x: [Float], y: [Float]) -> Float {
-    precondition(x.count == y.count, "Vectors must have equal count")
-    
-    var result: Float = 0.0
-    vDSP_dotpr(x, 1, y, 1, &result, vDSP_Length(x.count))
-    
-    return result
-}
-
-
-public func dot(_ x: [Double], y: [Double]) -> Double {
-    precondition(x.count == y.count, "Vectors must have equal count")
-    
-    var result: Double = 0.0
-    vDSP_dotprD(x, 1, y, 1, &result, vDSP_Length(x.count))
-    
-    return result
-}
-
 // MARK: - Distance
 
 public func dist(_ x: [Float], y: [Float]) -> Float {
@@ -246,24 +209,6 @@ public func dist(_ x: [Double], y: [Double]) -> Double {
     return sqrt(sum(squared))
 }
 
-// MARK: - Operators
-
-public func * (lhs: [Float], rhs: [Float]) -> [Float] {
-    return mul(lhs, y: rhs)
-}
-
-public func * (lhs: [Double], rhs: [Double]) -> [Double] {
-    return mul(lhs, y: rhs)
-}
-
-public func * (lhs: [Float], rhs: Float) -> [Float] {
-    return mul(lhs, y: [Float](repeating: rhs, count: lhs.count))
-}
-
-public func * (lhs: [Double], rhs: Double) -> [Double] {
-    return mul(lhs, y: [Double](repeating: rhs, count: lhs.count))
-}
-
 public func % (lhs: [Float], rhs: [Float]) -> [Float] {
     return mod(lhs, y: rhs)
 }
@@ -280,11 +225,4 @@ public func % (lhs: [Double], rhs: Double) -> [Double] {
     return mod(lhs, y: [Double](repeating: rhs, count: lhs.count))
 }
 
-infix operator •
-public func • (lhs: [Double], rhs: [Double]) -> Double {
-    return dot(lhs, y: rhs)
-}
 
-public func • (lhs: [Float], rhs: [Float]) -> Float {
-    return dot(lhs, y: rhs)
-}

@@ -74,35 +74,35 @@ public func / (lhs: Double, rhs: Int) -> Double {
 
 public func /= (lhs: inout Vector<Float>, rhs: Float){
     var rhs = rhs
-    vDSP_vsdiv(lhs.vector,1, &rhs, &lhs.vector, 1, vDSP_Length(lhs.length()))
+    vDSP_vsdiv(lhs.vector,1, &rhs, &lhs.vector, 1, vDSP_Length(lhs.length))
 }
 
 public func /= (lhs: inout Vector<Double>, rhs: Double){
     var rhs = rhs
-    vDSP_vsdivD(lhs.vector,1, &rhs, &lhs.vector, 1, vDSP_Length(lhs.length()))
+    vDSP_vsdivD(lhs.vector,1, &rhs, &lhs.vector, 1, vDSP_Length(lhs.length))
 }
 
 public func inv(_ x: inout Vector<Float>){
     var top:Float = 1
-    vDSP_svdiv(&top, x.vector, 1, &x.vector, 1, vDSP_Length(x.length()))
+    vDSP_svdiv(&top, x.vector, 1, &x.vector, 1, vDSP_Length(x.length))
 }
 
 public func inv(_ x: inout Vector<Double>){
     var top:Double = 1
-    vDSP_svdivD(&top, x.vector, 1, &x.vector, 1, vDSP_Length(x.length()))
+    vDSP_svdivD(&top, x.vector, 1, &x.vector, 1, vDSP_Length(x.length))
 }
 
 // MARK: Matrix division implementation
 public func / (lhs: Matrix<Float>, rhs: Matrix<Float>) -> Matrix<Float> {
     let BInv = inv(rhs)
     precondition(lhs.cols == BInv.rows, "Matrix dimensions not compatible")
-    return mul(lhs, y: BInv)
+    return lhs * BInv
 }
 
 public func / (lhs: Matrix<Double>, rhs: Matrix<Double>) -> Matrix<Double> {
     let BInv = inv(rhs)
     precondition(lhs.cols == BInv.rows, "Matrix dimensions not compatible")
-    return mul(lhs, y: BInv)
+    return lhs * BInv
 }
 
 public func / (lhs: Matrix<Double>, rhs: Double) -> Matrix<Double> {

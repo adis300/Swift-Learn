@@ -12,29 +12,29 @@ public struct Vector<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
     // public typealias Element = T
     
     var vector: [T]
+    var length: Int
     
     public init(_ length: Int) {
         vector = [T](repeating: 0, count: length)
+        self.length = length
     }
     
     public init(_ length: Int, repeatedValue: T) {
         vector = [T](repeating: repeatedValue, count: length)
+        self.length = length
     }
     
     public init(randomLength length: Int){
-        
+        self.length = length
         self.vector = (0..<length).map{_ in T(arc4random())/T(INT32_MAX) - 1}
     }
     
     public init(_ values: [T]) {
         // let repeatedValue: Element = 0.0
         vector = [T](values)
+        self.length = values.count
         // self.init(length: values.count, repeatedValue: repeatedValue)
         // vector.replaceSubrange(0..<values.count, with: values)
-    }
-    
-    public func length() -> Int{
-        return vector.count
     }
     
     public subscript(index: Int) -> T {
@@ -135,7 +135,7 @@ public struct Vector<T> where T: FloatingPoint, T: ExpressibleByFloatLiteral {
     
     // MARK: Vector Interop implementation
     func dot(vecB: Vector) -> Double{
-        precondition(vector.count == vecB.length(), "Vectors must have equal size")
+        precondition(vector.count == vecB.length, "Vectors must have equal size")
         
         var result: Double = 0.0
         vDSP_dotprD(vector, 1, vecB.vector, 1, &result, vDSP_Length(vector.count))
@@ -175,74 +175,62 @@ public func ==<T> (leftHandSide: Vector<T>, rightHandSide: Vector<T>) -> Bool {
     return leftHandSide.vector == rightHandSide.vector
 }
 
-public func mul(_ alpha: Float, _ x: Vector<Float>) -> Vector<Float> {
-    var results = Vector(x.vector)
-    cblas_sscal(CInt(x.vector.count), alpha, &(results.vector), 1)
-    return results
-}
-
-public func mul(_ alpha: Double, _ x: Vector<Double>) -> Vector<Double> {
-    var results = Vector(x.vector)
-    cblas_dscal(CInt(x.vector.count), alpha, &(results.vector), 1)
-    return results
-}
-
 public func dot(_ x: Vector<Float>, _ y: Vector<Float>) -> Float {
-    precondition(x.length() == y.length(), "Vectors must have equal length to perform dot product")
+    precondition(x.length == y.length, "Vectors must have equal length to perform dot product")
     
     var result: Float = 0.0
-    vDSP_dotpr(x.vector, 1, y.vector, 1, &result, vDSP_Length(x.length()))
+    vDSP_dotpr(x.vector, 1, y.vector, 1, &result, vDSP_Length(x.length))
     
     return result
 }
 
 public func dot(_ x: Vector<Double>, _ y: Vector<Double>) -> Double {
-    precondition(x.length() == y.length(), "Vectors must have equal length to perform dot product")
+    precondition(x.length == y.length, "Vectors must have equal length to perform dot product")
     
     var result: Double = 0.0
-    vDSP_dotprD(x.vector, 1, y.vector, 1, &result, vDSP_Length(x.length()))
+    vDSP_dotprD(x.vector, 1, y.vector, 1, &result, vDSP_Length(x.length))
     
     return result
 }
 
 // Element-vise multiplication (hadamard product)
 public func elmul(x: Vector<Float>, _ y: Vector<Float>) -> Vector<Float>{
-    precondition(x.length() == y.length(), "Vector dimensions not compatible for hadamard product")
+    precondition(x.length == y.length, "Vector dimensions not compatible for hadamard product")
     
-    var results = Vector<Float>(x.length()) //[Float](repeating: 0.0, count: x.count)
-    vDSP_vmul(x.vector, 1, y.vector, 1, &results.vector, 1, vDSP_Length(x.length()))
+    var results = Vector<Float>(x.length) //[Float](repeating: 0.0, count: x.count)
+    vDSP_vmul(x.vector, 1, y.vector, 1, &results.vector, 1, vDSP_Length(x.length))
     return results
 }
 
 public func elmul(x: Vector<Double>, _ y: Vector<Double>) -> Vector<Double>{
-    precondition(x.length() == y.length(), "Vector dimensions not compatible for hadamard product")
+    precondition(x.length == y.length, "Vector dimensions not compatible for hadamard product")
     
-    var results = Vector<Double>(x.length()) //[Float](repeating: 0.0, count: x.count)
-    vDSP_vmulD(x.vector, 1, y.vector, 1, &results.vector, 1, vDSP_Length(x.length()))
+    var results = Vector<Double>(x.length) //[Float](repeating: 0.0, count: x.count)
+    vDSP_vmulD(x.vector, 1, y.vector, 1, &results.vector, 1, vDSP_Length(x.length))
     return results
 }
 
 public func pow(_ x: Vector<Double>, _ y: Double) -> Vector<Double> {
-    var result = Vector<Double>(x.length())
-    vvpow(&result.vector, x.vector, [Double](repeating: y, count: x.length()), [Int32(x.length())])
+    var result = Vector<Double>(x.length)
+    vvpow(&result.vector, x.vector, [Double](repeating: y, count: x.length), [Int32(x.length)])
     return result
 }
 
 public func pow(_ x: Vector<Float>, _ y: Float) -> Vector<Float> {
-    var result = Vector<Float>(x.length())
-    vvpowf(&result.vector, x.vector, [Float](repeating: y, count: x.length()), [Int32(x.length())])
+    var result = Vector<Float>(x.length)
+    vvpowf(&result.vector, x.vector, [Float](repeating: y, count: x.length), [Int32(x.length)])
     return result
 }
 
 public func exp(_ x: Vector<Double>) -> Vector<Double> {
-    var result = Vector<Double>(x.length())
-    vvexp(&result.vector, x.vector, [Int32(x.length())])
+    var result = Vector<Double>(x.length)
+    vvexp(&result.vector, x.vector, [Int32(x.length)])
     return result
 }
 
 public func exp(_ x: Vector<Float>) -> Vector<Float> {
-    var result = Vector<Float>(x.length())
-    vvexpf(&result.vector, x.vector, [Int32(x.length())])
+    var result = Vector<Float>(x.length)
+    vvexpf(&result.vector, x.vector, [Int32(x.length)])
     return result
 }
 
