@@ -35,8 +35,10 @@ print(mat * vec)
 var vec:Vector<Double> = Vector([1,2,3])
 vec /= 2 
 print(vec)
-*/
+vec -= 2
+print(vec)
 print(sigmoid(Vector([1,2,3])))
+*/
 
 // MARK: Arithmic operation tests
 // print(1.0/[Double](repeating: 2.0, count : 3))
