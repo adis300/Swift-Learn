@@ -24,18 +24,18 @@ public func sigmoid(_ x: [Double])-> [Double]{
 }
 
 public func sigmoid(_ x: Vector<Double>)-> Vector<Double>{
-    
-    var results = Vector<Double>(x.length)
-    vDSP_vnegD(x.vector, 1, &results.vector, 1, vDSP_Length(Int32(x.length)))
-    
-    vvexp(&results.vector, results.vector, [Int32(x.length)])
-    results += 1
-    inv(&results) // 1/results
-    return results
+    return Vector(sigmoid(x.vector))
 }
 
 // """Derivative of the sigmoid function."""
 public func sigmoidPrime(_ x: Vector<Double>) -> Vector<Double>{
-    var sigmoidX = sigmoid(x)
+    let sigmoidX = sigmoid(x)
     return sigmoidX .* (1-sigmoidX)
 }
+
+public func sigmoidPrime(_ x: [Double]) -> [Double]{
+    let sigmoidX = sigmoid(x)
+    return sigmoidX .* (1 - sigmoidX)
+}
+
+

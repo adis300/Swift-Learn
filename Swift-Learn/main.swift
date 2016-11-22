@@ -54,6 +54,7 @@ print(network.weights)
 
 print("Activation test: ")
 print(sigmoid([0,1,2,3]))// .map{ return (Double($0))})
+print(sigmoidPrime([0,1,2,3]))
 
 // Test updateMiniBatch
 network.updateMiniBatch(miniBatch: [LabeledData(input: [1,2,3],label: [1,0])], eta: 3)

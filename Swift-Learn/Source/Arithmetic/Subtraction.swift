@@ -13,13 +13,13 @@ import Accelerate
 
 public func - (lhs: [Float], rhs: [Float]) -> [Float] {
     var results = [Float](lhs)
-    catlas_saxpby(Int32(lhs.count), 1.0, lhs, 1, -1, &results, 1)
+    vDSP_vsub(rhs, 1, lhs, 1, &results, 1, vDSP_Length(lhs.count))
     return results
 }
 
 public func - (lhs: [Double], rhs: [Double]) -> [Double] {
     var results = [Double](lhs)
-    catlas_daxpby(Int32(lhs.count), 1.0, lhs, 1, -1, &results, 1)
+    vDSP_vsubD(rhs, 1, lhs, 1, &results, 1, vDSP_Length(lhs.count))
     return results
 }
 
@@ -29,6 +29,20 @@ public func - (lhs: [Float], rhs: Float) -> [Float] {
 
 public func - (lhs: [Double], rhs: Double) -> [Double] {
     return lhs + (-rhs)
+}
+
+public func - (lhs: Float, rhs: [Float]) -> [Float] {
+    var results = [Float](rhs)
+    vDSP_vneg(rhs, 1, &results, 1, vDSP_Length(Int32(rhs.count)))
+    results += lhs
+    return results
+}
+
+public func - (lhs: Double, rhs: [Double]) -> [Double] {
+    var results = [Double](rhs)
+    vDSP_vnegD(rhs, 1, &results, 1, vDSP_Length(Int32(rhs.count)))
+    results += lhs
+    return results
 }
 
 public func -= (lhs: inout [Float], rhs: Float){
@@ -43,15 +57,11 @@ public func -= (lhs: inout [Double], rhs: Double){
 
 // MARK: Vector substraction implementation
 public func - (lhs: Vector<Float>, rhs: Vector<Float>) -> Vector<Float> {
-    var results = Vector(lhs.vector)
-    catlas_saxpby(Int32(lhs.length), 1.0, lhs.vector, 1, -1, &results.vector, 1)
-    return results
+    return Vector(lhs.vector - rhs.vector)
 }
 
 public func - (lhs: Vector<Double>, rhs: Vector<Double>) -> Vector<Double> {
-    var results = Vector(lhs.vector)
-    catlas_daxpby(Int32(lhs.length), 1.0, lhs.vector, 1, -1, &results.vector, 1)
-    return results
+    return Vector(lhs.vector - rhs.vector)
 }
 
 public func - (lhs: Vector<Float>, rhs: Float) -> Vector<Float> {
@@ -63,17 +73,11 @@ public func - (lhs: Vector<Double>, rhs: Double) -> Vector<Double> {
 }
 
 public func - (lhs: Float, rhs: Vector<Float>) -> Vector<Float> {
-    var results = Vector(rhs.vector)
-    vDSP_vneg(rhs.vector, 1, &results.vector, 1, vDSP_Length(Int32(rhs.length)))
-    results += 1
-    return results
+    return Vector(lhs - rhs.vector)
 }
 
 public func - (lhs: Double, rhs: Vector<Double>) -> Vector<Double> {
-    var results = Vector(rhs.vector)
-    vDSP_vnegD(rhs.vector, 1, &results.vector, 1, vDSP_Length(Int32(rhs.length)))
-    results += 1
-    return results
+    return Vector(lhs - rhs.vector)
 }
 
 public func -= (lhs: inout Vector<Float>, rhs: Float){
@@ -85,3 +89,17 @@ public func -= (lhs: inout Vector<Double>, rhs: Double){
     var rhs = -rhs
     vDSP_vsaddD(lhs.vector, 1, &rhs, &lhs.vector, 1, vDSP_Length(lhs.length))
 }
+
+/* Surge implementation
+public func - (lhs: [Float], rhs: [Float]) -> [Float] {
+    var results = [Float](lhs)
+    catlas_saxpby(Int32(lhs.count), 1.0, lhs, 1, -1, &results, 1)
+    return results
+}
+
+public func - (lhs: [Double], rhs: [Double]) -> [Double] {
+    var results = [Double](lhs)
+    catlas_daxpby(Int32(lhs.count), 1.0, lhs, 1, -1, &results, 1)
+    return results
+}
+ */
