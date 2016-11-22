@@ -87,25 +87,19 @@ public func • (lhs: [Float], rhs: [Float]) -> Float {
 // MARK: Vector implementation
 
 public func * (lhs: Vector<Float>, rhs: Float) -> Vector<Float> {
-    var rhs = rhs
-    var results = Vector(lhs.vector)
-    vDSP_vsmul(lhs.vector, 1, &rhs, &results.vector, 1, vDSP_Length(lhs.length))
-    return results
+    return Vector(lhs.vector * rhs)
 }
 
 public func * (lhs: Vector<Double>, rhs: Double) -> Vector<Double> {
-    var rhs = rhs
-    var results = Vector(lhs.vector)
-    vDSP_vsmulD(lhs.vector, 1, &rhs, &results.vector, 1, vDSP_Length(lhs.length))
-    return results
+    return Vector(lhs.vector * rhs)
 }
 
 public func * (lhs: Float, rhs: Vector<Float>) -> Vector<Float> {
-    return rhs * lhs
+    return Vector(rhs.vector * lhs)
 }
 
 public func * (lhs: Double, rhs: Vector<Double>) -> Vector<Double> {
-    return rhs * lhs
+    return Vector(rhs.vector * lhs)
 }
 
 public func .* (lhs: Vector<Float>, rhs: Vector<Float>) -> Vector<Float> {
@@ -127,17 +121,11 @@ public func *= (lhs: inout Vector<Double>, rhs: Double){
 }
 
 public func dot(_ x: Vector<Float>, y: Vector<Float>) -> Float {
-    precondition(x.length == x.length, "Vectors must have equal count")
-    var result: Float = 0
-    vDSP_dotpr(x.vector, 1, y.vector, 1, &result, vDSP_Length(x.length))
-    return result
+    return dot(x.vector, y: y.vector)
 }
 
 public func dot(_ x: Vector<Double>, y: Vector<Double>) -> Double {
-    precondition(x.length == x.length, "Vectors must have equal count")
-    var result: Double = 0
-    vDSP_dotprD(x.vector, 1, y.vector, 1, &result, vDSP_Length(x.length))
-    return result
+    return dot(x.vector, y: y.vector)
 }
 
 public func • (lhs: Vector<Float>, rhs: Vector<Float>) -> Float {
