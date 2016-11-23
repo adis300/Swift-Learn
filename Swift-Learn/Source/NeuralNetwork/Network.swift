@@ -80,11 +80,20 @@ class Network {
         
         // Back propagation passes
         let costDerivative = activations[activations.endIndex - 1] - dataSet.label
-        let delta = costDerivative .* sigmoidPrime(zs[zs.endIndex - 1])
+        var delta = costDerivative .* sigmoidPrime(zs[zs.endIndex - 1])
         
         var nablaBReversed = [delta]
         var nablaWReversed = [delta *^ activations[activations.endIndex - 2]]
-
+        /*
+         l = 1 means the last layer of neurons, l = 2 is the
+         second-last layer, and so on.  It's a renumbering of the
+        */
+        for lback in 2..<layerSizes.count{
+            let sp = sigmoidPrime(zs[zs.endIndex - lback])
+            delta = (transpose(weights[weights.endIndex - lback + 1]) * delta) .* sp
+            nablaBReversed.append(delta)
+            nablaWReversed.append(delta *^ activations[activations.endIndex - lback - 1])
+        }
         
         return (nablaWReversed.reversed(), nablaBReversed.reversed())
     }

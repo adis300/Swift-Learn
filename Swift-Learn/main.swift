@@ -8,7 +8,7 @@
 
 import Foundation
 
-print("Starting framework test!")
+// print("Starting framework test!")
 
 // MARK: Vector test
 // var vec = zeros(length: 6)
@@ -23,31 +23,36 @@ print("Square sum:")
 print(dot(vec,vec))
 */
 
-// MARK: Matrix test
-/*
-var mat = Matrix([[1,2,3],[4,5,6],[7,8,9]])
-var mat2 = Matrix([[1,2,3]])
-
-print(mat*mat2)
-var vec = Vector([1,4,8])
-print(mat * vec)
-
-var vec:Vector<Double> = Vector([1,2,3])
-vec /= 2 
-print(vec)
-vec -= 2
-print(vec)
- 
-print(Vector([1.0,2,3]) *^ Vector([1,0,1]))
-
-print(sigmoid(Vector([1,2,3])))
-*/
 
 // MARK: Arithmic operation tests
-// print(1.0/[Double](repeating: 2.0, count : 3))
-// print([1.0,2.0,3.0] + 3)
-// print(1.0/[1,2,3])
-// print([1.0,2.0,3.0]/3)
+print([1.0, 2.0, 3.0] + 3 + [1.0, 1, 1])
+print((1.0/[1, 2, 3]) .* [1.0, 2, 3])
+print([1.0, 2, 3]/3)
+print((1.0/[1, 2, 3]) .* [1.0, 2, 3])
+// Dot product
+print(([1.0, 2, 3]) • [1.0, 2, 3])
+
+// MARK: Matrix test
+var mat1 = Matrix([[1,2,3],[4,5,6],[7,8,9]])
+print("mat1 is:");                  print(mat1)
+var mat2 = Matrix([[1,1],[2,2],[3,3]])
+print("mat2 is:");                  print(mat2)
+print("mat1 * mat2 is:");           print(mat1 * mat2)
+
+var vec = Vector([1,4,8])
+print("vec is:");                   print(vec)
+print("mat1 * vec is:");            print(mat1 * vec)
+
+vec /= 2
+print("vec after /= 2 is now:");    print(vec)
+vec -= 2
+print("vec after -= 2 is now:");    print(vec)
+ 
+print("vec * vecTransposed is:");   print(vec *^ vec)
+
+print("Testing vectorized sigmoid function")
+print(sigmoid(Vector([1, 2, 3, 4, 5, 6])))
+
 
 // MARK: NeuralNetwork test
 var network = Network([3,3,2])
