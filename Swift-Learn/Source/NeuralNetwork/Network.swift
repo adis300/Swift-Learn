@@ -22,15 +22,45 @@ class Network {
         numLayers = layerSizes.count
         self.layerSizes = layerSizes
         
-        for nodeCount in 1..<layerSizes.count {
+        for layerNumber in 1..<layerSizes.count {
             // biases.append(Vector<Double>(layerSizes[nodeCount])) // Zero biases for test
-            biases.append(Vector<Double>(randomLength: layerSizes[nodeCount]))
+            biases.append(Vector<Double>(randomLength: layerSizes[layerNumber]))
             
             // weights.append(Matrix(rows: layerSizes[nodeCount],  cols:layerSizes[nodeCount - 1]))
-            weights.append(Matrix(randomSize:(layerSizes[nodeCount], layerSizes[nodeCount - 1])))
+            weights.append(Matrix(randomSize:(layerSizes[layerNumber], layerSizes[layerNumber - 1])))
         }
     }
-    /* 
+    
+    // Return the output of the network if x is input.
+
+    func feedforward(_ x: Vector<Double>) -> Vector<Double>{
+        print(x)
+        var a = x
+        print(a)
+        for layerNumber in 1..<layerSizes.count {
+            a = sigmoid(weights[layerNumber - 1] * a + biases[layerNumber - 1])
+        }
+        return a
+    }
+    
+    
+    /*
+    Return the number of test inputs for which the neural
+    network outputs the correct result. Note that the neural
+    network's output is assumed to be the index of whichever
+    neuron in the final layer has the highest activation.
+     */
+    func evaluate(testSet: [LabeledData]) -> Int{
+        var correctCount: Int = 0
+        for testData in testSet{
+            let result = maxIndex(feedforward(testData.input))
+            if result == maxIndex(testData.label){
+                correctCount += 1
+            }
+        }
+        return correctCount
+    }
+    /*
     Update the network's weights and biases by applying
     gradient descent using backpropagation to a single mini batch.
     The ``mini_batch`` is a list of tuples ``(x, y)``, and ``eta``
@@ -96,6 +126,21 @@ class Network {
         }
         
         return (nablaWReversed.reversed(), nablaBReversed.reversed())
+    }
+    
+    /* 
+    Train the neural network using mini-batch stochastic
+    gradient descent.  The ``training_data`` is a list of tuples
+    ``(x, y)`` representing the training inputs and the desired
+    outputs.  The other non-optional parameters are
+    self-explanatory.  If ``test_data`` is provided then the
+    network will be evaluated against the test data after each
+    epoch, and partial progress printed out.  This is useful for
+    tracking progress, but slows things down substantially.
+    */
+    
+    func SGD(trainingSet: [LabeledData], epochs: Int, miniBatchSize: Int, eta: Int, testSet: [LabeledData]?){
+        // TODO: Implementa SGD
     }
     
 

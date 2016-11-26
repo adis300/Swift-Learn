@@ -61,37 +61,8 @@ public func sumsq(_ x: [Double]) -> Double {
     vDSP_svesqD(x, 1, &result, vDSP_Length(x.count))
     return result
 }
-// MARK: Maximum
 
-public func max(_ x: [Float]) -> Float {
-    var result: Float = 0.0
-    vDSP_maxv(x, 1, &result, vDSP_Length(x.count))
-    
-    return result
-}
 
-public func max(_ x: [Double]) -> Double {
-    var result: Double = 0.0
-    vDSP_maxvD(x, 1, &result, vDSP_Length(x.count))
-    
-    return result
-}
-
-// MARK: Minimum
-
-public func min(_ x: [Float]) -> Float {
-    var result: Float = 0.0
-    vDSP_minv(x, 1, &result, vDSP_Length(x.count))
-    
-    return result
-}
-
-public func min(_ x: [Double]) -> Double {
-    var result: Double = 0.0
-    vDSP_minvD(x, 1, &result, vDSP_Length(x.count))
-    
-    return result
-}
 
 // MARK: Mean
 
