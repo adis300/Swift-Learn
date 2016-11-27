@@ -53,11 +53,11 @@ public func max(_ x: [Double]) -> (Double, Int){
     return (value, Int(index))
 }
 
-public func maxIndex(_ x: Vector<Float>) -> (Float, Int){
+public func max(_ x: Vector<Float>) -> (Float, Int){
     return max(x.vector)
 }
 
-public func maxIndex(_ x: Vector<Double>) -> (Double, Int){
+public func max(_ x: Vector<Double>) -> (Double, Int){
     return max(x.vector)
 }
 

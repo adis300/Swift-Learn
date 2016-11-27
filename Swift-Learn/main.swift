@@ -21,7 +21,13 @@ print(vec)
 
 print("Square sum:")
 print(dot(vec,vec))
-*/
+
+// Shuffle operator
+print([1,2,3,4].shuffled())
+let a = stride(from:0, to: 10, by: 2)
+for i in a{
+    print(i)
+}
 let (minValue, minIndex) = min([1.0,2,3])
 print((minValue, minIndex))
 
@@ -53,18 +59,20 @@ print("vec * vecTransposed is:");   print(vec *^ vec)
 
 print("Testing vectorized sigmoid function")
 print(sigmoid(Vector([1, 2, 3, 4, 5, 6])))
+*/
 
 
-// MARK: NeuralNetwork test
-var network = Network([3,3,2])
-print(network.biases)
-print("Weights: ")
-print(network.weights)
 
 print("Activation test: ")
 print(sigmoid([0,1,2,3]))// .map{ return (Double($0))})
 print(sigmoidPrime([0,1,2,3]))
 
+// MARK: NeuralNetwork test
+var network = Network([3,2])
+print(network.biases)
+print("Weights: ")
+print(network.weights)
+/*
 // Test updateMiniBatch
 network.updateMiniBatch(miniBatch: [LabeledData(input: [1,2,3],label: [1,0])], eta: 3)
 
@@ -73,3 +81,34 @@ let (deltaW, deltaB) = network.backProp(LabeledData(input: [1,2,3],label: [0,1])
 print("Backprop test:")
 print(deltaW)
 print(deltaB)
+*/
+var trainingSet:[LabeledData] = []
+for i in 1...100{
+    trainingSet.append(LabeledData(input: [0.2,0.3,0.8], label: [1,0]))
+    trainingSet.append(LabeledData(input: [0.1,0.1,0.2], label: [1,0]))
+    trainingSet.append(LabeledData(input: [0.7,0.1,0.9], label: [1,0]))
+    trainingSet.append(LabeledData(input: [0.7,0.7,0.9], label: [1,0]))
+}
+
+for i in 1...100{
+    trainingSet.append(LabeledData(input: [0.6,0.6,0.2], label: [0,1]))
+    trainingSet.append(LabeledData(input: [0.4,0.3,0.1], label: [0,1]))
+    trainingSet.append(LabeledData(input: [0.9,0.1,0.7], label: [0,1]))
+    trainingSet.append(LabeledData(input: [0.9,0.7,0.7], label: [1,0]))
+
+}
+
+let testSet = [
+    LabeledData(input: [0.2,0.3,0.8], label: [1,0]),
+    LabeledData(input: [0.2,0.3,0.9], label: [1,0]),
+
+    LabeledData(input: [0.6,0.6,0.2], label: [0,1]),
+    LabeledData(input: [0.7,0.7,0.2], label: [0,1])
+]
+
+network.SGD(trainingSet: trainingSet, epochs: 20, miniBatchSize: 30, eta: 3, testSet: testSet)
+print("Trained weights:")
+print(network.weights)
+print("Trained biases:")
+print(network.biases)
+

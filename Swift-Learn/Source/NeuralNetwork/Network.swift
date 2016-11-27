@@ -34,12 +34,11 @@ class Network {
     // Return the output of the network if x is input.
 
     func feedforward(_ x: Vector<Double>) -> Vector<Double>{
-        print(x)
         var a = x
-        print(a)
         for layerNumber in 1..<layerSizes.count {
             a = sigmoid(weights[layerNumber - 1] * a + biases[layerNumber - 1])
         }
+        print(a)
         return a
     }
     
@@ -50,11 +49,12 @@ class Network {
     network's output is assumed to be the index of whichever
     neuron in the final layer has the highest activation.
      */
-    func evaluate(testSet: [LabeledData]) -> Int{
+    func evaluate(_ testSet: [LabeledData]) -> Int{
         var correctCount: Int = 0
         for testData in testSet{
-            let result = maxIndex(feedforward(testData.input))
-            if result == maxIndex(testData.label){
+            let (_, maxIndTest) = max(feedforward(testData.input))
+            let (_, maxIndTestLabel) = max(testData.label)
+            if maxIndTest == maxIndTestLabel{
                 correctCount += 1
             }
         }
@@ -67,6 +67,11 @@ class Network {
     is the learning rate. 
      */
     func updateMiniBatch(miniBatch: [LabeledData], eta: Double){
+        
+        if miniBatch.count == 0{
+            print("Empty mini batch, no update was computed")
+            return
+        }
         
         var nablaB = biases.map{Vector($0.length)} // Gradient of biases
         // var nablaW = weights.map{Matrix(size: ($0.rows, $0.cols))}
@@ -85,6 +90,8 @@ class Network {
             addTo(&biases[layerNumber - 1], values: nablaB[layerNumber - 1], scale: -eta/miniBatch.count)
             addTo(&weights[layerNumber - 1], values: nablaW[layerNumber - 1], scale: -eta/miniBatch.count)
         }
+        // print("New weights:")
+        // print(weights)
     }
     /*
      Return a tuple ``(nabla_w,nabla_b)`` representing the
@@ -139,10 +146,27 @@ class Network {
     tracking progress, but slows things down substantially.
     */
     
-    func SGD(trainingSet: [LabeledData], epochs: Int, miniBatchSize: Int, eta: Int, testSet: [LabeledData]?){
+    func SGD(trainingSet: [LabeledData], epochs: Int, miniBatchSize: Int, eta: Double, testSet: [LabeledData]?){
         // TODO: Implementa SGD
-        
-        
+        for epoch in 1...epochs{ // Defines train epoch many times
+            
+            var trainingSet = trainingSet.shuffled()
+            
+            for i in stride(from: 0, to: trainingSet.count, by: miniBatchSize){
+                if i + miniBatchSize > trainingSet.count{
+                    let miniBatch = Array(trainingSet[i ..< trainingSet.count])
+                    updateMiniBatch(miniBatch: miniBatch, eta: eta)
+                }else{
+                    let miniBatch = Array(trainingSet[i ..< i+miniBatchSize])
+                    updateMiniBatch(miniBatch: miniBatch, eta: eta)
+                }
+            }
+            if let testDataSet = testSet{
+                print("Epoch \(epoch): \(evaluate(testDataSet)) / \(testDataSet.count)")
+            }else{
+                print("Epoch \(epoch) complete")
+            }
+        }
     }
     
 

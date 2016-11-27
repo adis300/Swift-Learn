@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E03478EB1DE7490300F27EBF /* MaxMin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03478EA1DE7490300F27EBF /* MaxMin.swift */; };
+		E03478EE1DEA884700F27EBF /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03478ED1DEA884700F27EBF /* Collection.swift */; };
 		E09E7A941DE14591003F7DA2 /* LabeledData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E7A931DE14591003F7DA2 /* LabeledData.swift */; };
 		E09E7A9A1DE36C19003F7DA2 /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E7A991DE36C19003F7DA2 /* Arithmetic.swift */; };
 		E09E7A9C1DE36C45003F7DA2 /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E7A9B1DE36C45003F7DA2 /* Addition.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		E03478EA1DE7490300F27EBF /* MaxMin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxMin.swift; sourceTree = "<group>"; };
+		E03478ED1DEA884700F27EBF /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		E09E7A931DE14591003F7DA2 /* LabeledData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledData.swift; sourceTree = "<group>"; };
 		E09E7A991DE36C19003F7DA2 /* Arithmetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arithmetic.swift; sourceTree = "<group>"; };
 		E09E7A9B1DE36C45003F7DA2 /* Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Addition.swift; sourceTree = "<group>"; };
@@ -70,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E03478EC1DEA883700F27EBF /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E03478ED1DEA884700F27EBF /* Collection.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		E09E7A981DE36C05003F7DA2 /* Arithmetic */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +121,7 @@
 		E0E1BC881DCEC67D009D9D5F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				E03478EC1DEA883700F27EBF /* Extension */,
 				E09E7A981DE36C05003F7DA2 /* Arithmetic */,
 				E0E1BC9C1DD11585009D9D5F /* NeuralNetwork */,
 				E0E1BC891DCEC67D009D9D5F /* Matrix.swift */,
@@ -202,6 +213,7 @@
 				E0E1BC711DCE61F4009D9D5F /* main.swift in Sources */,
 				E09E7AA01DE399D3003F7DA2 /* Subtraction.swift in Sources */,
 				E0E1BC971DD105B1009D9D5F /* Power.swift in Sources */,
+				E03478EE1DEA884700F27EBF /* Collection.swift in Sources */,
 				E0E1BC8C1DCEC752009D9D5F /* Matrix.swift in Sources */,
 				E0E1BC8D1DCEC754009D9D5F /* Err.swift in Sources */,
 				E09E7A9E1DE38474003F7DA2 /* Division.swift in Sources */,
