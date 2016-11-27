@@ -94,19 +94,22 @@ for i in 1...100{
     trainingSet.append(LabeledData(input: [0.6,0.6,0.2], label: [0,1]))
     trainingSet.append(LabeledData(input: [0.4,0.3,0.1], label: [0,1]))
     trainingSet.append(LabeledData(input: [0.9,0.1,0.7], label: [0,1]))
-    trainingSet.append(LabeledData(input: [0.9,0.7,0.7], label: [1,0]))
+    trainingSet.append(LabeledData(input: [0.9,0.7,0.7], label: [0,1]))
 
 }
 
 let testSet = [
     LabeledData(input: [0.2,0.3,0.8], label: [1,0]),
     LabeledData(input: [0.2,0.3,0.9], label: [1,0]),
+    LabeledData(input: [0.2,0.3,0.4], label: [1,0]),
 
     LabeledData(input: [0.6,0.6,0.2], label: [0,1]),
-    LabeledData(input: [0.7,0.7,0.2], label: [0,1])
+    LabeledData(input: [0.7,0.7,0.2], label: [0,1]),
+    LabeledData(input: [0.5,0.3,0.2], label: [0,1])
+
 ]
 
-network.SGD(trainingSet: trainingSet, epochs: 20, miniBatchSize: 30, eta: 3, testSet: testSet)
+network.SGD(trainingSet: trainingSet, epochs: 1000, miniBatchSize: 10, eta: 3, testSet: testSet)
 print("Trained weights:")
 print(network.weights)
 print("Trained biases:")

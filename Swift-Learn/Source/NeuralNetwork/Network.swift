@@ -38,7 +38,7 @@ class Network {
         for layerNumber in 1..<layerSizes.count {
             a = sigmoid(weights[layerNumber - 1] * a + biases[layerNumber - 1])
         }
-        print(a)
+        // print("Test activation: \(a)")
         return a
     }
     
