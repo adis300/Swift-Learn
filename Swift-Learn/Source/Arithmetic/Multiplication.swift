@@ -51,6 +51,7 @@ public func *= (lhs: inout [Double], rhs: Double){
     vDSP_vsmulD(lhs, 1, &rhs, &lhs, 1, vDSP_Length(lhs.count))
 }
 
+// The The Hadamard product / element-wise multiplication
 public func .* (lhs: [Float], rhs: [Float]) -> [Float] {
     var results = [Float](lhs)
     vDSP_vmul(lhs, 1, rhs, 1, &results, 1, vDSP_Length(lhs.count))
@@ -85,7 +86,6 @@ public func • (lhs: [Float], rhs: [Float]) -> Float {
     return dot(lhs, y: rhs)
 }
 
-// The The Hadamard product
 public func *^ (lhs: [Float], rhs: [Float]) -> [Float] {
     var results = [Float](repeating: 0, count: lhs.count * rhs.count)
     vDSP_mmul(lhs, 1, rhs, 1, &results, 1, vDSP_Length(lhs.count), vDSP_Length(rhs.count), vDSP_Length(1))
@@ -116,7 +116,7 @@ public func * (lhs: Double, rhs: Vector<Double>) -> Vector<Double> {
     return Vector(rhs.vector * lhs)
 }
 
-// The The Hadamard product
+// The The Hadamard product / element-wise multiplication
 public func .* (lhs: Vector<Float>, rhs: Vector<Float>) -> Vector<Float> {
     return Vector(lhs.vector .* rhs.vector)
 }

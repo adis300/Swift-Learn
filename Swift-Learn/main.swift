@@ -22,7 +22,8 @@ print(vec)
 print("Square sum:")
 print(dot(vec,vec))
 */
-
+let (minValue, minIndex) = min([1.0,2,3])
+print((minValue, minIndex))
 
 // MARK: Arithmic operation tests
 print([1.0, 2.0, 3.0] + 3 + [1.0, 1, 1])

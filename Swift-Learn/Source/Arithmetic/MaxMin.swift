@@ -39,20 +39,26 @@ public func max(_ x: Vector<Double>) -> Double {
 
 
 // TODO: Implement max index
-public func maxIndex(_ x: [Float]) -> Int{
-    return 0
+public func max(_ x: [Float]) -> (Float, Int){
+    var index: UInt = 0
+    var value: Float = 0
+    vDSP_maxvi(x, 1, &value, &index, vDSP_Length(x.count))
+    return (value, Int(index))
 }
 
-public func maxIndex(_ x: [Double]) -> Int{
-    return 0
+public func max(_ x: [Double]) -> (Double, Int){
+    var index: UInt = 0
+    var value: Double = 0
+    vDSP_maxviD(x, 1, &value, &index, vDSP_Length(x.count))
+    return (value, Int(index))
 }
 
-public func maxIndex(_ x: Vector<Float>) -> Int{
-    return 0
+public func maxIndex(_ x: Vector<Float>) -> (Float, Int){
+    return max(x.vector)
 }
 
-public func maxIndex(_ x: Vector<Double>) -> Int{
-    return 0
+public func maxIndex(_ x: Vector<Double>) -> (Double, Int){
+    return max(x.vector)
 }
 
 // MARK: Minimum
@@ -60,46 +66,48 @@ public func maxIndex(_ x: Vector<Double>) -> Int{
 public func min(_ x: [Float]) -> Float {
     var result: Float = 0.0
     vDSP_minv(x, 1, &result, vDSP_Length(x.count))
-    
     return result
 }
 
 public func min(_ x: [Double]) -> Double {
     var result: Double = 0.0
     vDSP_minvD(x, 1, &result, vDSP_Length(x.count))
-    
     return result
 }
 
 public func min(_ x: Vector<Float>) -> Float {
     var result: Float = 0.0
     vDSP_minv(x.vector, 1, &result, vDSP_Length(x.length))
-    
     return result
 }
 
 public func min(_ x: Vector<Double>) -> Double {
     var result: Double = 0.0
     vDSP_minvD(x.vector, 1, &result, vDSP_Length(x.length))
-    
     return result
 }
 
-// TODO: Implement min index
-public func minIndex(_ x: [Float]) -> Int{
-    return 0
+// Minimum index
+public func min(_ x: [Float]) -> (Float, Int){
+    var index: UInt = 0
+    var value: Float = 0
+    vDSP_minvi(x, 1, &value, &index, vDSP_Length(x.count))
+    return (value, Int(index))
 }
 
-public func minIndex(_ x: [Double]) -> Int{
-    return 0
+public func min(_ x: [Double]) -> (Double, Int){
+    var index: UInt = 0
+    var value: Double = 0
+    vDSP_minviD(x, 1, &value, &index, vDSP_Length(x.count))
+    return (value, Int(index))
 }
 
-public func minIndex(_ x: Vector<Float>) -> Int{
-    return 0
+public func min(_ x: Vector<Float>) -> (Float, Int){
+    return min(x.vector)
 }
 
-public func minIndex(_ x: Vector<Double>) -> Int{
-    return 0
+public func min(_ x: Vector<Double>) -> (Double, Int){
+    return min(x.vector)
 }
 
 

@@ -141,6 +141,8 @@ class Network {
     
     func SGD(trainingSet: [LabeledData], epochs: Int, miniBatchSize: Int, eta: Int, testSet: [LabeledData]?){
         // TODO: Implementa SGD
+        
+        
     }
     
 
