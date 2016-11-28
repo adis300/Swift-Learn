@@ -147,7 +147,6 @@ class Network {
     */
     
     func SGD(trainingSet: [LabeledData], epochs: Int, miniBatchSize: Int, eta: Double, testSet: [LabeledData]?){
-        // TODO: Implementa SGD
         for epoch in 1...epochs{ // Defines train epoch many times
             
             var trainingSet = trainingSet.shuffled()
