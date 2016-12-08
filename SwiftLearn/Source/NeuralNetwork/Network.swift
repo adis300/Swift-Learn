@@ -8,14 +8,14 @@
 
 import Foundation
 
-class Network {
+public class Network {
     
     var numLayers : Int
     var layerSizes: [Int]
     var weights : [Matrix<Double>] = []
     var biases: [Vector<Double>] = []
     
-    init(_ layerSizes: [Int]) {
+    public init(_ layerSizes: [Int]) {
         
         precondition(layerSizes.count > 1, "Unable to initialize neural network with no count")
         
@@ -146,7 +146,7 @@ class Network {
     tracking progress, but slows things down substantially.
     */
     
-    func SGD(trainingSet: [LabeledData], epochs: Int, miniBatchSize: Int, eta: Double, testSet: [LabeledData]?){
+    public func SGD(trainingSet: [LabeledData], epochs: Int, miniBatchSize: Int, eta: Double, testSet: [LabeledData]?){
         for epoch in 1...epochs{ // Defines train epoch many times
             
             var trainingSet = trainingSet.shuffled()

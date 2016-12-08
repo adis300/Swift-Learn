@@ -32,6 +32,8 @@
 		E0E87B0D1DF3F6B700D58DF9 /* MatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B0C1DF3F6B700D58DF9 /* MatrixTests.swift */; };
 		E0E87B0F1DF3FC5700D58DF9 /* ActivationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B0E1DF3FC5700D58DF9 /* ActivationTests.swift */; };
 		E0E87B111DF3FE0F00D58DF9 /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B101DF3FE0F00D58DF9 /* NetworkTests.swift */; };
+		E0FE822A1DF958F000B6A254 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0FE82291DF958F000B6A254 /* Foundation.framework */; };
+		E0FE822C1DF958F900B6A254 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0FE822B1DF958F900B6A254 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		E0E87B0C1DF3F6B700D58DF9 /* MatrixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatrixTests.swift; sourceTree = "<group>"; };
 		E0E87B0E1DF3FC5700D58DF9 /* ActivationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationTests.swift; sourceTree = "<group>"; };
 		E0E87B101DF3FE0F00D58DF9 /* NetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
+		E0FE82291DF958F000B6A254 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E0FE822B1DF958F900B6A254 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0FE822C1DF958F900B6A254 /* Accelerate.framework in Frameworks */,
+				E0FE822A1DF958F000B6A254 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +106,7 @@
 				E0E87AC61DF3E96E00D58DF9 /* SwiftLearn */,
 				E0E87AD11DF3E96E00D58DF9 /* SwiftLearnTests */,
 				E0E87AC51DF3E96E00D58DF9 /* Products */,
+				E0FE82281DF958F000B6A254 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -182,6 +189,15 @@
 				E0E87AF01DF3E98D00D58DF9 /* Network.swift */,
 			);
 			path = NeuralNetwork;
+			sourceTree = "<group>";
+		};
+		E0FE82281DF958F000B6A254 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E0FE822B1DF958F900B6A254 /* Accelerate.framework */,
+				E0FE82291DF958F000B6A254 /* Foundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -529,6 +545,7 @@
 				E0E87ADA1DF3E96E00D58DF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E0E87ADB1DF3E96E00D58DF9 /* Build configuration list for PBXNativeTarget "SwiftLearnTests" */ = {
 			isa = XCConfigurationList;
@@ -537,6 +554,7 @@
 				E0E87ADD1DF3E96E00D58DF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

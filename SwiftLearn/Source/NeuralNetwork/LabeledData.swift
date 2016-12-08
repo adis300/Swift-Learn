@@ -8,17 +8,17 @@
 
 import Foundation
 
-class LabeledData{
+public class LabeledData{
     
     let input: Vector<Double>
     let label: Vector<Double>
     
-    init(input: Vector<Double>, label: Vector<Double>) {
+    public init(input: Vector<Double>, label: Vector<Double>) {
         self.input = input
         self.label = label
     }
     
-    init(input: [Double], label: [Double]) {
+    public init(input: [Double], label: [Double]) {
         self.input = Vector(input)
         self.label = Vector(label)
     }
