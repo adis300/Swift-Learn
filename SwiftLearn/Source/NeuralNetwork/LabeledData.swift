@@ -23,4 +23,15 @@ public class LabeledData{
         self.label = Vector(label)
     }
     
+    public init(input: [Double], label: Int, labelSize: Int) {
+        precondition(labelSize > label, "Cannot create label out of range")
+        var labels = [Double](repeating: 0, count: labelSize)
+        if label >= 0{
+            labels[label] = 1.0
+        } // else create all 0 passive labels
+        
+        self.input = Vector(input)
+        self.label = Vector(labels)
+    }
+    
 }

@@ -169,6 +169,10 @@ extension Matrix: CustomStringConvertible {
         
         return description
     }
+    
+    public var dict: [String: Any] {
+        return ["cols": cols, "rows": rows, "grid": grid] as [String : Any]
+    }
 }
 
 // MARK: - SequenceType

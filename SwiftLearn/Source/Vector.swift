@@ -149,8 +149,11 @@ extension Vector: CustomStringConvertible {
     public var description: String {
         return vector.description
     }
+    
+    public var dict: [String: Any] {
+        return ["vector": vector]
+    }
 }
-
 // MARK: - SequenceType
 
 extension Vector: Sequence {

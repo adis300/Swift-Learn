@@ -12,8 +12,8 @@ public class Network {
     
     var numLayers : Int
     var layerSizes: [Int]
-    var weights : [Matrix<Double>] = []
-    var biases: [Vector<Double>] = []
+    public var weights : [Matrix<Double>] = []
+    public var biases: [Vector<Double>] = []
     
     public init(_ layerSizes: [Int]) {
         
@@ -29,6 +29,24 @@ public class Network {
             // weights.append(Matrix(rows: layerSizes[nodeCount],  cols:layerSizes[nodeCount - 1]))
             weights.append(Matrix(randomSize:(layerSizes[layerNumber], layerSizes[layerNumber - 1])))
         }
+    }
+    
+    public init(jsonData: Data) {
+        
+        precondition(jsonData.count > 1, "Unable to initialize neural network with empty data")
+        
+        do {
+
+            let decoded = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
+            numLayers = 0
+            self.layerSizes = []
+
+        } catch {
+            print(error.localizedDescription)
+            numLayers = 0
+            self.layerSizes = []
+        }
+        
     }
     
     // Return the output of the network if x is input.
@@ -168,5 +186,17 @@ public class Network {
         }
     }
     
-
+    public func toJson() -> Data{
+        var dict: [String: Any] = ["layerSizes": layerSizes]
+        dict["weights"] = weights.map{$0.dict}
+        dict["biases"] = biases.map{$0.dict}
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
+            return jsonData
+        }catch{
+            print(error.localizedDescription)
+            return Data()
+        }
+    }
 }

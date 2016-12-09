@@ -146,14 +146,14 @@
 		E0E87ADF1DF3E98D00D58DF9 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E0E87AE01DF3E98D00D58DF9 /* Activation.swift */,
 				E0E87AE11DF3E98D00D58DF9 /* Arithmetic */,
+				E0E87AEA1DF3E98D00D58DF9 /* Extension */,
+				E0E87AEE1DF3E98D00D58DF9 /* NeuralNetwork */,
+				E0E87AE01DF3E98D00D58DF9 /* Activation.swift */,
 				E0E87AE81DF3E98D00D58DF9 /* Auxiliary.swift */,
 				E0E87AE91DF3E98D00D58DF9 /* Err.swift */,
-				E0E87AEA1DF3E98D00D58DF9 /* Extension */,
 				E0E87AEC1DF3E98D00D58DF9 /* Initializer.swift */,
 				E0E87AED1DF3E98D00D58DF9 /* Matrix.swift */,
-				E0E87AEE1DF3E98D00D58DF9 /* NeuralNetwork */,
 				E0E87AF11DF3E98D00D58DF9 /* Power.swift */,
 				E0E87AF21DF3E98D00D58DF9 /* Random.swift */,
 				E0E87AF31DF3E98D00D58DF9 /* Vector.swift */,
