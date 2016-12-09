@@ -38,8 +38,18 @@ public class Network {
         do {
 
             let decoded = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
-            numLayers = 0
-            self.layerSizes = []
+            self.layerSizes = decoded["layerSizes"] as! [Int]
+            numLayers = self.layerSizes.count
+            let biasVectors = decoded["biases"] as! [[String: [Double]]]
+            biases = biasVectors.map{Vector($0["vector"]!)}
+            
+            let weightMatrices = decoded["weights"] as! [[String: Any]]
+            weights = weightMatrices.map{x in
+                let cols = x["cols"] as! Int
+                let rows = x["rows"] as! Int
+                let grid = x["grid"] as! [Double]
+                return Matrix(rows: rows, cols: cols, values: grid)
+            }
 
         } catch {
             print(error.localizedDescription)
@@ -51,7 +61,7 @@ public class Network {
     
     // Return the output of the network if x is input.
 
-    func feedforward(_ x: Vector<Double>) -> Vector<Double>{
+    public func feedforward(_ x: Vector<Double>) -> Vector<Double>{
         var a = x
         for layerNumber in 1..<layerSizes.count {
             a = sigmoid(weights[layerNumber - 1] * a + biases[layerNumber - 1])
