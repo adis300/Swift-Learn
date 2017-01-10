@@ -51,7 +51,6 @@ class NetworkTests: XCTestCase {
     func testNetworkSGD() {
         network.SGD(trainingSet: trainingSet, epochs: 1000, miniBatchSize: 10, eta: 3, testSet: testSet)
         assert(network.biases[0][0] > 2 && network.biases[0][0] < 3, "Biase test failed")
-        
         assert(network.weights[0][0,0] > -24 && network.weights[0][0,0] < -23, "Weight test failed")
         
     }

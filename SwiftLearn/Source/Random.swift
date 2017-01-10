@@ -14,4 +14,8 @@ class Random{
         return (0..<length).map{_ in Double(arc4random())/Double(INT32_MAX) - 1}
     }
     
+    static func randMinus1To1() -> Double{
+        return Double(arc4random())/Double(INT32_MAX) - 1
+    }
+    
 }
