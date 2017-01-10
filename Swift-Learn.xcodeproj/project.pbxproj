@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0AAD7A41E256984003C0EE9 /* Gene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAD7A31E256984003C0EE9 /* Gene.swift */; };
 		E0E87B441DF4057700D58DF9 /* Activation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B2F1DF4057700D58DF9 /* Activation.swift */; };
 		E0E87B451DF4057700D58DF9 /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B311DF4057700D58DF9 /* Addition.swift */; };
 		E0E87B461DF4057700D58DF9 /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B321DF4057700D58DF9 /* Arithmetic.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E0AAD7A31E256984003C0EE9 /* Gene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gene.swift; sourceTree = "<group>"; };
 		E0E1BC6D1DCE61F4009D9D5F /* Swift-Learn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Swift-Learn"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E87B2F1DF4057700D58DF9 /* Activation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activation.swift; sourceTree = "<group>"; };
 		E0E87B311DF4057700D58DF9 /* Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Addition.swift; sourceTree = "<group>"; };
@@ -72,6 +74,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E0AAD7A11E256961003C0EE9 /* ML */ = {
+			isa = PBXGroup;
+			children = (
+				E0AAD7A21E256961003C0EE9 /* NEAT */,
+			);
+			path = ML;
+			sourceTree = "<group>";
+		};
+		E0AAD7A21E256961003C0EE9 /* NEAT */ = {
+			isa = PBXGroup;
+			children = (
+				E0AAD7A31E256984003C0EE9 /* Gene.swift */,
+			);
+			path = NEAT;
+			sourceTree = "<group>";
+		};
 		E0E1BC641DCE61F4009D9D5F = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +118,7 @@
 		E0E87B2D1DF4054A00D58DF9 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				E0AAD7A11E256961003C0EE9 /* ML */,
 				E0E87B2F1DF4057700D58DF9 /* Activation.swift */,
 				E0E87B301DF4057700D58DF9 /* Arithmetic */,
 				E0E87B371DF4057700D58DF9 /* Auxiliary.swift */,
@@ -218,6 +237,7 @@
 				E0E87B471DF4057700D58DF9 /* Division.swift in Sources */,
 				E0E87B4F1DF4057700D58DF9 /* Matrix.swift in Sources */,
 				E0E87B491DF4057700D58DF9 /* Multiplication.swift in Sources */,
+				E0AAD7A41E256984003C0EE9 /* Gene.swift in Sources */,
 				E0E87B481DF4057700D58DF9 /* MaxMin.swift in Sources */,
 				E0E87B451DF4057700D58DF9 /* Addition.swift in Sources */,
 				E0E87B511DF4057700D58DF9 /* Network.swift in Sources */,
