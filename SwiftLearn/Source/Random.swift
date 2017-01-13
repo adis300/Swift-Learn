@@ -18,4 +18,8 @@ class Random{
         return Double(arc4random())/Double(INT32_MAX) - 1
     }
     
+    static func randN(n:Int) -> Int{
+        return Int(arc4random_uniform(UInt32(n)))
+    }
+    
 }
