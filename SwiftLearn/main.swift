@@ -8,8 +8,6 @@
 
 import Foundation
 
-print("Starting framework test!")
-
 // MARK: Vector test
 var vec = Vector([-6.0,7.0,6,8,7,3])
 print(vec)
