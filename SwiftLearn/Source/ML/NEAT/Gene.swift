@@ -12,13 +12,19 @@ import GameKit
 // NodeGene is an implementation of each node within a genome.
 // Each node includes a node ID (NID), a node type (NType), and
 // a pointer to an activation function.
+
+public enum NodeType{
+    case output
+    case sensor
+}
+
 public class NodeGene:Comparable,Equatable{
     
     public var nodeId: Int
-    public var nodeType: String
+    public var nodeType: NodeType
     public var activationFunc: ActivationFunc
     
-    init(nodeId:Int, nodeType: String, activationFunc: ActivationFunc) {
+    init(nodeId:Int, nodeType: NodeType, activationFunc: ActivationFunc) {
         self.nodeId = nodeId
         self.nodeType = nodeType
         self.activationFunc = activationFunc
@@ -64,13 +70,22 @@ public class ConnGene:Comparable,Equatable{
     public var output: Int = 0
     public var weight: Double = Random.randMinus1To1()
     
+    public init(innovation: Int, input:Int, output:Int, weight: Double){
+        self.innovation = innovation
+        self.input = input
+        self.output = output
+        self.weight = weight
+    }
+    
+    public init(innovation: Int, input:Int, output:Int){
+        self.innovation = innovation
+        self.input = input
+        self.output = output
+    }
+    
     public func copy() -> ConnGene{
-        let gene = ConnGene()
+        let gene = ConnGene(innovation: self.innovation, input: self.input, output: self.output, weight: self.weight)
         gene.disabled = disabled
-        gene.innovation = innovation
-        gene.input = input
-        gene.output = output
-        gene.weight = weight
         // gene.mutation  = mutation
         return gene
     }

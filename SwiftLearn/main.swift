@@ -13,7 +13,6 @@ var vec = Vector([-6.0,7.0,6,8,7,3])
 print(vec)
 vec[2...5] = [-6.0,7.0,6,8]
 
-
 print("Original: vector")
 print(vec)
 
