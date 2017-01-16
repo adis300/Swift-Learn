@@ -36,6 +36,9 @@ public class Parameter{
     public static var coeffDisjoint :Double = 0// coefficient for disjoint
     public static var coeffWeight :Double = 0 // coefficient for average weight
     
+    // Optional parameters
+    public static var largeGenomeSizeThreshold: Int = 1
+    
     // Static initializer
     public static func initialize(params: [String: Any]){
         if let numOfSensor = params["numberOfSensor"] as? Int{
@@ -134,6 +137,11 @@ public class Parameter{
         }else{
             print("Parameter: failed to initialize [coeffWeight]")
             return
+        }
+        
+        // Optional parameters
+        if let threshold = params["largeGenomeSizeThreshold"] as? Int{
+            largeGenomeSizeThreshold = threshold
         }
     }
     

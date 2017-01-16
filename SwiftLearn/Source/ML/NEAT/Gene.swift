@@ -18,6 +18,7 @@ public enum NodeType{
     case sensor
 }
 
+// Neuron cell equivalent
 public class NodeGene:Comparable,Equatable{
     
     public var nodeId: Int
@@ -54,7 +55,7 @@ public func <= (lhs: NodeGene, rhs: NodeGene) -> Bool {
 public func >= (lhs: NodeGene, rhs: NodeGene) -> Bool {
     return lhs.nodeId >= rhs.nodeId
 }
-
+// Synapse equivalent
 // ConnGene is an implementation of each connection within a genome.
 // It represents a connection between an in-node and an out-node;
 // it contains an innovation number and nids of the in-node and the
@@ -91,8 +92,8 @@ public class ConnGene:Comparable,Equatable{
     }
     
     // mutate mutates the connection weight.
-    public func mutate(mutWeightRate: Double) {
-        if Random.rand0To1() < mutWeightRate {
+    public func mutate() {
+        if Random.rand0To1() < Parameter.mutateWeightRate {
             weight += Random.standardNormalRandom()
         }
     }

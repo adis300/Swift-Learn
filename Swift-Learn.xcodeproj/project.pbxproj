@@ -10,7 +10,7 @@
 		E0147A641E2C804600B796FB /* Genome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A631E2C804600B796FB /* Genome.swift */; };
 		E0147A661E2C80C100B796FB /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A651E2C80C100B796FB /* Parameter.swift */; };
 		E0147A681E2D46DF00B796FB /* NEAT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A671E2D46DF00B796FB /* NEAT.swift */; };
-		E0276BFE1E256DCD00B1994A /* Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0276BFD1E256DCD00B1994A /* Synapse.swift */; };
+		E0147A6A1E2D6E7800B796FB /* Innovation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A691E2D6E7800B796FB /* Innovation.swift */; };
 		E0276C001E256EC600B1994A /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0276BFF1E256EC600B1994A /* Population.swift */; };
 		E0276C0D1E281DD800B1994A /* ActivationFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0276C0C1E281DD800B1994A /* ActivationFunc.swift */; };
 		E0AAD7A41E256984003C0EE9 /* Gene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAD7A31E256984003C0EE9 /* Gene.swift */; };
@@ -50,7 +50,7 @@
 		E0147A631E2C804600B796FB /* Genome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genome.swift; sourceTree = "<group>"; };
 		E0147A651E2C80C100B796FB /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
 		E0147A671E2D46DF00B796FB /* NEAT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEAT.swift; sourceTree = "<group>"; };
-		E0276BFD1E256DCD00B1994A /* Synapse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synapse.swift; sourceTree = "<group>"; };
+		E0147A691E2D6E7800B796FB /* Innovation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Innovation.swift; sourceTree = "<group>"; };
 		E0276BFF1E256EC600B1994A /* Population.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Population.swift; sourceTree = "<group>"; };
 		E0276C0C1E281DD800B1994A /* ActivationFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationFunc.swift; sourceTree = "<group>"; };
 		E0AAD7A31E256984003C0EE9 /* Gene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gene.swift; sourceTree = "<group>"; };
@@ -98,12 +98,12 @@
 			isa = PBXGroup;
 			children = (
 				E0AAD7A31E256984003C0EE9 /* Gene.swift */,
-				E0276BFD1E256DCD00B1994A /* Synapse.swift */,
 				E0276BFF1E256EC600B1994A /* Population.swift */,
 				E0276C0C1E281DD800B1994A /* ActivationFunc.swift */,
 				E0147A631E2C804600B796FB /* Genome.swift */,
 				E0147A651E2C80C100B796FB /* Parameter.swift */,
 				E0147A671E2D46DF00B796FB /* NEAT.swift */,
+				E0147A691E2D6E7800B796FB /* Innovation.swift */,
 			);
 			path = NEAT;
 			sourceTree = "<group>";
@@ -261,7 +261,7 @@
 				E0E87B491DF4057700D58DF9 /* Multiplication.swift in Sources */,
 				E0AAD7A41E256984003C0EE9 /* Gene.swift in Sources */,
 				E0E87B481DF4057700D58DF9 /* MaxMin.swift in Sources */,
-				E0276BFE1E256DCD00B1994A /* Synapse.swift in Sources */,
+				E0147A6A1E2D6E7800B796FB /* Innovation.swift in Sources */,
 				E0E87B451DF4057700D58DF9 /* Addition.swift in Sources */,
 				E0147A641E2C804600B796FB /* Genome.swift in Sources */,
 				E0E87B511DF4057700D58DF9 /* Network.swift in Sources */,
