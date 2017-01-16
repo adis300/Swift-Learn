@@ -102,7 +102,7 @@ public class ActivationFunc {
     }
     
     // RandFunc returns a random activation function from a particular function set
-    static func randomActivationFunc(set: [(Double) -> Double]) -> (Double) -> Double{
+    static func randomActivationFunc(set: [ActivationFunc]) -> ActivationFunc{
         return set[Random.randN(n: set.count)]
     }
 

@@ -18,5 +18,9 @@ public class NEAT{
     // .In swift, we can use nil for zero, thus, global Innovation number can start from 0
     
     public static var globalInnovationNumber: Int = 0
+    
+    public static var ActivationFunctionSet = [ActivationFunc("sigmoid")]
+    
+    
 }
 

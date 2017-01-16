@@ -240,9 +240,49 @@ public class Genome {
         // of 1.0 and the original connection's weight, in order to prevent
         // sudden changes in the network's performance.
         if Random.rand0To1() < Parameter.mutateAddNodeRate {
+            
             // requires at least one connection
             if connections.count > 0 {
+                let oldConn = Array(connections.values)[Random.randN(n: connections.count)]
                 
+                // Create a new node that will be placed between a connection
+                let newNode = NodeGene(nodeId: nodes.count, nodeType: .hidden, activationFunc: ActivationFunc.randomActivationFunc(set: NEAT.ActivationFunctionSet))
+                
+                self.nodes[newNode.nodeId] = newNode
+
+                // The first connection that will be created by spliting an existing
+                // connection will have a weight of 1.0, and will be connected from
+                // the in-node of the existing node to the newly created node.
+                var innovationKey = InnovationKey(input: oldConn.input, output:newNode.nodeId)
+                var innovationNumber = NEAT.innovationTracker[innovationKey]
+                
+                if innovationNumber == nil{
+                    innovationNumber = NEAT.globalInnovationNumber
+                    // register the new connection innovation
+                    NEAT.innovationTracker[innovationKey] = innovationNumber
+                    NEAT.globalInnovationNumber += 1
+                }
+                
+                self.connections[innovationNumber!] = ConnGene(innovation: innovationNumber!, input: oldConn.input, output: newNode.nodeId, weight: 1)
+                
+                // The second new connection will have the same weight as the existing
+                // connection, in order to prevent sudden changes after the mutation, and
+                // will be connected from the new node to the out-node of the existing
+                // connection.
+                innovationKey = InnovationKey(input: newNode.nodeId, output:oldConn.output)
+                innovationNumber = NEAT.innovationTracker[innovationKey]
+                
+                if innovationNumber == nil{
+                    innovationNumber = NEAT.globalInnovationNumber
+                    // register the new connection innovation
+                    NEAT.innovationTracker[innovationKey] = innovationNumber
+                    NEAT.globalInnovationNumber += 1
+                }
+                
+                self.connections[innovationNumber!] = ConnGene(innovation: innovationNumber!, input: newNode.nodeId, output: oldConn.output, weight: oldConn.weight)
+                
+                // Switch off the old connection
+                oldConn.toggle()
             }
         }
     }

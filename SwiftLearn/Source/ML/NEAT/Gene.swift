@@ -16,6 +16,7 @@ import GameKit
 public enum NodeType{
     case output
     case sensor
+    case hidden
 }
 
 // Neuron cell equivalent
@@ -96,6 +97,10 @@ public class ConnGene:Comparable,Equatable{
         if Random.rand0To1() < Parameter.mutateWeightRate {
             weight += Random.standardNormalRandom()
         }
+    }
+    
+    public func toggle(){
+        self.disabled = !self.disabled
     }
 }
 
