@@ -54,7 +54,7 @@ public func >= (lhs: NodeGene, rhs: NodeGene) -> Bool {
 // it contains an innovation number and nids of the in-node and the
 // out-node, whether if the connection is disabled, and the weight
 // of the connection.
-public class ConnGene{
+public class ConnGene:Comparable,Equatable{
     
     public var disabled = false
     
@@ -81,4 +81,24 @@ public class ConnGene{
             weight += Random.standardNormalRandom()
         }
     }
+}
+
+public func == (lhs: ConnGene, rhs: ConnGene) -> Bool {
+    return lhs.innovation == rhs.innovation
+}
+
+public func < (lhs: ConnGene, rhs: ConnGene) -> Bool {
+    return lhs.innovation < rhs.innovation
+}
+
+public func > (lhs: ConnGene, rhs: ConnGene) -> Bool {
+    return lhs.innovation > rhs.innovation
+}
+
+public func <= (lhs: ConnGene, rhs: ConnGene) -> Bool {
+    return lhs.innovation <= rhs.innovation
+}
+
+public func >= (lhs: ConnGene, rhs: ConnGene) -> Bool {
+    return lhs.innovation >= rhs.innovation
 }
