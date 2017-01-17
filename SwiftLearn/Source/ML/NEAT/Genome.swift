@@ -289,6 +289,38 @@ public class Genome {
     
     func mutateAddConnection(){
         if Random.rand0To1() < Parameter.mutateAddConnectionRate {
+            
+            // The in-node of the connection to be added can be selected
+            // randomly from any node genes.
+            let inNode = Array(nodes.values)[Random.randN(n: nodes.count)]
+            
+            // The out-node can only be randomly selected from nodes that are
+            // not sensor nodes.
+            let outNodeId = Random.randN(n: nodes.count - Parameter.numberOfSensor) + Parameter.numberOfSensor
+            let outNode = nodes[outNodeId]!
+            
+            // Search for a connection gene that has the same in-node and out-node.
+            for (_, conn) in connections{
+                if(conn.input == inNode.nodeId && conn.output == outNode.nodeId){
+                    return
+                }
+            }
+            
+            // A new connection gene with a random weight is added between the
+            // selected nodes. If the connection innovation already exists, use
+            // the same innovation number as before; use global innovation number,
+            // otherwise.
+            let innovationKey = InnovationKey(input: inNode.nodeId, output: outNode.nodeId)
+            var innovationNumber = NEAT.innovationTracker[innovationKey]
+            
+            if innovationNumber == nil {
+                innovationNumber = NEAT.globalInnovationNumber
+                NEAT.innovationTracker[innovationKey] = innovationNumber
+                // register the new connection innovation
+                NEAT.globalInnovationNumber += 1
+            }
+            
+            connections[innovationNumber!] = ConnGene(innovation: innovationNumber!, input: inNode.nodeId, output: outNode.nodeId)
 
         }
     }

@@ -31,7 +31,7 @@ class Random{
     static var use_last = false
     ///  static Function to get a random value for a given distribution
     // static func gaussianRandom(_ mean : Double, standardDeviation : Double) -> Double
-    static func standardNormalRandom() -> Double
+    static func normalRandom() -> Double
 
     {
         var y1 : Double
