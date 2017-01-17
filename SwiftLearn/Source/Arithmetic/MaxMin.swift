@@ -38,7 +38,7 @@ public func max(_ x: Vector<Double>) -> Double {
 }
 
 
-// TODO: Implement max index
+// Max with index
 public func max(_ x: [Float]) -> (Float, Int){
     var index: UInt = 0
     var value: Float = 0

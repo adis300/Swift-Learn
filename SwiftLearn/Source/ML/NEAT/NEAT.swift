@@ -11,6 +11,7 @@ import Foundation
 
 
 public class NEAT{
+    
     public static var innovationTracker:[InnovationKey: Int] = [:]
     
     // globalInnovNum is a global variable that keeps track of
@@ -21,6 +22,11 @@ public class NEAT{
     
     public static var ActivationFunctionSet = [ActivationFunc("sigmoid")]
     
-    
+    public static func Initialize(){
+        
+        // Clear out previous history
+        globalInnovationNumber = 0
+        innovationTracker = [:]
+    }
 }
 

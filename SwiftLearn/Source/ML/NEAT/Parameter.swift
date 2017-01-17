@@ -10,7 +10,7 @@ import Foundation
 
 public class Parameter{
     
-    public static var initialized: Bool = false
+    static var initialized: Bool = false
     
     // Topology parameter
     public static var numberOfSensor: Int = 0
@@ -143,6 +143,12 @@ public class Parameter{
         if let threshold = params["largeGenomeSizeThreshold"] as? Int{
             largeGenomeSizeThreshold = threshold
         }
+        
+        initialized = true
+    }
+    
+    public static func isInitialized() -> Bool{
+        return Parameter.initialized
     }
     
 }

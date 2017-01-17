@@ -11,6 +11,7 @@
 		E0147A661E2C80C100B796FB /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A651E2C80C100B796FB /* Parameter.swift */; };
 		E0147A681E2D46DF00B796FB /* NEAT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A671E2D46DF00B796FB /* NEAT.swift */; };
 		E0147A6A1E2D6E7800B796FB /* Innovation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A691E2D6E7800B796FB /* Innovation.swift */; };
+		E0147A6C1E2DC5F800B796FB /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A6B1E2DC5F800B796FB /* Species.swift */; };
 		E0276C001E256EC600B1994A /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0276BFF1E256EC600B1994A /* Population.swift */; };
 		E0276C0D1E281DD800B1994A /* ActivationFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0276C0C1E281DD800B1994A /* ActivationFunc.swift */; };
 		E0AAD7A41E256984003C0EE9 /* Gene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAD7A31E256984003C0EE9 /* Gene.swift */; };
@@ -51,6 +52,7 @@
 		E0147A651E2C80C100B796FB /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
 		E0147A671E2D46DF00B796FB /* NEAT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEAT.swift; sourceTree = "<group>"; };
 		E0147A691E2D6E7800B796FB /* Innovation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Innovation.swift; sourceTree = "<group>"; };
+		E0147A6B1E2DC5F800B796FB /* Species.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		E0276BFF1E256EC600B1994A /* Population.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Population.swift; sourceTree = "<group>"; };
 		E0276C0C1E281DD800B1994A /* ActivationFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationFunc.swift; sourceTree = "<group>"; };
 		E0AAD7A31E256984003C0EE9 /* Gene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gene.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				E0147A651E2C80C100B796FB /* Parameter.swift */,
 				E0147A671E2D46DF00B796FB /* NEAT.swift */,
 				E0147A691E2D6E7800B796FB /* Innovation.swift */,
+				E0147A6B1E2DC5F800B796FB /* Species.swift */,
 			);
 			path = NEAT;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				E0E87B571DF4058700D58DF9 /* main.swift in Sources */,
 				E0147A661E2C80C100B796FB /* Parameter.swift in Sources */,
 				E0276C001E256EC600B1994A /* Population.swift in Sources */,
+				E0147A6C1E2DC5F800B796FB /* Species.swift in Sources */,
 				E0E87B4D1DF4057700D58DF9 /* Collection.swift in Sources */,
 				E0276C0D1E281DD800B1994A /* ActivationFunc.swift in Sources */,
 				E0E87B461DF4057700D58DF9 /* Arithmetic.swift in Sources */,
