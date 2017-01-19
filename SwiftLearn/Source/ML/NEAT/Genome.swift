@@ -254,6 +254,10 @@ public class Genome {
                 // Create a new node that will be placed between a connection
                 let newNode = NodeGene(nodeId: nodes.count, nodeType: .hidden, activationFunc: ActivationFunc.randomActivationFunc(set: NEAT.ActivationFunctionSet))
                 
+                guard self.nodes[newNode.nodeId] == nil else{
+                    fatalError("Node already exists, cannot add new node.")
+                }
+                
                 self.nodes[newNode.nodeId] = newNode
 
                 // The first connection that will be created by spliting an existing

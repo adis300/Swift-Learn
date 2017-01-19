@@ -58,9 +58,33 @@ public class NEATNetwork{
         }
     }
     
-    public func forwardPropagate(inputs: Vector<Double>) -> Vector<Double>{
-        // TODO: Implement network forward propagation.
-        return inputs
+    public func forwardPropagate(inputs: [Double]) -> [Double]{
+
+        guard inputs.count == Parameter.numberOfSensor else{
+            print("Error: inputs does not match number of sensors")
+            return []
+        }
+        
+        // Pop in inputs
+        for i in 0 ..< Parameter.numberOfSensor{
+            nodes[i]!.signal = inputs[i]
+        }
+        
+        let h = Parameter.numberOfSensor + Parameter.numberOfOutput
+        
+        // Activate hidden neurons
+        for i in h ..< self.nodes.count{
+            _ = self.nodes[i]!.output()
+        }
+        
+        var outputs:[Double] = []
+        
+        // Finnally trigger the output neuron
+        for i in Parameter.numberOfSensor ..< h{
+            outputs.append(self.nodes[i]!.output())
+        }
+        
+        return outputs
     }
     
 }
