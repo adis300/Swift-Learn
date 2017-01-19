@@ -28,6 +28,12 @@ public class Genome {
         
     }
     
+    public func copy() -> Genome{
+        return Genome(genomeId: self.genomeId, speciesId: self.speciesId, nodes: self.nodes, connections: self.connections)
+    }
+    
+    
+    
     public init(genomeId:Int, speciesId: Int) {
         
         let numberOfNodes = Parameter.numberOfSensor + Parameter.numberOfOutput

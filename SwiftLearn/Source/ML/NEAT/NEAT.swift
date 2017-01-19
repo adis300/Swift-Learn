@@ -12,7 +12,7 @@ import Foundation
 
 public class NEAT{
     
-    public static var innovationTracker:[InnovationKey: Int] = [:]
+    static var innovationTracker:[InnovationKey: Int] = [:]
     
     // globalInnovNum is a global variable that keeps track of
     // the chronology of the evolution via historical marking;
@@ -24,7 +24,7 @@ public class NEAT{
     
     public static func Initialize(){
         
-        // Clear out previous history
+        // Clear out previous training history
         globalInnovationNumber = 0
         innovationTracker = [:]
     }

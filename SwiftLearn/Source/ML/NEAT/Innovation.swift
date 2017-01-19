@@ -10,13 +10,13 @@ import Foundation
 
 
 // Innovation classes
-public struct InnovationKey{
+struct InnovationKey{
     
     public let input: Int
     public let output: Int
 }
 
-public func ==(lhs: InnovationKey, rhs: InnovationKey) -> Bool {
+func ==(lhs: InnovationKey, rhs: InnovationKey) -> Bool {
     return lhs.input == rhs.input && lhs.output == rhs.output
 }
 

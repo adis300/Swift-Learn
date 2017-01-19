@@ -37,7 +37,7 @@ public class Parameter{
     public static var coeffWeight :Double = 0 // coefficient for average weight
     
     // Optional parameters
-    public static var largeGenomeSizeThreshold: Int = 1
+    public static var largeGenomeSizeThreshold: Int = 1  // Marks if N should be used when computing the genome distances 
     
     // Static initializer
     public static func initialize(params: [String: Any]){

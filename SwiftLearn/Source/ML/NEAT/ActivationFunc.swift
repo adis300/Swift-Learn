@@ -63,6 +63,10 @@ public class ActivationFunc {
         return 1 / (1 + exp(-x))
     }
     
+    static let sigmoidSharp: (Double) -> Double = {x in
+        return 1 / (1 + exp(-4.9 * x))
+    }
+    
     /* No need to define these activation functions
      static let Tanh: (Double) -> Double = {x in
      return tanh(x)
