@@ -10,7 +10,7 @@ import Foundation
 
 public class Parameter{
     
-    static var initialized: Bool = false
+    fileprivate static var initialized: Bool = false
     
     // Topology parameter
     public static var numberOfSensor: Int = 0
@@ -41,110 +41,121 @@ public class Parameter{
     
     // Static initializer
     public static func initialize(params: [String: Any]){
-        if let numOfSensor = params["numberOfSensor"] as? Int{
-            numberOfSensor = numOfSensor
+        if let numOfSensor = params["numberOfSensor"] as? NSNumber{
+            numberOfSensor = numOfSensor.intValue
         }else{
-            print("Parameter: failed to initialize [numberOfSensor]")
-            return
+            fatalError("Parameter: failed to initialize [numberOfSensor]")
         }
         
-        if let numOfOutput = params["numberOfOutput"] as? Int{
-            numberOfOutput = numOfOutput
+        if let numOfOutput = params["numberOfOutput"] as? NSNumber{
+            numberOfOutput = numOfOutput.intValue
         }else{
-            print("Parameter: failed to initialize [numberOfOutput]")
-            return
+            fatalError("Parameter: failed to initialize [numberOfOutput]")
         }
         
-        if let popSize = params["populationSize"] as? Int{
-            populationSize = popSize
+        if let popSize = params["populationSize"] as? NSNumber{
+            populationSize = popSize.intValue
         }else{
-            print("Parameter: failed to initialize [populationSize]")
-            return
+            fatalError("Parameter: failed to initialize [populationSize]")
         }
         
-        if let numOfGeneration = params["numberOfGeneration"] as? Int{
-            numberOfGeneration = numOfGeneration
+        if let numOfGeneration = params["numberOfGeneration"] as? NSNumber{
+            numberOfGeneration = numOfGeneration.intValue
         }else{
-            print("Parameter: failed to initialize [numberOfGeneration]")
-            return
+            fatalError("Parameter: failed to initialize [numberOfGeneration]")
         }
         
-        if let survRate = params["survivalRate"] as? Double{
-            survivalRate = survRate
+        if let survRate = params["survivalRate"] as? NSNumber{
+            survivalRate = survRate.doubleValue
         }else{
-            print("Parameter: failed to initialize [survivalRate]")
-            return
+            fatalError("Parameter: failed to initialize [survivalRate]")
         }
         
-        if let distThreshold = params["distanceThreshold"] as? Double{
-            distanceThreshold = distThreshold
+        if let distThreshold = params["distanceThreshold"] as? NSNumber{
+            distanceThreshold = distThreshold.doubleValue
         }else{
-            print("Parameter: failed to initialize [distanceThreshold]")
-            return
+            fatalError("Parameter: failed to initialize [distanceThreshold]")
         }
         
-        if let doAge = params["dropoffAge"] as? Int{
-            dropoffAge = doAge
+        if let doAge = params["dropoffAge"] as? NSNumber{
+            dropoffAge = doAge.intValue
         }else{
-            print("Parameter: failed to initialize [dropoffAge]")
-            return
+            fatalError("Parameter: failed to initialize [dropoffAge]")
         }
         
-        if let coRate = params["crossoverRate"] as? Double{
-            crossoverRate = coRate
+        if let coRate = params["crossoverRate"] as? NSNumber{
+            crossoverRate = coRate.doubleValue
         }else{
-            print("Parameter: failed to initialize [crossoverRate]")
-            return
+            fatalError("Parameter: failed to initialize [crossoverRate]")
         }
         
-        if let mutAddNodeRate = params["mutateAddNodeRate"] as? Double{
-            mutateAddNodeRate = mutAddNodeRate
+        if let mutAddNodeRate = params["mutateAddNodeRate"] as? NSNumber{
+            mutateAddNodeRate = mutAddNodeRate.doubleValue
         }else{
-            print("Parameter: failed to initialize [mutateAddNodeRate]")
-            return
+            fatalError("Parameter: failed to initialize [mutateAddNodeRate]")
         }
         
-        if let mutAddConnectionRate = params["mutateAddConnectionRate"] as? Double{
-            mutateAddConnectionRate = mutAddConnectionRate
+        if let mutAddConnectionRate = params["mutateAddConnectionRate"] as? NSNumber{
+            mutateAddConnectionRate = mutAddConnectionRate.doubleValue
         }else{
-            print("Parameter: failed to initialize [mutateAddConnectionRate]")
-            return
+            fatalError("Parameter: failed to initialize [mutateAddConnectionRate]")
         }
         
-        if let mutWeightRate = params["mutateWeightRate"] as? Double{
-            mutateWeightRate = mutWeightRate
+        if let mutWeightRate = params["mutateWeightRate"] as? NSNumber{
+            mutateWeightRate = mutWeightRate.doubleValue
         }else{
-            print("Parameter: failed to initialize [mutateWeightRate]")
-            return
+            fatalError("Parameter: failed to initialize [mutateWeightRate]")
         }
         
-        if let excess = params["coeffExcess"] as? Double{
-            coeffExcess = excess
+        if let excess = params["coeffExcess"] as? NSNumber{
+            coeffExcess = excess.doubleValue
         }else{
-            print("Parameter: failed to initialize [coeffExcess]")
-            return
+            fatalError("Parameter: failed to initialize [coeffExcess]")
         }
         
-        if let disjoint = params["coeffDisjoint"] as? Double{
-            coeffDisjoint = disjoint
+        if let disjoint = params["coeffDisjoint"] as? NSNumber{
+            coeffDisjoint = disjoint.doubleValue
         }else{
-            print("Parameter: failed to initialize [coeffDisjoint]")
-            return
+            fatalError("Parameter: failed to initialize [coeffDisjoint]")
         }
         
-        if let weight = params["coeffWeight"] as? Double{
-            coeffWeight = weight
+        if let weight = params["coeffWeight"] as? NSNumber{
+            coeffWeight = weight.doubleValue
         }else{
-            print("Parameter: failed to initialize [coeffWeight]")
-            return
+            fatalError("Parameter: failed to initialize [coeffWeight]")
         }
         
         // Optional parameters
-        if let threshold = params["largeGenomeSizeThreshold"] as? Int{
-            largeGenomeSizeThreshold = threshold
+        if let threshold = params["largeGenomeSizeThreshold"] as? NSNumber{
+            largeGenomeSizeThreshold = threshold.intValue
         }
         
         initialized = true
+    }
+    
+    public static func initialize(numberOfSensor: Int, numberOfOutput:Int){
+        var params:[String: NSNumber] = [:]
+        params["numberOfSensor"] = NSNumber(value:numberOfSensor)
+        params["numberOfOutput"] = NSNumber(value:numberOfOutput)
+        params["populationSize"] = NSNumber(value:50)
+        params["numberOfGeneration"] = NSNumber(value:50)
+        params["survivalRate"] = NSNumber(value:0.2)
+        params["distanceThreshold"] = NSNumber(value:1.8)
+        params["dropoffAge"] = NSNumber(value:15)
+        params["crossoverRate"] = NSNumber(value:0.2)
+        params["mutateAddNodeRate"] = NSNumber(value:0.1)
+        params["mutateAddConnectionRate"] = NSNumber(value:0.1)
+        params["mutateWeightRate"] = NSNumber(value:0.1)
+        params["coeffExcess"] = NSNumber(value:1.0)
+        params["coeffDisjoint"] = NSNumber(value:1.0)
+        params["coeffWeight"] = NSNumber(value:2.0)
+
+        initialize(params: params)
+    }
+    
+    public static func isValid() -> Bool{
+        // TODO: Implement parameter is valid function
+        return true
     }
     
     public static func isInitialized() -> Bool{

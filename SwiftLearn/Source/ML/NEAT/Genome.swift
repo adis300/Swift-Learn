@@ -252,7 +252,7 @@ public class Genome {
                 let oldConn = Array(connections.values)[Random.randN(n: connections.count)]
                 
                 // Create a new node that will be placed between a connection
-                let newNode = NodeGene(nodeId: nodes.count, nodeType: .hidden, activationFunc: ActivationFunc.randomActivationFunc(set: NEAT.ActivationFunctionSet))
+                let newNode = NodeGene(nodeId: nodes.count, nodeType: .hidden, activationFunc: ActivationFunc.randomActivationFunc(set: NEAT.activationFunctionSet))
                 
                 guard self.nodes[newNode.nodeId] == nil else{
                     fatalError("Node already exists, cannot add new node.")

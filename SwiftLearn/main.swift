@@ -73,6 +73,8 @@ print("Backprop test:")
 print(deltaW)
 print(deltaB)
 */
+
+/*
 var trainingSet:[LabeledData] = []
 for i in 1...100{
     trainingSet.append(LabeledData(input: [0.2,0.3,0.8], label: [1,0]))
@@ -105,4 +107,15 @@ print("Trained weights:")
 print(network.weights)
 print("Trained biases:")
 print(network.biases)
+ */
+// Test NEATNetwork
+print("=== Creating a Network ===\n")
+Parameter.initialize(numberOfSensor: 3, numberOfOutput: 1)
+NEAT.initialize()
+NEAT.evaluate()
+NEAT.population.forEach { (genome) in
+    print("Genome fitness: \(genome.fitness)")
+}
+
+
 

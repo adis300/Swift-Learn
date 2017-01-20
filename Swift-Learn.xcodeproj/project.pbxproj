@@ -14,6 +14,7 @@
 		E0147A6C1E2DC5F800B796FB /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A6B1E2DC5F800B796FB /* Species.swift */; };
 		E0147A9E1E303CA000B796FB /* NEATNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A9D1E303CA000B796FB /* NEATNetwork.swift */; };
 		E0276C0D1E281DD800B1994A /* ActivationFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0276C0C1E281DD800B1994A /* ActivationFunc.swift */; };
+		E0364B9F1E31BB39007DDAEC /* Evaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0364B9E1E31BB39007DDAEC /* Evaluation.swift */; };
 		E0AAD7A41E256984003C0EE9 /* Gene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAD7A31E256984003C0EE9 /* Gene.swift */; };
 		E0E87B441DF4057700D58DF9 /* Activation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B2F1DF4057700D58DF9 /* Activation.swift */; };
 		E0E87B451DF4057700D58DF9 /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B311DF4057700D58DF9 /* Addition.swift */; };
@@ -55,6 +56,7 @@
 		E0147A6B1E2DC5F800B796FB /* Species.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		E0147A9D1E303CA000B796FB /* NEATNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEATNetwork.swift; sourceTree = "<group>"; };
 		E0276C0C1E281DD800B1994A /* ActivationFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationFunc.swift; sourceTree = "<group>"; };
+		E0364B9E1E31BB39007DDAEC /* Evaluation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluation.swift; sourceTree = "<group>"; };
 		E0AAD7A31E256984003C0EE9 /* Gene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gene.swift; sourceTree = "<group>"; };
 		E0E1BC6D1DCE61F4009D9D5F /* Swift-Learn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Swift-Learn"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E87B2F1DF4057700D58DF9 /* Activation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activation.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				E0147A9D1E303CA000B796FB /* NEATNetwork.swift */,
 				E0147A691E2D6E7800B796FB /* Innovation.swift */,
 				E0147A6B1E2DC5F800B796FB /* Species.swift */,
+				E0364B9E1E31BB39007DDAEC /* Evaluation.swift */,
 			);
 			path = NEAT;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				E0E87B471DF4057700D58DF9 /* Division.swift in Sources */,
 				E0E87B4F1DF4057700D58DF9 /* Matrix.swift in Sources */,
 				E0E87B491DF4057700D58DF9 /* Multiplication.swift in Sources */,
+				E0364B9F1E31BB39007DDAEC /* Evaluation.swift in Sources */,
 				E0AAD7A41E256984003C0EE9 /* Gene.swift in Sources */,
 				E0E87B481DF4057700D58DF9 /* MaxMin.swift in Sources */,
 				E0147A6A1E2D6E7800B796FB /* Innovation.swift in Sources */,

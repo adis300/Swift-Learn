@@ -20,13 +20,48 @@ public class NEAT{
     
     public static var globalInnovationNumber: Int = 0
     
-    public static var ActivationFunctionSet = [ActivationFunc("sigmoid")]
+    public static var activationFunctionSet = [ActivationFunc("sigmoid")]
     
-    public static func Initialize(){
+    public static var evaluationFunction = EvaluationFunc("xortest")
+    
+    public static func initialize(){
+        
+        guard Parameter.isInitialized() && Parameter.isValid() else{
+            fatalError("Parameters must be initialized first.")
+        }
         
         // Clear out previous training history
         globalInnovationNumber = 0
         innovationTracker = [:]
+        
+        // initialize population
+        for i in 0 ..< Parameter.populationSize{
+            population.append(Genome(genomeId: i, speciesId: 0))
+        }
+        
+        // initialize slice of species with one species
+        species.append(Species(speciesId: 0, genome: population[0]))
+        
     }
+    
+    fileprivate init() {
+        NEAT.initialize()
+    }
+    
+    public static var population : [Genome] = [] // population of genomes
+    
+    public static var species: [Species] = []    // ordered list of species
+    
+    
+    public static func evaluate(){
+        population.forEach { (genome) in
+            genome.fitness = evaluationFunction.evaluate(genome)
+        }
+    }
+    
+    public static func speciate(){
+        
+    }
+    
 }
 
