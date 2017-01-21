@@ -108,9 +108,31 @@ print(network.weights)
 print("Trained biases:")
 print(network.biases)
  */
+
+
+// Genome implementation test
+Parameter.initialize(numberOfSensor: 3, numberOfOutput: 1)
+
+let g0 = Genome(genomeId: 0, speciesId: 0)
+for _ in 0...20 {
+    g0.mutate()
+}
+print("---------g0 status after mutation -------------")
+g0.status()
+
+let g1 = Genome(genomeId: 1, speciesId: 0)
+for _ in 0...5 {
+    g1.mutate()
+}
+print("---------g1 status after mutation -------------")
+g1.status()
+let g2 = g0.crossover(partner: g1, newGenomeId: 2)
+
+print("---------g2 child after crossover -------------")
+g2.status()
+
 // Test NEATNetwork
 print("=== Creating a Network ===")
-Parameter.initialize(numberOfSensor: 3, numberOfOutput: 1)
 NEAT.initialize()
 NEAT.evaluate()
 NEAT.population.forEach { (genome) in

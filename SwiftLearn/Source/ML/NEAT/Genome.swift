@@ -32,8 +32,6 @@ public class Genome {
         return Genome(genomeId: self.genomeId, speciesId: self.speciesId, nodes: self.nodes, connections: self.connections)
     }
     
-    
-    
     public init(genomeId:Int, speciesId: Int) {
         
         let numberOfNodes = Parameter.numberOfSensor + Parameter.numberOfOutput
@@ -202,7 +200,8 @@ public class Genome {
                 }
             }
         }
-        
+        child.maxInnovationNumber = largerMaxInnovation
+
         return child
     }
     
@@ -279,6 +278,10 @@ public class Genome {
                 
                 self.connections[innovationNumber!] = ConnGene(innovation: innovationNumber!, input: oldConn.input, output: newNode.nodeId, weight: 1)
                 
+                if innovationNumber! > maxInnovationNumber{
+                    maxInnovationNumber = innovationNumber!
+                }
+                
                 // The second new connection will have the same weight as the existing
                 // connection, in order to prevent sudden changes after the mutation, and
                 // will be connected from the new node to the out-node of the existing
@@ -295,6 +298,9 @@ public class Genome {
                 
                 self.connections[innovationNumber!] = ConnGene(innovation: innovationNumber!, input: newNode.nodeId, output: oldConn.output, weight: oldConn.weight)
                 
+                if innovationNumber! > maxInnovationNumber{
+                    maxInnovationNumber = innovationNumber!
+                }
                 // Switch off the old connection
                 oldConn.toggle()
             }
@@ -335,7 +341,29 @@ public class Genome {
             }
             
             connections[innovationNumber!] = ConnGene(innovation: innovationNumber!, input: inNode.nodeId, output: outNode.nodeId)
-
+            
+            if innovationNumber! > maxInnovationNumber{
+                maxInnovationNumber = innovationNumber!
+            }
+        }
+    }
+    
+    // status prints the current state of the genome, followed by the current global innovation number.
+    public func status(){
+        
+        print("Genome Status for: GenomeID: \(genomeId)")
+        print("Nodes:")
+        
+        for i in 0 ..< nodes.count {
+            if let node =  nodes[i]{
+                print("NODE_ID:\(node.nodeId), TYPE:\(node.nodeType), AFN:\(node.activationFunc.name)")
+            }
+        }
+        print("Connections:")
+        for i in 0 ... maxInnovationNumber {
+            if let conn =  connections[i]{
+                print("INNO_NUM:\(conn.innovation), DISABLED:\(conn.disabled), FROM:\(conn.input), TO:\(conn.output), WEIGHT:\(conn.weight)")
+            }
         }
     }
     
