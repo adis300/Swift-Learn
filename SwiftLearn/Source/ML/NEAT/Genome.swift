@@ -195,9 +195,11 @@ public class Genome {
         }
         
         // Deal with excess gene cross over
-        for i in (smallerMaxInnnovation + 1) ... largerMaxInnovation{
-            if let conn = larger.getConnection(innovationNumber: i) {
-                child.copyConnection(source: larger, connection: conn)
+        if largerMaxInnovation > smallerMaxInnnovation{
+            for i in (smallerMaxInnnovation + 1) ... largerMaxInnovation{
+                if let conn = larger.getConnection(innovationNumber: i) {
+                    child.copyConnection(source: larger, connection: conn)
+                }
             }
         }
         
