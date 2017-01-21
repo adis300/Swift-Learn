@@ -140,7 +140,7 @@ public class Parameter{
         params["populationSize"] = NSNumber(value:50)
         params["numberOfGeneration"] = NSNumber(value:50)
         params["survivalRate"] = NSNumber(value:0.2)
-        params["distanceThreshold"] = NSNumber(value:1.8)
+        params["distanceThreshold"] = NSNumber(value:1.2)
         params["dropoffAge"] = NSNumber(value:15)
         params["crossoverRate"] = NSNumber(value:0.2)
         params["mutateAddNodeRate"] = NSNumber(value:0.1)

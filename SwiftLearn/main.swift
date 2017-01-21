@@ -109,13 +109,32 @@ print("Trained biases:")
 print(network.biases)
  */
 // Test NEATNetwork
-print("=== Creating a Network ===\n")
+print("=== Creating a Network ===")
 Parameter.initialize(numberOfSensor: 3, numberOfOutput: 1)
 NEAT.initialize()
 NEAT.evaluate()
 NEAT.population.forEach { (genome) in
     print("Genome fitness: \(genome.fitness)")
 }
+
+print("=== Speciation Test ===")
+NEAT.speciate()
+NEAT.species.forEach { (niche) in
+    print("SPECIES:\(niche.speciesId)")
+    print("Representative: \(niche.representative)")
+}
+
+print("=== Fitness Sharing Test ===")
+NEAT.population.forEach { (genome) in
+    print("Genome fitness before sharing: \(genome.fitness)")
+}
+NEAT.species.forEach { (niche) in
+    niche.fitnessShare()
+}
+NEAT.population.forEach { (genome) in
+    print("Genome fitness after sharing: \(genome.fitness)")
+}
+
 
 
 

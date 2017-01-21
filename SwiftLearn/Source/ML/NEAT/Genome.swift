@@ -127,9 +127,11 @@ public class Genome {
         }
         
         // count excess genes
-        for i in (smallerMaxInnnovation + 1) ... largerMaxInnovation{
-            if larger.getConnection(innovationNumber: i) != nil {
-                numExcess += 1
+        if largerMaxInnovation > smallerMaxInnnovation{
+            for i in (smallerMaxInnnovation + 1) ... largerMaxInnovation{
+                if larger.getConnection(innovationNumber: i) != nil {
+                    numExcess += 1
+                }
             }
         }
         

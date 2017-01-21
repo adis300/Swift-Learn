@@ -60,7 +60,41 @@ public class NEAT{
     }
     
     public static func speciate(){
+        population.forEach { (genome) in
+            var addedToSpecies = false
+            for i in 0..<species.count{
+                if species[i].representative.distance(to: genome) < Parameter.distanceThreshold{
+                    species[i].addMember(genome: genome)
+                    addedToSpecies = true
+                    break
+                }
+            }
+            // If not added to existing species create a new species
+            if !addedToSpecies{
+                genome.speciesId = species.count
+                species.append(Species(speciesId: genome.speciesId, genome: genome))
+            }
+        }
         
+        // remove empty species
+        species = species.filter { (sp) -> Bool in
+            return sp.individuals.count > 0
+        }
+    }
+    
+    // Run executes NEAT algorithm.
+    public static func run(){
+        
+        for _ in 0 ..< Parameter.numberOfGeneration {
+            evaluate()
+            speciate()
+            
+            // crossover and fitness share
+            species.forEach({ (group) in
+                group.fitnessShare()
+                group.age += 1
+            })
+        }
     }
     
 }
