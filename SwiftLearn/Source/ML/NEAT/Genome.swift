@@ -28,8 +28,8 @@ public class Genome {
         
     }
     
-    public func copy() -> Genome{
-        return Genome(genomeId: self.genomeId, speciesId: self.speciesId, nodes: self.nodes, connections: self.connections)
+    public func copy(newGenomeId: Int) -> Genome{
+        return Genome(genomeId: newGenomeId, speciesId: self.speciesId, nodes: self.nodes, connections: self.connections)
     }
     
     public init(genomeId:Int, speciesId: Int) {
@@ -182,10 +182,22 @@ public class Genome {
                 }else if thatConn == nil{
                     child.copyConnection(source: self, connection: thisConn!)
                 }else{
+                    // Proper implementation of mutation by averaging weight
                     if Random.rand0To1() < 0.5{
-                        child.copyConnection(source: self, connection: thisConn!)
+                        if self.fitness > partner.fitness{
+                            child.copyConnection(source: self, connection: thisConn!)
+                        }else{
+                            child.copyConnection(source: partner, connection: thatConn!)
+                        }
                     }else{
-                        child.copyConnection(source: partner, connection: thatConn!)
+                        let probability = Random.rand0To1()
+                        if probability < 0.3333333334{
+                            child.copyConnection(source: self, connection: thisConn!)
+                        }else if probability < 0.6666666667{
+                            child.copyConnection(source: partner, connection: thatConn!)
+                        }else{
+                            child.copyConnectionAverageWeight(source: partner, connection: thatConn!, weight: thisConn!.weight + thatConn!.weight)
+                        }
                     }
                 }
             }
@@ -217,6 +229,25 @@ public class Genome {
             self.nodes[connection.input] = source.getNode(nodeId: connection.input)
         }
 
+        if self.getNode(nodeId: connection.output) == nil {
+            self.nodes[connection.output] = source.getNode(nodeId: connection.output)
+        }
+    }
+    
+    // copyConn is a helper function of Crossover which copies a connection from
+    // other genome to this genome, and nodes that are connected by this
+    // connection, accordingly.
+    public func copyConnectionAverageWeight(source:Genome, connection: ConnGene, weight: Double){
+        if self.getConnection(innovationNumber: connection.innovation) == nil{
+            let newConnection = connection.copy()
+            newConnection.weight = weight
+            self.connections[connection.innovation] = newConnection
+        }
+        
+        if self.getNode(nodeId: connection.input) == nil {
+            self.nodes[connection.input] = source.getNode(nodeId: connection.input)
+        }
+        
         if self.getNode(nodeId: connection.output) == nil {
             self.nodes[connection.output] = source.getNode(nodeId: connection.output)
         }

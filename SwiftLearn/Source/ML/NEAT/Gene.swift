@@ -98,6 +98,11 @@ public class ConnGene:Comparable,Equatable{
         if Random.rand0To1() < Parameter.mutateWeightRate {
             weight += Random.normalRandom()
         }
+        if disabled{
+            if Random.rand0To1() < Parameter.enableConnectionRate{
+                toggle()
+            }
+        }
     }
     
     public func toggle(){

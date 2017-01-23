@@ -108,6 +108,28 @@ public class Species{
         }
     }
     
+    public func breadChild() -> Genome {
+        let child: Genome
+        let g0Ind = Random.randN(n: individuals.count)
+        let g0 = individuals[g0Ind]
+        if Random.rand0To1() < Parameter.crossoverRate {
+            let g1Ind = Random.randN(n: individuals.count)
+            
+            // if g0Ind != g1Ind{   // skip checking of same genome crossing over
+            let g1 = individuals[g1Ind]
+            child = g0.crossover(partner: g1, newGenomeId: individuals.count)
+            addMember(genome: child)
+            return child
+        }
+        
+        child = g0.copy(newGenomeId: individuals.count)
+        child.mutate()
+
+        addMember(genome: child)
+        return child
+    }
+
+    
     // sh implements a part of the explicit fitness sharing function, sh.
     // If a compatibility distance 'd' is larger than the compatibility
     // threshold 'dt', return 0; otherwise, return 1.
@@ -117,5 +139,6 @@ public class Species{
         }
         return true
     }
+    
     
 }

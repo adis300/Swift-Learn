@@ -110,7 +110,7 @@ print(network.biases)
  */
 
 
-// Genome implementation test
+// Test Genome implementation 
 Parameter.initialize(numberOfSensor: 3, numberOfOutput: 1)
 
 let g0 = Genome(genomeId: 0, speciesId: 0)

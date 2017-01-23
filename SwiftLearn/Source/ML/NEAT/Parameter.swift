@@ -38,6 +38,7 @@ public class Parameter{
     
     // Optional parameters
     public static var largeGenomeSizeThreshold: Int = 1  // Marks if N should be used when computing the genome distances 
+    public static var enableConnectionRate: Double = 0.01  // Re-enables a connection
     
     // Static initializer
     public static func initialize(params: [String: Any]){
@@ -130,6 +131,10 @@ public class Parameter{
             largeGenomeSizeThreshold = threshold.intValue
         }
         
+        if let enableConnRate = params["enableConnectionRate"] as? NSNumber{
+            enableConnectionRate = enableConnRate.doubleValue
+        }
+        
         initialized = true
     }
     
@@ -142,13 +147,14 @@ public class Parameter{
         params["survivalRate"] = NSNumber(value:0.2)
         params["distanceThreshold"] = NSNumber(value:1.2)
         params["dropoffAge"] = NSNumber(value:15)
-        params["crossoverRate"] = NSNumber(value:0.2)
+        params["crossoverRate"] = NSNumber(value:0.25)
         params["mutateAddNodeRate"] = NSNumber(value:0.1)
         params["mutateAddConnectionRate"] = NSNumber(value:0.1)
         params["mutateWeightRate"] = NSNumber(value:0.1)
         params["coeffExcess"] = NSNumber(value:1.0)
         params["coeffDisjoint"] = NSNumber(value:1.0)
         params["coeffWeight"] = NSNumber(value:2.0)
+        // Optionals
 
         initialize(params: params)
     }
