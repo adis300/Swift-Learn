@@ -398,4 +398,8 @@ public class Genome {
         }
     }
     
+    public func evaluate(){
+        self.fitness = NEAT.evaluationFunction.evaluate(self)
+    }
+    
 }

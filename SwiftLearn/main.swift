@@ -134,13 +134,12 @@ g2.status()
 // Test NEATNetwork
 print("=== Creating a Network ===")
 NEAT.initialize()
-NEAT.evaluate()
+/*
 NEAT.population.forEach { (genome) in
     print("Genome fitness: \(genome.fitness)")
 }
 
 print("=== Speciation Test ===")
-NEAT.speciate()
 NEAT.species.forEach { (niche) in
     print("SPECIES:\(niche.speciesId)")
     print("Representative: \(niche.representative)")
@@ -156,6 +155,10 @@ NEAT.species.forEach { (niche) in
 NEAT.population.forEach { (genome) in
     print("Genome fitness after sharing: \(genome.fitness)")
 }
+ */
+NEAT.run()
+
+print("Champion fitness for XOR test is: \(NEAT.evaluationFunction.evaluate(NEAT.globalChampion))")
 
 
 

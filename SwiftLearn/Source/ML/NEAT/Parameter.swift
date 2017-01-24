@@ -143,7 +143,7 @@ public class Parameter{
         params["numberOfSensor"] = NSNumber(value:numberOfSensor)
         params["numberOfOutput"] = NSNumber(value:numberOfOutput)
         params["populationSize"] = NSNumber(value:50)
-        params["numberOfGeneration"] = NSNumber(value:50)
+        params["numberOfGeneration"] = NSNumber(value:200)
         params["survivalRate"] = NSNumber(value:0.2)
         params["distanceThreshold"] = NSNumber(value:1.2)
         params["dropoffAge"] = NSNumber(value:15)
@@ -161,7 +161,7 @@ public class Parameter{
     
     public static func isValid() -> Bool{
         // TODO: Implement parameter is valid function
-        return true
+        return initialized && true
     }
     
     public static func isInitialized() -> Bool{

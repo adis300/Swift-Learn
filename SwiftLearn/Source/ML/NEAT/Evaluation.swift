@@ -57,7 +57,7 @@ public class EvaluationFunc{
 
         score += pow((outputs[0] - 0.0), 2.0)
         
-        return score
+        return 4.0 - score
     }
     
 }
