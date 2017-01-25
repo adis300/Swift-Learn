@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0A52B201E383D2200234657 /* ActivationFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B161E383D2200234657 /* ActivationFunc.swift */; };
+		E0A52B211E383D2200234657 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B171E383D2200234657 /* Connection.swift */; };
+		E0A52B221E383D2200234657 /* Evaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B181E383D2200234657 /* Evaluation.swift */; };
+		E0A52B231E383D2200234657 /* Genome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B191E383D2200234657 /* Genome.swift */; };
+		E0A52B241E383D2200234657 /* Innovation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B1A1E383D2200234657 /* Innovation.swift */; };
+		E0A52B251E383D2200234657 /* NEAT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B1B1E383D2200234657 /* NEAT.swift */; };
+		E0A52B261E383D2200234657 /* NEATNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B1C1E383D2200234657 /* NEATNetwork.swift */; };
+		E0A52B271E383D2200234657 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B1D1E383D2200234657 /* Node.swift */; };
+		E0A52B281E383D2200234657 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B1E1E383D2200234657 /* Parameter.swift */; };
+		E0A52B291E383D2200234657 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B1F1E383D2200234657 /* Species.swift */; };
 		E0E87ACE1DF3E96E00D58DF9 /* SwiftLearn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E87AC41DF3E96E00D58DF9 /* SwiftLearn.framework */; };
 		E0E87AD51DF3E96E00D58DF9 /* SwiftLearn.h in Headers */ = {isa = PBXBuildFile; fileRef = E0E87AC71DF3E96E00D58DF9 /* SwiftLearn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E0E87AF51DF3E98D00D58DF9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87ADE1DF3E98D00D58DF9 /* main.swift */; };
@@ -47,6 +57,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E0A52B161E383D2200234657 /* ActivationFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationFunc.swift; sourceTree = "<group>"; };
+		E0A52B171E383D2200234657 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		E0A52B181E383D2200234657 /* Evaluation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluation.swift; sourceTree = "<group>"; };
+		E0A52B191E383D2200234657 /* Genome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genome.swift; sourceTree = "<group>"; };
+		E0A52B1A1E383D2200234657 /* Innovation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Innovation.swift; sourceTree = "<group>"; };
+		E0A52B1B1E383D2200234657 /* NEAT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEAT.swift; sourceTree = "<group>"; };
+		E0A52B1C1E383D2200234657 /* NEATNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEATNetwork.swift; sourceTree = "<group>"; };
+		E0A52B1D1E383D2200234657 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		E0A52B1E1E383D2200234657 /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
+		E0A52B1F1E383D2200234657 /* Species.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		E0E87AC41DF3E96E00D58DF9 /* SwiftLearn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftLearn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E87AC71DF3E96E00D58DF9 /* SwiftLearn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLearn.h; sourceTree = "<group>"; };
 		E0E87AC81DF3E96E00D58DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +120,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E0A52B141E383D2200234657 /* ML */ = {
+			isa = PBXGroup;
+			children = (
+				E0A52B151E383D2200234657 /* NEAT */,
+			);
+			path = ML;
+			sourceTree = "<group>";
+		};
+		E0A52B151E383D2200234657 /* NEAT */ = {
+			isa = PBXGroup;
+			children = (
+				E0A52B161E383D2200234657 /* ActivationFunc.swift */,
+				E0A52B171E383D2200234657 /* Connection.swift */,
+				E0A52B181E383D2200234657 /* Evaluation.swift */,
+				E0A52B191E383D2200234657 /* Genome.swift */,
+				E0A52B1A1E383D2200234657 /* Innovation.swift */,
+				E0A52B1B1E383D2200234657 /* NEAT.swift */,
+				E0A52B1C1E383D2200234657 /* NEATNetwork.swift */,
+				E0A52B1D1E383D2200234657 /* Node.swift */,
+				E0A52B1E1E383D2200234657 /* Parameter.swift */,
+				E0A52B1F1E383D2200234657 /* Species.swift */,
+			);
+			path = NEAT;
+			sourceTree = "<group>";
+		};
 		E0E87ABA1DF3E96E00D58DF9 = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +191,7 @@
 		E0E87ADF1DF3E98D00D58DF9 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				E0A52B141E383D2200234657 /* ML */,
 				E0E87AE11DF3E98D00D58DF9 /* Arithmetic */,
 				E0E87AEA1DF3E98D00D58DF9 /* Extension */,
 				E0E87AEE1DF3E98D00D58DF9 /* NeuralNetwork */,
@@ -315,11 +361,21 @@
 			files = (
 				E0E87AF51DF3E98D00D58DF9 /* main.swift in Sources */,
 				E0E87AFB1DF3E98D00D58DF9 /* Multiplication.swift in Sources */,
+				E0A52B261E383D2200234657 /* NEATNetwork.swift in Sources */,
 				E0E87AFC1DF3E98D00D58DF9 /* Subtraction.swift in Sources */,
 				E0E87B051DF3E98D00D58DF9 /* Random.swift in Sources */,
+				E0A52B271E383D2200234657 /* Node.swift in Sources */,
 				E0E87B041DF3E98D00D58DF9 /* Power.swift in Sources */,
+				E0A52B251E383D2200234657 /* NEAT.swift in Sources */,
+				E0A52B291E383D2200234657 /* Species.swift in Sources */,
 				E0E87B011DF3E98D00D58DF9 /* Matrix.swift in Sources */,
+				E0A52B231E383D2200234657 /* Genome.swift in Sources */,
+				E0A52B241E383D2200234657 /* Innovation.swift in Sources */,
+				E0A52B201E383D2200234657 /* ActivationFunc.swift in Sources */,
+				E0A52B281E383D2200234657 /* Parameter.swift in Sources */,
+				E0A52B211E383D2200234657 /* Connection.swift in Sources */,
 				E0E87AFA1DF3E98D00D58DF9 /* MaxMin.swift in Sources */,
+				E0A52B221E383D2200234657 /* Evaluation.swift in Sources */,
 				E0E87B031DF3E98D00D58DF9 /* Network.swift in Sources */,
 				E0E87AF81DF3E98D00D58DF9 /* Arithmetic.swift in Sources */,
 				E0E87AFE1DF3E98D00D58DF9 /* Err.swift in Sources */,
@@ -402,6 +458,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -447,6 +504,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
