@@ -8,17 +8,18 @@
 
 import Foundation
 
-// NEATSet returns a set of activation functions that are used in
-// general NEAT algorithm, which only includes Sigmoid function.
-public var NEATSet:[ActivationFunc] = [ActivationFunc("sigmoid")]
-
-// CPPNSet returns a set of activation functions that are used in
-// CPPN-NEAT algorithm, which includes all provided types of activation
-// functions, except for Gaussian function, which can be further added
-// by the user.
-public var CPPNSet:[ActivationFunc] = [ActivationFunc("tanh"), ActivationFunc("sin"), ActivationFunc("cos"), ActivationFunc("sigmoid"), ActivationFunc("relu"), ActivationFunc("log"), ActivationFunc("exp"), ActivationFunc("abs"), ActivationFunc("square"), ActivationFunc("cube")]
-
 public class ActivationFunc {
+    
+    // CPPNSet returns a set of activation functions that are used in
+    // CPPN-NEAT algorithm, which includes all provided types of activation
+    // functions, except for Gaussian function, which can be further added
+    // by the user.
+    public static var CPPNSet:[ActivationFunc] = [ActivationFunc("tanh"), ActivationFunc("sin"), ActivationFunc("cos"), ActivationFunc("sigmoid"), ActivationFunc("relu"), ActivationFunc("log"), ActivationFunc("exp"), ActivationFunc("abs"), ActivationFunc("square"), ActivationFunc("cube")]
+    
+    // NEATSet returns a set of activation functions that are used in
+    // general NEAT algorithm, which only includes Sigmoid function.
+    public static var NEATSet:[ActivationFunc] = [ActivationFunc("sigmoid")]
+
     public var name:String
     public let function: (Double) -> Double
     

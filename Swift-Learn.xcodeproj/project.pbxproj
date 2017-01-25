@@ -15,7 +15,8 @@
 		E0147A9E1E303CA000B796FB /* NEATNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0147A9D1E303CA000B796FB /* NEATNetwork.swift */; };
 		E0276C0D1E281DD800B1994A /* ActivationFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0276C0C1E281DD800B1994A /* ActivationFunc.swift */; };
 		E0364B9F1E31BB39007DDAEC /* Evaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0364B9E1E31BB39007DDAEC /* Evaluation.swift */; };
-		E0AAD7A41E256984003C0EE9 /* Gene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAD7A31E256984003C0EE9 /* Gene.swift */; };
+		E0A52B111E38318F00234657 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B101E38318F00234657 /* Node.swift */; };
+		E0A52B131E3831CA00234657 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A52B121E3831CA00234657 /* Connection.swift */; };
 		E0E87B441DF4057700D58DF9 /* Activation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B2F1DF4057700D58DF9 /* Activation.swift */; };
 		E0E87B451DF4057700D58DF9 /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B311DF4057700D58DF9 /* Addition.swift */; };
 		E0E87B461DF4057700D58DF9 /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E87B321DF4057700D58DF9 /* Arithmetic.swift */; };
@@ -57,7 +58,8 @@
 		E0147A9D1E303CA000B796FB /* NEATNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEATNetwork.swift; sourceTree = "<group>"; };
 		E0276C0C1E281DD800B1994A /* ActivationFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationFunc.swift; sourceTree = "<group>"; };
 		E0364B9E1E31BB39007DDAEC /* Evaluation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluation.swift; sourceTree = "<group>"; };
-		E0AAD7A31E256984003C0EE9 /* Gene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gene.swift; sourceTree = "<group>"; };
+		E0A52B101E38318F00234657 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		E0A52B121E3831CA00234657 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		E0E1BC6D1DCE61F4009D9D5F /* Swift-Learn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Swift-Learn"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E87B2F1DF4057700D58DF9 /* Activation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activation.swift; sourceTree = "<group>"; };
 		E0E87B311DF4057700D58DF9 /* Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Addition.swift; sourceTree = "<group>"; };
@@ -101,7 +103,8 @@
 		E0AAD7A21E256961003C0EE9 /* NEAT */ = {
 			isa = PBXGroup;
 			children = (
-				E0AAD7A31E256984003C0EE9 /* Gene.swift */,
+				E0A52B101E38318F00234657 /* Node.swift */,
+				E0A52B121E3831CA00234657 /* Connection.swift */,
 				E0276C0C1E281DD800B1994A /* ActivationFunc.swift */,
 				E0147A631E2C804600B796FB /* Genome.swift */,
 				E0147A651E2C80C100B796FB /* Parameter.swift */,
@@ -267,7 +270,6 @@
 				E0E87B4F1DF4057700D58DF9 /* Matrix.swift in Sources */,
 				E0E87B491DF4057700D58DF9 /* Multiplication.swift in Sources */,
 				E0364B9F1E31BB39007DDAEC /* Evaluation.swift in Sources */,
-				E0AAD7A41E256984003C0EE9 /* Gene.swift in Sources */,
 				E0E87B481DF4057700D58DF9 /* MaxMin.swift in Sources */,
 				E0147A6A1E2D6E7800B796FB /* Innovation.swift in Sources */,
 				E0E87B451DF4057700D58DF9 /* Addition.swift in Sources */,
@@ -275,6 +277,8 @@
 				E0E87B511DF4057700D58DF9 /* Network.swift in Sources */,
 				E0E87B551DF4057700D58DF9 /* Vector.swift in Sources */,
 				E0E87B501DF4057700D58DF9 /* LabeledData.swift in Sources */,
+				E0A52B131E3831CA00234657 /* Connection.swift in Sources */,
+				E0A52B111E38318F00234657 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

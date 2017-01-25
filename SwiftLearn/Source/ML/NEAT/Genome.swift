@@ -54,13 +54,14 @@ public class Genome {
         self.speciesId = speciesId
         
         for i in 0..<Parameter.numberOfSensor{
-            nodes[i] = NodeGene(nodeId:i, nodeType:.sensor, activationFunc: ActivationFunc("identity"))
+            // TODO: Implement selecting random activation function from the function set
+            nodes[i] = NodeGene(nodeId:i, nodeType:.sensor, activationFunc: NEAT.activationFunctionSet[0])
         }
         // nodes = (0..<Parameter.numberOfSensor).map{NodeGene(nodeId:$0, nodeType:.sensor, activationFunc: ActivationFunc("identity"))}
         
         for i in Parameter.numberOfSensor..<numberOfNodes{
             
-            let node = NodeGene(nodeId:i, nodeType:.output, activationFunc: ActivationFunc("sigmoid"))
+            let node = NodeGene(nodeId:i, nodeType:.output, activationFunc: NEAT.activationFunctionSet[0])
             nodes[i] = node
             
             for j in 0 ..< Parameter.numberOfSensor{
@@ -297,6 +298,7 @@ public class Genome {
                 let oldConn = Array(connections.values)[Random.randN(n: connections.count)]
                 if !oldConn.disabled{
                     // Create a new node that will be placed between a connection
+                                        
                     let newNode = NodeGene(nodeId: nodes.count, nodeType: .hidden, activationFunc: ActivationFunc.randomActivationFunc(set: NEAT.activationFunctionSet))
                     
                     guard self.nodes[newNode.nodeId] == nil else{
