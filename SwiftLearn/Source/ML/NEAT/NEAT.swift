@@ -115,6 +115,13 @@ public class NEAT{
             // Preserve the species that has the champion
             return group.isHealthy() || group.speciesId == NEAT.globalChampion.speciesId
         })
+        
+        species.sort(by:{ $0.fitness() > $1.fitness() })
+        
+        let survived = Int((Double(species.count) * Parameter.speciesSurvivalRate) + 0.5)
+        
+        species = Array(species[0..<survived])
+        
     }
     
     // Run executes NEAT algorithm.
@@ -132,6 +139,8 @@ public class NEAT{
             removeStaleSpecies()
             // Compute total average fitness for next round and find the global champion
             computeTotalAverageFitness()
+            
+            print("NEAT: Species count: \(species.count)")
         }
         
         // TODO: Finally find global champion and save as json

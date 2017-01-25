@@ -39,7 +39,29 @@ public class Parameter{
     // Optional parameters
     public static var largeGenomeSizeThreshold: Int = 1  // Marks if N should be used when computing the genome distances 
     public static var enableConnectionRate: Double = 0.08  // Re-enables a connection
-    public static var maxStagnation: Int = 10
+    public static var maxStagnation: Int = 3
+    public static var speciesSurvivalRate: Double = 0.8
+    
+    public static func initialize(numberOfSensor: Int, numberOfOutput:Int){
+        var params:[String: NSNumber] = [:]
+        params["numberOfSensor"] = NSNumber(value:numberOfSensor)
+        params["numberOfOutput"] = NSNumber(value:numberOfOutput)
+        params["populationSize"] = NSNumber(value:50)
+        params["numberOfGeneration"] = NSNumber(value:250)
+        params["survivalRate"] = NSNumber(value:0.1)
+        params["distanceThreshold"] = NSNumber(value:2.5)
+        params["dropoffAge"] = NSNumber(value:15)
+        params["crossoverRate"] = NSNumber(value:0.1)
+        params["mutateAddNodeRate"] = NSNumber(value:0.1)
+        params["mutateAddConnectionRate"] = NSNumber(value:0.1)
+        params["mutateWeightRate"] = NSNumber(value:0.1)
+        params["coeffExcess"] = NSNumber(value:1.0)
+        params["coeffDisjoint"] = NSNumber(value:1.0)
+        params["coeffWeight"] = NSNumber(value:2.0)
+        // Optionals
+        
+        initialize(params: params)
+    }
     
     // Static initializer
     public static func initialize(params: [String: Any]){
@@ -141,27 +163,6 @@ public class Parameter{
         }
         
         initialized = true
-    }
-    
-    public static func initialize(numberOfSensor: Int, numberOfOutput:Int){
-        var params:[String: NSNumber] = [:]
-        params["numberOfSensor"] = NSNumber(value:numberOfSensor)
-        params["numberOfOutput"] = NSNumber(value:numberOfOutput)
-        params["populationSize"] = NSNumber(value:50)
-        params["numberOfGeneration"] = NSNumber(value:15)
-        params["survivalRate"] = NSNumber(value:0.2)
-        params["distanceThreshold"] = NSNumber(value:1.2)
-        params["dropoffAge"] = NSNumber(value:15)
-        params["crossoverRate"] = NSNumber(value:0.1)
-        params["mutateAddNodeRate"] = NSNumber(value:0.05)
-        params["mutateAddConnectionRate"] = NSNumber(value:0.1)
-        params["mutateWeightRate"] = NSNumber(value:0.1)
-        params["coeffExcess"] = NSNumber(value:1.0)
-        params["coeffDisjoint"] = NSNumber(value:1.0)
-        params["coeffWeight"] = NSNumber(value:2.0)
-        // Optionals
-
-        initialize(params: params)
     }
     
     public static func isValid() -> Bool{

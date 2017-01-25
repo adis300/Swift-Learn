@@ -38,6 +38,13 @@ public class Species{
         self.individuals = [genome]
     }
     
+    public func fitness() -> Double{
+        if let fit = previousFitness.last{
+            return fit
+        }
+        return -1.0
+    }
+    
     fileprivate func isEmpty() -> Bool{
         return self.individuals.count == 0
     }
@@ -117,7 +124,7 @@ public class Species{
     // previous and current average fitnesses; this function call also updates its
     // previous average fitness to the current fitness.
     fileprivate func isStagnant() -> Bool {
-        return stagnation > 0
+        return stagnation > Parameter.maxStagnation
         /*
         if previousFitness.count > 1{
             if previousFitness[previousFitness.count-1] < previousFitness[previousFitness.count - 2]{
