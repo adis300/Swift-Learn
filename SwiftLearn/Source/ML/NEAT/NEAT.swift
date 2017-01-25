@@ -25,7 +25,7 @@ public class NEAT{
     
     public static var totalAverageFitness: Double = 0.0
     
-    public static var activationFunctionSet = [ActivationFunc("sigmoid")]
+    public static var activationFunctionSet = CPPNSet
     
     public static var evaluationFunction = EvaluationFunc("xortest")
     

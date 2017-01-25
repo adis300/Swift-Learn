@@ -21,6 +21,7 @@ public class Species{
     public var maxFitness: Double
     public var representative: Genome       // species representative
     fileprivate var individuals: [Genome]  // genomes in this species
+    fileprivate var stagnation: Int = 0
     
     public var speciesGenomeId: Int
     
@@ -97,8 +98,17 @@ public class Species{
                 fitnessSum += individual.fitness
             }
             
-            previousFitness.append(fitnessSum / Double(individuals.count))
+            let avgFitness = fitnessSum / Double(individuals.count)
+            if let lastFitness = previousFitness.last{
+                if avgFitness < lastFitness{
+                    stagnation += 1
+                }else{
+                    stagnation = 0
+                }
+            }
+            previousFitness.append(avgFitness)
         }else{
+            stagnation += 1
             previousFitness[previousFitness.count - 1] = -1
         }
     }
@@ -107,13 +117,15 @@ public class Species{
     // previous and current average fitnesses; this function call also updates its
     // previous average fitness to the current fitness.
     fileprivate func isStagnant() -> Bool {
-        
+        return stagnation > 0
+        /*
         if previousFitness.count > 1{
             if previousFitness[previousFitness.count-1] < previousFitness[previousFitness.count - 2]{
                 return true
             }
         }
         return false
+         */
     }
     
     public func isHealthy() -> Bool{
@@ -123,6 +135,8 @@ public class Species{
     // TODO: Implement adjusted fitness function with age panelty
     // FitnessShare computes and assigns the shared fitness of genomes via explicit fitness sharing.
     public func fitnessShare() {
+        
+        /*
         var adjusted: [Int:Double] = [:]
         
         for g0 in self.individuals{
@@ -141,7 +155,7 @@ public class Species{
             if let adjustment = adjusted[individual.genomeId]{
                 individual.fitness = adjustment
             }
-        }
+        }*/
     }
     
     public func nextGeneration(){
