@@ -19,6 +19,43 @@ public class Genome {
     
     public var maxInnovationNumber = 0
     
+    public init(jsonData: Data) {
+        
+        precondition(jsonData.count > 1, "Unable to initialize genome with empty data")
+        
+        do {
+            
+            let decoded = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
+            
+            self.genomeId = decoded["genomeId"] as! Int
+            self.speciesId = decoded["speciesId"] as! Int
+            self.fitness = decoded["fitness"] as! Double
+            
+            let decodedNodes = decoded["nodes"] as![[String: Any]]
+            
+            decodedNodes.forEach({ (nodeDict) in
+                let nodeId = nodeDict["nodeId"] as! Int
+                let nodeType = nodeDict["nodeType"] as! String
+                let activationFunc = nodeDict["activationFunc"] as! String
+                nodes[nodeId] = NodeGene(nodeId: nodeId, nodeType: NodeType(rawValue: nodeType)!, activationFunc: ActivationFunc(activationFunc))
+            })
+            
+            let decodedConnections = decoded["connections"] as![[String: Any]]
+            decodedConnections.forEach({ (connDict) in
+                let innovation = connDict["innovation"] as! Int
+                let input = connDict["input"] as! Int
+                let output = connDict["output"] as! Int
+                let weight = connDict["weight"] as! Double
+                connections[innovation] = ConnGene(innovation: innovation, input: input, output: output, weight: weight)
+            })
+            
+        } catch {
+            print(error.localizedDescription)
+            fatalError("ERROR: Unable to properly deserialize json data into a genome")
+        }
+        
+    }
+    
     public init(genomeId:Int, speciesId: Int, nodes: [Int: NodeGene], connections: [Int: ConnGene]){
         
         self.genomeId = genomeId
@@ -414,6 +451,40 @@ public class Genome {
     
     public func evaluate(){
         self.fitness = NEAT.evaluationFunction.evaluate(self)
+    }
+    
+    
+    // Convert genome into a json format in order to be saved to a file
+    public func toJson(verbose: Bool = false) -> Data{
+        // initialize json dict with useless meta data
+        var dict: [String: Any] = ["genomeId": genomeId, "speciesId": speciesId, "fitness": fitness]
+
+        // Map all nodes
+        dict["nodes"] = nodes.sorted(by: { $0.key < $1.key })
+            .map{ (nodeId,node) in
+                return ["nodeId": nodeId, "nodeType": node.nodeType.rawValue, "activationFunc": node.activationFunc.name]
+            }
+        // Map all connections
+        let connectionCopy: [(Int, ConnGene)]
+        if verbose{
+            connectionCopy = connections.sorted(by: { $0.key < $1.key })
+            // filter{ _,_ in true }
+        }else{
+            connectionCopy = connections.filter { !$0.value.disabled }
+                .sorted(by: { $0.key < $1.key })
+        }
+        
+        dict["connections"] = connectionCopy.map{ (innovationNum,connection) in
+            return ["innovation": innovationNum, "input": connection.input, "output": connection.output, "weight": connection.weight, "disabled": connection.disabled]
+        }
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
+            return jsonData
+        }catch{
+            print(error.localizedDescription)
+            return Data()
+        }
     }
     
 }

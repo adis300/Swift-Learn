@@ -159,6 +159,10 @@ NEAT.population.forEach { (genome) in
 NEAT.run()
 
 print("Champion fitness for XOR test is: \(NEAT.evaluationFunction.evaluate(NEAT.globalChampion))")
+let jsonData = NEAT.globalChampion.toJson()
+print(String(data: jsonData, encoding: .utf8))
+let newGenome = Genome(jsonData: jsonData)
+print("New genome fitness for XOR test is: \(NEAT.evaluationFunction.evaluate(newGenome))")
 
 
 

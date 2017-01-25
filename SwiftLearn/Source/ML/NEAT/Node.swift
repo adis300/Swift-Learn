@@ -12,10 +12,10 @@ import Foundation
 // Each node includes a node ID (NID), a node type (NType), and
 // a pointer to an activation function.
 
-public enum NodeType{
-    case output
-    case sensor
-    case hidden
+public enum NodeType: String{
+    case sensor = "sensor"
+    case output = "output"
+    case hidden = "hidden"
 }
 
 // Neuron cell equivalent

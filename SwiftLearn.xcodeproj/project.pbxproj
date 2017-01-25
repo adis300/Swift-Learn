@@ -132,13 +132,13 @@
 			isa = PBXGroup;
 			children = (
 				E0A52B161E383D2200234657 /* ActivationFunc.swift */,
+				E0A52B1D1E383D2200234657 /* Node.swift */,
 				E0A52B171E383D2200234657 /* Connection.swift */,
 				E0A52B181E383D2200234657 /* Evaluation.swift */,
 				E0A52B191E383D2200234657 /* Genome.swift */,
 				E0A52B1A1E383D2200234657 /* Innovation.swift */,
 				E0A52B1B1E383D2200234657 /* NEAT.swift */,
 				E0A52B1C1E383D2200234657 /* NEATNetwork.swift */,
-				E0A52B1D1E383D2200234657 /* Node.swift */,
 				E0A52B1E1E383D2200234657 /* Parameter.swift */,
 				E0A52B1F1E383D2200234657 /* Species.swift */,
 			);
