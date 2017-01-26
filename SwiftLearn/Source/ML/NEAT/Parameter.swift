@@ -47,7 +47,7 @@ public class Parameter{
         params["numberOfSensor"] = NSNumber(value:numberOfSensor)
         params["numberOfOutput"] = NSNumber(value:numberOfOutput)
         params["populationSize"] = NSNumber(value:50)
-        params["numberOfGeneration"] = NSNumber(value:250)
+        params["numberOfGeneration"] = NSNumber(value:200)
         params["survivalRate"] = NSNumber(value:0.1)
         params["distanceThreshold"] = NSNumber(value:2.5)
         params["dropoffAge"] = NSNumber(value:15)

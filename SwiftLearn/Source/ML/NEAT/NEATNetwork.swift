@@ -42,8 +42,11 @@ public class NEATNetwork{
     
     fileprivate var nodes: [Int: Node] = [:]
     
+    fileprivate var maxNodeId:Int
+    
     public init(genome: Genome) {
         
+        maxNodeId = genome.maxNodeId
         genome.nodes.values.forEach { (nodeGene) in
             nodes[nodeGene.nodeId] = Node(gene: nodeGene)
         }
@@ -73,8 +76,15 @@ public class NEATNetwork{
         let h = Parameter.numberOfSensor + Parameter.numberOfOutput
         
         // Activate hidden neurons
-        for i in h ..< self.nodes.count{
-            _ = self.nodes[i]!.output()
+        if h <= maxNodeId{
+            for i in h ... maxNodeId{
+                if let node = self.nodes[i]{
+                    _ = node.output()
+                }
+                /*else{
+                 print("Skipped node id")
+                 }*/
+            }
         }
         
         var outputs:[Double] = []

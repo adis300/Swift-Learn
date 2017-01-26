@@ -19,6 +19,8 @@ public class Genome {
     
     public var maxInnovationNumber = 0
     
+    var maxNodeId:Int = 0
+    
     public init(jsonData: Data) {
         
         precondition(jsonData.count > 1, "Unable to initialize genome with empty data")
@@ -27,6 +29,7 @@ public class Genome {
             
             let decoded = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
             
+            self.maxNodeId = decoded["maxNodeId"] as! Int
             self.genomeId = decoded["genomeId"] as! Int
             self.speciesId = decoded["speciesId"] as! Int
             self.fitness = decoded["fitness"] as! Double
@@ -35,6 +38,9 @@ public class Genome {
             
             decodedNodes.forEach({ (nodeDict) in
                 let nodeId = nodeDict["nodeId"] as! Int
+                if nodeId > maxNodeId{
+                    maxNodeId = nodeId
+                }
                 let nodeType = nodeDict["nodeType"] as! String
                 let activationFunc = nodeDict["activationFunc"] as! String
                 nodes[nodeId] = NodeGene(nodeId: nodeId, nodeType: NodeType(rawValue: nodeType)!, activationFunc: ActivationFunc(activationFunc))
@@ -61,6 +67,9 @@ public class Genome {
         self.genomeId = genomeId
         self.speciesId = speciesId
         nodes.forEach { (key, value) in
+            if key > maxNodeId{
+                maxNodeId = key
+            }
             self.nodes[key] = value.copy()
         }
         
@@ -98,6 +107,7 @@ public class Genome {
         
         for i in Parameter.numberOfSensor..<numberOfNodes{
             
+            // Set up output node
             let node = NodeGene(nodeId:i, nodeType:.output, activationFunc: NEAT.activationFunctionSet[0])
             nodes[i] = node
             
@@ -120,6 +130,7 @@ public class Genome {
                 connections[innovationNumber!] = ConnGene(innovation: innovationNumber!, input: nodes[j]!.nodeId, output: node.nodeId)
             }
         }
+        maxNodeId = numberOfNodes - 1
     }
     
     public func getNode(nodeId: Int) -> NodeGene?{
@@ -276,10 +287,16 @@ public class Genome {
 
         if self.getNode(nodeId: connection.input) == nil {
             self.nodes[connection.input] = source.getNode(nodeId: connection.input)
+            if connection.input > maxNodeId{
+                maxNodeId = connection.input
+            }
         }
 
         if self.getNode(nodeId: connection.output) == nil {
             self.nodes[connection.output] = source.getNode(nodeId: connection.output)
+            if connection.output > maxNodeId {
+                maxNodeId = connection.output
+            }
         }
     }
     
@@ -295,10 +312,16 @@ public class Genome {
         
         if self.getNode(nodeId: connection.input) == nil {
             self.nodes[connection.input] = source.getNode(nodeId: connection.input)
+            if connection.input > maxNodeId{
+                maxNodeId = connection.input
+            }
         }
         
         if self.getNode(nodeId: connection.output) == nil {
             self.nodes[connection.output] = source.getNode(nodeId: connection.output)
+            if connection.output > maxNodeId {
+                maxNodeId = connection.output
+            }
         }
     }
     
@@ -335,8 +358,8 @@ public class Genome {
                 let oldConn = Array(connections.values)[Random.randN(n: connections.count)]
                 if !oldConn.disabled{
                     // Create a new node that will be placed between a connection
-                                        
-                    let newNode = NodeGene(nodeId: nodes.count, nodeType: .hidden, activationFunc: ActivationFunc.randomActivationFunc(set: NEAT.activationFunctionSet))
+                    maxNodeId += 1
+                    let newNode = NodeGene(nodeId: maxNodeId, nodeType: .hidden, activationFunc: ActivationFunc.randomActivationFunc(set: NEAT.activationFunctionSet))
                     
                     guard self.nodes[newNode.nodeId] == nil else{
                         fatalError("Node already exists, cannot add new node.")
@@ -398,8 +421,12 @@ public class Genome {
             
             // The out-node can only be randomly selected from nodes that are
             // not sensor nodes.
-            let outNodeId = Random.randN(n: nodes.count - Parameter.numberOfSensor) + Parameter.numberOfSensor
-            let outNode = nodes[outNodeId]!
+            let noneInputNodes = Array(nodes.values).filter({ (nodeGene) -> Bool in
+                nodeGene.nodeId >= Parameter.numberOfSensor
+            })
+            
+            let outNode = noneInputNodes[Random.randN(n: noneInputNodes.count)]
+
             
             // Search for a connection gene that has the same in-node and out-node.
             for (_, conn) in connections{
@@ -436,7 +463,7 @@ public class Genome {
         print("Genome Status for: GenomeID: \(genomeId)")
         print("Nodes:")
         
-        for i in 0 ..< nodes.count {
+        for i in 0 ... maxNodeId {
             if let node =  nodes[i]{
                 print("NODE_ID:\(node.nodeId), TYPE:\(node.nodeType), AFN:\(node.activationFunc.name)")
             }
@@ -457,7 +484,7 @@ public class Genome {
     // Convert genome into a json format in order to be saved to a file
     public func toJson(verbose: Bool = false) -> Data{
         // initialize json dict with useless meta data
-        var dict: [String: Any] = ["genomeId": genomeId, "speciesId": speciesId, "fitness": fitness]
+        var dict: [String: Any] = ["genomeId": genomeId, "speciesId": speciesId, "fitness": fitness, "maxNodeId": maxNodeId]
 
         // Map all nodes
         dict["nodes"] = nodes.sorted(by: { $0.key < $1.key })

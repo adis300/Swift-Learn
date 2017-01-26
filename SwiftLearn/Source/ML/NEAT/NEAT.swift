@@ -35,7 +35,7 @@ public class NEAT{
     public static var species: [Species] = []    // ordered list of species
 
     
-    public static func initialize(){
+    fileprivate static func initialize(){
         
         guard Parameter.isInitialized() && Parameter.isValid() else{
             fatalError("NEAT: Parameters must be initialized & valid.")
@@ -125,7 +125,9 @@ public class NEAT{
     }
     
     // Run executes NEAT algorithm.
-    public static func run(){
+    public static func run() -> Genome{
+        initialize()
+        
         print("NEAT: Generation 0: Initial population")
         computeTotalAverageFitness()
 
@@ -143,8 +145,8 @@ public class NEAT{
             print("NEAT: Species count: \(species.count)")
         }
         
-        // TODO: Finally find global champion and save as json
         print("NEAT: Champion fitness is: \(globalChampion.fitness)")
+        return globalChampion
     }
     
 }

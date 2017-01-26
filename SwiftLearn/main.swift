@@ -133,37 +133,13 @@ g2.status()
 
 // Test NEATNetwork
 print("=== Creating a Network ===")
-NEAT.initialize()
+
+let champion = NEAT.run()
+
+print("Champion fitness for XOR test is: \(NEAT.evaluationFunction.evaluate(champion))")
 /*
-NEAT.population.forEach { (genome) in
-    print("Genome fitness: \(genome.fitness)")
-}
-
-print("=== Speciation Test ===")
-NEAT.species.forEach { (niche) in
-    print("SPECIES:\(niche.speciesId)")
-    print("Representative: \(niche.representative)")
-}
-
-print("=== Fitness Sharing Test ===")
-NEAT.population.forEach { (genome) in
-    print("Genome fitness before sharing: \(genome.fitness)")
-}
-NEAT.species.forEach { (niche) in
-    niche.fitnessShare()
-}
-NEAT.population.forEach { (genome) in
-    print("Genome fitness after sharing: \(genome.fitness)")
-}
- */
-NEAT.run()
-
-print("Champion fitness for XOR test is: \(NEAT.evaluationFunction.evaluate(NEAT.globalChampion))")
-let jsonData = NEAT.globalChampion.toJson()
+let jsonData = champion.toJson()
 print(String(data: jsonData, encoding: .utf8))
 let newGenome = Genome(jsonData: jsonData)
 print("New genome fitness for XOR test is: \(NEAT.evaluationFunction.evaluate(newGenome))")
-
-
-
-
+ */
