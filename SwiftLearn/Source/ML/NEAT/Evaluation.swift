@@ -21,6 +21,10 @@ public class EvaluationFunc{
         }
     }
     
+    public init(function: @escaping (Genome) -> Double) {
+        evaluate = function
+    }
+    
     fileprivate static func xortest(genome: Genome) -> Double{
         let network = NEATNetwork(genome: genome)
         var sse = 0.0
