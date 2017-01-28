@@ -125,7 +125,12 @@ public class NEAT{
     }
     
     // Run executes NEAT algorithm.
-    public static func run() -> Genome{
+    public static func run(evaluationFunc: ((Genome) -> Double)? = nil) -> Genome{
+        
+        if let eval = evaluationFunc{
+            evaluationFunction = EvaluationFunc(function: eval)
+        }
+        
         initialize()
         
         print("NEAT: Generation 0: Initial population")
