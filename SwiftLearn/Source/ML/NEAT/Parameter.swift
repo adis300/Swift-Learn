@@ -48,7 +48,7 @@ public class Parameter{
         params["numberOfSensor"] = NSNumber(value:numberOfSensor)
         params["numberOfOutput"] = NSNumber(value:numberOfOutput)
         params["populationSize"] = NSNumber(value:50)
-        params["numberOfGeneration"] = NSNumber(value:1000)
+        params["numberOfGeneration"] = NSNumber(value:300)
         params["survivalRate"] = NSNumber(value:0.1)
         params["distanceThreshold"] = NSNumber(value: 2.8)
         // TODO: Implement dropoff age when stagnant
@@ -162,6 +162,10 @@ public class Parameter{
         
         if let maxStag = params["maxStagnation"] as? NSNumber{
             maxStagnation = maxStag.intValue
+        }
+        
+        if let speciesSurvRate = params["speciesSurvivalRate"] as? NSNumber{
+            speciesSurvivalRate = speciesSurvRate.doubleValue
         }
         
         if let maxSpecies = params["maxNumberOfSpecies"] as? NSNumber{

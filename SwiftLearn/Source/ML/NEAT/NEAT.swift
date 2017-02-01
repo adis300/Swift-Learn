@@ -117,8 +117,13 @@ public class NEAT{
         })
         
         species.sort(by:{ $0.fitness() > $1.fitness() })
+        // TODO: Implement age penalty
         
-        let survived = Int((Double(species.count) * Parameter.speciesSurvivalRate) + 0.5)
+        var survived = Int((Double(species.count) * Parameter.speciesSurvivalRate) + 0.5)
+        
+        if survived > Parameter.maxNumberOfSpecies{
+            survived = Parameter.maxNumberOfSpecies
+        }
         
         species = Array(species[0..<survived])
         
