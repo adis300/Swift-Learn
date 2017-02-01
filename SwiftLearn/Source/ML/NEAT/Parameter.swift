@@ -40,20 +40,20 @@ public class Parameter{
     public static var largeGenomeSizeThreshold: Int = 1  // Marks if N should be used when computing the genome distances 
     public static var enableConnectionRate: Double = 0.08  // Re-enables a connection
     public static var maxStagnation: Int = 3
-    public static var speciesSurvivalRate: Double = 0.8
+    public static var speciesSurvivalRate: Double = 0.75
     
     public static func initialize(numberOfSensor: Int, numberOfOutput:Int){
         var params:[String: NSNumber] = [:]
         params["numberOfSensor"] = NSNumber(value:numberOfSensor)
         params["numberOfOutput"] = NSNumber(value:numberOfOutput)
         params["populationSize"] = NSNumber(value:50)
-        params["numberOfGeneration"] = NSNumber(value:200)
+        params["numberOfGeneration"] = NSNumber(value:300)
         params["survivalRate"] = NSNumber(value:0.1)
-        params["distanceThreshold"] = NSNumber(value:2.5)
+        params["distanceThreshold"] = NSNumber(value: 2.8)
         params["dropoffAge"] = NSNumber(value:15)
         params["crossoverRate"] = NSNumber(value:0.1)
-        params["mutateAddNodeRate"] = NSNumber(value:0.1)
-        params["mutateAddConnectionRate"] = NSNumber(value:0.1)
+        params["mutateAddNodeRate"] = NSNumber(value:0.12)
+        params["mutateAddConnectionRate"] = NSNumber(value:0.12)
         params["mutateWeightRate"] = NSNumber(value:0.1)
         params["coeffExcess"] = NSNumber(value:1.0)
         params["coeffDisjoint"] = NSNumber(value:1.0)

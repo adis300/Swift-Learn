@@ -148,9 +148,9 @@ public class NEAT{
             computeTotalAverageFitness()
             
             print("NEAT: Species count: \(species.count)")
+            print("NEAT: Champion fitness is: \(globalChampion.fitness)")
         }
         
-        print("NEAT: Champion fitness is: \(globalChampion.fitness)")
         return globalChampion
     }
     

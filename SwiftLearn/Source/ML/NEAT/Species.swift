@@ -114,6 +114,9 @@ public class Species{
                 }
             }
             previousFitness.append(avgFitness)
+            if previousFitness.count > Parameter.maxStagnation {
+                previousFitness = Array(previousFitness.suffix(Parameter.maxStagnation))
+            }
         }else{
             stagnation += 1
             previousFitness[previousFitness.count - 1] = -1
