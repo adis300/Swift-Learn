@@ -67,7 +67,11 @@ public class Species{
             maxFitness = maxFit
             
             // Compute survival rate only if there is still individuals left
-            let survived = Int((Double(self.individuals.count) * survivalRate) + 0.5)
+            var survived = Int((Double(self.individuals.count) * survivalRate) + 0.5)
+            
+            if survived > Parameter.maxNumberOfSpecies{
+                survived = Parameter.maxNumberOfSpecies
+            }
             
             self.individuals = Array(self.individuals[0..<survived])
             

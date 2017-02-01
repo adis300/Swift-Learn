@@ -40,16 +40,18 @@ public class Parameter{
     public static var largeGenomeSizeThreshold: Int = 1  // Marks if N should be used when computing the genome distances 
     public static var enableConnectionRate: Double = 0.08  // Re-enables a connection
     public static var maxStagnation: Int = 3
-    public static var speciesSurvivalRate: Double = 0.75
+    public static var speciesSurvivalRate: Double = 0.76
+    public static var maxNumberOfSpecies : Int = 20
     
     public static func initialize(numberOfSensor: Int, numberOfOutput:Int){
         var params:[String: NSNumber] = [:]
         params["numberOfSensor"] = NSNumber(value:numberOfSensor)
         params["numberOfOutput"] = NSNumber(value:numberOfOutput)
         params["populationSize"] = NSNumber(value:50)
-        params["numberOfGeneration"] = NSNumber(value:300)
+        params["numberOfGeneration"] = NSNumber(value:1000)
         params["survivalRate"] = NSNumber(value:0.1)
         params["distanceThreshold"] = NSNumber(value: 2.8)
+        // TODO: Implement dropoff age when stagnant
         params["dropoffAge"] = NSNumber(value:15)
         params["crossoverRate"] = NSNumber(value:0.1)
         params["mutateAddNodeRate"] = NSNumber(value:0.12)
@@ -160,6 +162,10 @@ public class Parameter{
         
         if let maxStag = params["maxStagnation"] as? NSNumber{
             maxStagnation = maxStag.intValue
+        }
+        
+        if let maxSpecies = params["maxNumberOfSpecies"] as? NSNumber{
+            maxNumberOfSpecies = maxSpecies.intValue
         }
         
         initialized = true
