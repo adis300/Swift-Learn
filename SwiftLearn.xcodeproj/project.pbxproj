@@ -71,7 +71,6 @@
 		E0E87AC81DF3E96E00D58DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0E87ACD1DF3E96E00D58DF9 /* SwiftLearnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLearnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E87AD41DF3E96E00D58DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E0E87ADE1DF3E98D00D58DF9 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E0E87AE01DF3E98D00D58DF9 /* Activation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activation.swift; sourceTree = "<group>"; };
 		E0E87AE21DF3E98D00D58DF9 /* Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Addition.swift; sourceTree = "<group>"; };
 		E0E87AE31DF3E98D00D58DF9 /* Arithmetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arithmetic.swift; sourceTree = "<group>"; };
@@ -166,7 +165,6 @@
 		E0E87AC61DF3E96E00D58DF9 /* SwiftLearn */ = {
 			isa = PBXGroup;
 			children = (
-				E0E87ADE1DF3E98D00D58DF9 /* main.swift */,
 				E0E87ADF1DF3E98D00D58DF9 /* Source */,
 				E0E87AC71DF3E96E00D58DF9 /* SwiftLearn.h */,
 				E0E87AC81DF3E96E00D58DF9 /* Info.plist */,

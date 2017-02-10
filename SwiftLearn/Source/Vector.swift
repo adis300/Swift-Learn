@@ -245,4 +245,16 @@ public func reverse(_ x: inout Vector<Double>){
     vDSP_vrvrsD(&x.vector, 1, vDSP_Length(x.length))
 }
 
+public func sumsq(_ x: inout Vector<Double>) -> Double{
+    var result: Double = 0
+    vDSP_svesqD(x.vector, 1, &result, vDSP_Length(x.length))
+    return result
+}
+
+public func sumsq(_ x: Vector<Float>) -> Float {
+    var result: Float = 0
+    vDSP_svesq(x.vector, 1, &result, vDSP_Length(x.length))
+    return result
+}
+
 
