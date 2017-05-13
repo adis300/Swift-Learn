@@ -13,6 +13,8 @@ var vec = Vector([-6.0,7.0,6,8,7,3])
 print(vec)
 vec[2...5] = [-6.0,7.0,6,8]
 
+print("Simple array addition")
+
 print("Original: vector")
 print(vec)
 
@@ -133,7 +135,6 @@ g2.status()
 
 // Test NEATNetwork
 print("=== Creating a Network ===")
-
 let champion = NEAT.run()
 
 print("Champion fitness for XOR test is: \(NEAT.evaluationFunction.evaluate(champion))")
