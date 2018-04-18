@@ -154,7 +154,6 @@
 				E0E87B3B1DF4057700D58DF9 /* Initializer.swift */,
 				E0E87B3C1DF4057700D58DF9 /* Matrix.swift */,
 				E0E87B3D1DF4057700D58DF9 /* NeuralNetwork */,
-				E0E87B401DF4057700D58DF9 /* Power.swift */,
 				E0E87B411DF4057700D58DF9 /* Random.swift */,
 				E0E87B431DF4057700D58DF9 /* Vector.swift */,
 			);
@@ -164,6 +163,7 @@
 		E0E87B301DF4057700D58DF9 /* Arithmetic */ = {
 			isa = PBXGroup;
 			children = (
+				E0E87B401DF4057700D58DF9 /* Power.swift */,
 				E0E87B311DF4057700D58DF9 /* Addition.swift */,
 				E0E87B321DF4057700D58DF9 /* Arithmetic.swift */,
 				E0E87B331DF4057700D58DF9 /* Division.swift */,
