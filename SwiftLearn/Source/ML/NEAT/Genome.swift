@@ -497,8 +497,13 @@ public class Genome {
             connectionCopy = connections.sorted(by: { $0.key < $1.key })
             // filter{ _,_ in true }
         }else{
-            connectionCopy = connections.filter { !$0.value.disabled }
-                .sorted(by: { $0.key < $1.key })
+            /*
+            connectionCopy = connections.filter({ (k, v) -> Bool in
+                return !v.disabled
+            }).sorted(by: { $0.key < $1.key })
+             */
+            let filteredConnections = connections.filter({ (key, value) -> Bool in return !value.disabled})
+            connectionCopy = filteredConnections.sorted(by: { $0.key < $1.key })
         }
         
         dict["connections"] = connectionCopy.map{ (innovationNum,connection) in

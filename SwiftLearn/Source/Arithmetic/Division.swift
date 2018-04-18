@@ -128,9 +128,12 @@ public func inv(_ x : Matrix<Float>) -> Matrix<Float> {
     var error: __CLPK_integer = 0
     var nc = __CLPK_integer(x.cols)
     
-    sgetrf_(&nc, &nc, &(results.grid), &nc, &ipiv, &error)
-    sgetri_(&nc, &(results.grid), &nc, &ipiv, &work, &lwork, &error)
-    
+    _ = withUnsafeMutablePointer(to: &nc) {
+        sgetrf_($0, $0, &(results.grid), $0, &ipiv, &error)
+    }
+    _ = withUnsafeMutablePointer(to: &nc) {
+        sgetri_($0, &(results.grid), $0, &ipiv, &work, &lwork, &error)
+    }
     assert(error == 0, "Matrix not invertible")
     
     return results
@@ -147,9 +150,13 @@ public func inv(_ x : Matrix<Double>) -> Matrix<Double> {
     var error: __CLPK_integer = 0
     var nc = __CLPK_integer(x.cols)
     
-    dgetrf_(&nc, &nc, &(results.grid), &nc, &ipiv, &error)
-    dgetri_(&nc, &(results.grid), &nc, &ipiv, &work, &lwork, &error)
-    
+    _ = withUnsafeMutablePointer(to: &nc) {
+        dgetrf_($0, $0, &(results.grid), $0, &ipiv, &error)
+    }
+    _ = withUnsafeMutablePointer(to: &nc) {
+        dgetri_($0, &(results.grid), $0, &ipiv, &work, &lwork, &error)
+    }
+
     assert(error == 0, "Matrix not invertible")
     
     return results

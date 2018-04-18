@@ -101,9 +101,10 @@ public class Network {
             return
         }
         
-        var nablaB = biases.map{Vector($0.length)} // Gradient of biases
+        var nablaB = biases.map{Vector<Double>($0.length)} // Gradient of biases
+
         // var nablaW = weights.map{Matrix(size: ($0.rows, $0.cols))}
-        var nablaW = weights.map{Matrix(rows: $0.rows, cols:$0.cols)}
+        var nablaW = weights.map{Matrix<Double>(rows: $0.rows, cols:$0.cols)}
         
         for trainingData in miniBatch {
             let (deltaNablaW, deltaNablaB) = backProp(trainingData)

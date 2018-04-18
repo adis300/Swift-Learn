@@ -98,7 +98,7 @@ public class ActivationFunc {
     static let mu:Double = 1
     static let sigma:Double = 1
     static let gaussian:(Double) -> Double = {x in
-        return 1.0 / (sigma * sqrt(2*M_PI)) *
+        return 1.0 / (sigma * sqrt(2 * Double.pi)) *
             exp(-pow((x-mu)/sigma, 2.0)/2.0)
     }
     
